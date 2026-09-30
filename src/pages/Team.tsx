@@ -9,9 +9,9 @@ export default function Team() {
       <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
         {team.map((m) => (
           <div key={m.name}>
-            <div className="aspect-[4/5] w-full overflow-hidden bg-sand">
+            <div className="aspect-[2/3] w-full overflow-hidden bg-sand">
               {m.photo ? (
-                <img src={m.photo} alt={m.name} loading="lazy" className="h-full w-full object-cover object-top grayscale transition-all duration-500 hover:grayscale-0" />
+                <img src={m.photo} alt={m.name} loading="lazy" className="h-full w-full object-cover object-center grayscale transition-all duration-500 hover:grayscale-0" />
               ) : (
                 <div className="display flex h-full w-full items-center justify-center text-5xl text-ink/20">{m.name.split(" ").map((s) => s[0]).join("")}</div>
               )}
