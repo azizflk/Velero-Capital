@@ -149,7 +149,8 @@ export const team = [
   { name: "Rosie Gazar", role: "Head of Strategy", photo: "/team/rosie-gazar.jpg", telegram: "https://t.me/rosie_vc1" },
   { name: "Kamala Aliyeva", role: "Head of OTC", photo: "/team/kamala-aliyeva.jpg", telegram: "https://t.me/kamala_vc" },
   { name: "Lika Gazar", role: "Head of Investments", photo: "/team/lika-gazar.jpg", telegram: "https://t.me/lika_vc" },
-  { name: "Elvin Mammadli", role: "Head of Partnerships", photo: "/team/elvin-mammadli.jpg", telegram: "https://t.me/elvin_vc" },
+  { name: "Sabina Taghi", role: "Head of Partnerships", photo: "/team/sabina-taghi.jpg" },
+  { name: "Elvin Mammadli", role: "Head of Partnerships", telegram: "https://t.me/elvin_vc" },
 ];
 
 /** Official accounts used by the Account Verification page. Keep this list current. */
