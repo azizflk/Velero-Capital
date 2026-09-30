@@ -3,6 +3,7 @@ export const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || "info@velero.
 export const nav = [
   {
     label: "Web3",
+    to: "/web3-services/",
     children: [
       { label: "Overview", to: "/web3-services/" },
       { label: "OTC Investment", to: "/otc-investment/" },
@@ -10,21 +11,17 @@ export const nav = [
     ],
   },
   { label: "Tech", to: "/tech-investments-part/" },
-  {
-    label: "Company",
-    children: [
-      { label: "About us", to: "/about-us/" },
-      { label: "Team", to: "/team/" },
-      { label: "Account Verification", to: "/verification/" },
-      { label: "Contact", to: "/contact-us/" },
-    ],
-  },
+  { label: "About", to: "/about-us/" },
+  { label: "Team", to: "/team/" },
+  { label: "Verification", to: "/verification/" },
+  { label: "Contact", to: "/contact-us/" },
 ];
 
 export const social = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/107078065/" },
   { label: "CoinMarketCap", href: "https://coinmarketcap.com/community/profile/velerocapital/" },
   { label: "X", href: "https://x.com/velerocapital" },
+  { label: "Telegram", href: "https://t.me/velerocapital" },
 ];
 
 export const offices = [
@@ -32,11 +29,13 @@ export const offices = [
   { region: "Singapore", address: "10 Anson Road #33-10 Suite C International Plaza Singapore 079903" },
 ];
 
+export const STATS_ASOF = "9.29.26";
 export const stats = [
-  { value: 125, suffix: "+", label: "Raises supported" },
-  { value: 8, suffix: "", label: "Unicorns in portfolio" },
-  { value: 21, prefix: "$", suffix: "M+", label: "Funds Deployed*" },
-  { value: 100, suffix: "+", label: "New Funding Rounds" },
+  { value: 125, suffix: "+", label: "raises supported" },
+  { value: 8, suffix: "", label: "unicorns in portfolio" },
+  { value: 21, prefix: "$", suffix: "M+", label: "funds deployed" },
+  { value: 100, suffix: "+", label: "new funding rounds" },
+  { value: 3, suffix: "", label: "global offices" },
 ];
 
 export const trustedExchanges = [

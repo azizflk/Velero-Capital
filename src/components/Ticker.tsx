@@ -34,9 +34,9 @@ export default function Ticker() {
   const items = [...list, ...list];
   const fmt = (n: number) => (n >= 1 ? n.toLocaleString("en-US", { maximumFractionDigits: 2 }) : n.toPrecision(4));
   return (
-    <div className="border-y border-line bg-surface/60" aria-label="Live crypto prices (Kraken)">
+    <div className="border-y border-rule" aria-label="Live crypto prices (Kraken)">
       <div className="relative overflow-hidden">
-        <div className="marquee flex w-max items-center gap-10 py-3 text-sm">
+        <div className="marquee flex w-max items-center gap-10 py-2 text-[12px]">
           {items.map((c, i) => {
             const r = data[c.key];
             const last = Number(r.c[0]);
@@ -44,10 +44,10 @@ export default function Ticker() {
             const pct = open ? ((last - open) / open) * 100 : 0;
             return (
               <div key={c.sym + i} className="flex items-center gap-2 whitespace-nowrap">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-bold text-white" style={{ background: c.color }}>{c.sym[0]}</span>
-                <span className="text-white/90">{c.name}<span className="text-muted">({c.sym})</span></span>
-                <span className="text-white">${fmt(last)}</span>
-                <span className={pct >= 0 ? "text-emerald-400" : "text-rose-400"}>{pct >= 0 ? "+" : ""}{pct.toFixed(2)}%</span>
+                <span className="h-2 w-2 rounded-full" style={{ background: c.color }} />
+                <span className="font-medium">{c.name} <span className="text-ink/50">{c.sym}</span></span>
+                <span>${fmt(last)}</span>
+                <span className={pct >= 0 ? "text-emerald-700" : "text-red-700"}>{pct >= 0 ? "+" : ""}{pct.toFixed(2)}%</span>
               </div>
             );
           })}

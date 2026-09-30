@@ -1,12 +1,12 @@
-import Hero from "@/components/Hero";
+import { SidebarPage } from "@/components/Layout";
 import Button from "@/components/Button";
 import { useTitle } from "@/lib/useTitle";
 
 export default function NotFound() {
   useTitle("Page not found");
   return (
-    <Hero title="Page not found" text="The page you’re looking for doesn’t exist or has moved.">
+    <SidebarPage title="Page not found" intro="The page you’re looking for doesn’t exist or has moved.">
       <Button to="/">Back to home</Button>
-    </Hero>
+    </SidebarPage>
   );
 }

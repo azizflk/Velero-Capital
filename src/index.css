@@ -1,39 +1,50 @@
 @import "tailwindcss";
 
-@font-face { font-family: "Coinbase Sans"; src: url("/fonts/CoinbaseSans-Light.woff2") format("woff2"); font-weight: 300; font-display: swap; }
-@font-face { font-family: "Coinbase Sans"; src: url("/fonts/CoinbaseSans-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Coinbase Sans"; src: url("/fonts/CoinbaseSans-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
-@font-face { font-family: "Coinbase Sans"; src: url("/fonts/CoinbaseSans-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-
 @theme {
-  --font-sans: "Coinbase Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-ink: #0b0b0b;
-  --color-surface: #161618;
-  --color-card: #202020;
-  --color-card-2: #252527;
-  --color-line: #2c2c2f;
-  --color-muted: #a8aaaa;
-  --color-cyan: #08d2eb;
-  --color-teal: #11c3d9;
-  --color-blue: #3c66de;
-  --color-indigo: #4654dd;
-  --color-violet: #d682f8;
-  --color-peach: #f8ae8e;
+  --font-sans: "Schibsted Grotesk", Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+  --color-paper: #f3f4ef;
+  --color-ink: #1f1f1f;
+  --color-muted: #6b6b66;
+  --color-rule: rgba(0, 0, 0, 0.12);
+  --color-sand: #f2eae0;
+  --color-blue: #023ccf;
+  --color-blue-dark: #022a90;
 }
 
 html { scroll-behavior: smooth; }
-body { @apply bg-ink text-white font-sans antialiased; }
-::selection { background: #08d2eb55; }
+body { @apply bg-paper text-ink font-sans antialiased text-[15px] leading-relaxed; }
+::selection { background: #023ccf; color: #fff; }
 
-.container-x { @apply mx-auto w-full max-w-7xl px-5 sm:px-8; }
-.gradient-text { background: linear-gradient(90deg, #4654dd 0%, #0ad2ea 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.gradient-bg { background: linear-gradient(90deg, #4654dd 0%, #0ad2ea 100%); }
-.card { @apply rounded-2xl border border-line bg-card; }
-.glow { box-shadow: 0 0 0 1px #08d2eb33, 0 20px 60px -20px #08d2eb55; }
+/* Layout */
+.wrap { @apply mx-auto w-full max-w-[1400px] px-6 sm:px-10; }
+.rule { @apply border-t border-rule; }
+
+/* Type */
+.display { @apply font-display font-semibold uppercase leading-[0.92] tracking-[-0.01em]; }
+.eyebrow { @apply text-[12px] text-ink/70; }
+.serif { @apply font-serif; }
+.prose-gc p + p { @apply mt-4; }
+
+/* Controls */
+.pill { @apply inline-flex items-center gap-2 rounded-full border border-ink px-5 py-2 text-[13px] font-medium text-ink transition-colors hover:bg-ink hover:text-paper focus:outline-none focus-visible:ring-2 focus-visible:ring-blue disabled:opacity-50; }
+.pill-blue { @apply border-blue bg-blue text-white hover:bg-blue-dark hover:border-blue-dark; }
+.field { @apply w-full border-0 border-b border-ink/30 bg-transparent px-0 py-3 text-[15px] text-ink placeholder:text-ink/40 focus:border-blue focus:outline-none focus:ring-0 rounded-none; }
+.field-label { @apply mb-0 block text-[12px] text-ink/60; }
+
+/* Links */
+.navlink { @apply relative text-[15px] font-medium text-ink pb-1; }
+.navlink::after { content: ""; @apply absolute left-0 right-0 -bottom-px h-px bg-ink scale-x-0 origin-left transition-transform; }
+.navlink:hover::after, .navlink.active::after { @apply scale-x-100; }
+.textlink { @apply underline decoration-ink/30 underline-offset-4 hover:decoration-ink; }
+
+/* Logos in ink */
+.logo-ink { filter: brightness(0); opacity: .75; }
 
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee { animation: marquee 45s linear infinite; }
+.marquee { animation: marquee 60s linear infinite; }
 .marquee:hover { animation-play-state: paused; }
 
-@keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-.fade-up { animation: fade-up .6s ease-out both; }
+@keyframes fade-in { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: none; } }
+.fade-in { animation: fade-in .5s ease-out both; }

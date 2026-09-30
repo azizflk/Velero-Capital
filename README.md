@@ -1,6 +1,6 @@
 # Velero Capital — velero.capital
 
-Marketing site for Velero Capital, rebuilt as a static React app (previously WordPress + Elementor on Hostinger).
+Marketing site for Velero Capital, rebuilt as a static React app (previously WordPress + Elementor on Hostinger). The design follows an editorial, General Catalyst-style system: off-white paper, condensed uppercase headlines, hairline rules, sticky left sidebar on subpages, and a full-bleed wordmark footer.
 
 **Stack:** Vite 6 · React 19 · TypeScript · Tailwind CSS 4 · React Router 7
 
@@ -21,7 +21,8 @@ npm run preview    # serve the production build locally
 | Official Telegram handles / email domains for the verifier | `officialAccounts` in `src/data/site.ts` |
 | Pages (one file per route) | `src/pages/` |
 | Shared UI (nav, footer, hero, cards, ticker, forms) | `src/components/` |
-| Logos, team photos, fonts | `public/` |
+| Logos, team photos | `public/` |
+| Layout primitives (sidebar page, sections, columns, quote) | `src/components/Layout.tsx` |
 
 Routes keep the old WordPress slugs (`/otc-investment/`, `/about-us/`, …) so existing links and SEO carry over. Dead links from the old site (`/advisory/`, `/web3-and-crypto-marketing/`, `/tech-startups-investments-part/`) redirect to the closest page.
 
@@ -42,5 +43,7 @@ The build is static (`dist/`), so it works on any host.
 
 ## Notes
 
-- Coinbase Sans is self-hosted in `public/fonts/`, carried over from the previous site. Confirm you hold a licence for it or swap `--font-sans` in `src/index.css` to a free alternative like Inter.
+- Fonts are loaded from Google Fonts: Barlow Condensed (headlines), Schibsted Grotesk (body), Newsreader (pull quotes). Swap them in `index.html` and the `@theme` block of `src/index.css`.
+- Brand colour is `#023CCF`, sampled from the logo. The logo lives at `public/images/logo-box.png`.
+- Team portraits are shown in black and white via a CSS filter (`grayscale` in `src/pages/Team.tsx`); remove the class for colour.
 - Nubar Dadash has no photo yet; the card shows initials until one is added to `public/team/` and referenced in `src/data/site.ts`.
