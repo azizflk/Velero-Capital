@@ -9,9 +9,9 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-rule bg-paper/95 backdrop-blur">
-      <div className="wrap flex h-16 items-center justify-between">
+      <div className="wrap flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center" aria-label="Velero Capital home">
-          <img src="/images/logo-box.png" alt="Velero Capital" className="h-9 w-auto" />
+          <img src="/images/logo-box.png" alt="Velero Capital" className="h-12 w-auto" />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Main">

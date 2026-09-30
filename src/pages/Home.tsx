@@ -11,8 +11,8 @@ import { useTitle } from "@/lib/useTitle";
 type Slide = { eyebrow: string; title: string; text: string; to: string; image: React.ReactNode };
 
 const LogoPanel = (
-  <div className="flex h-full w-full items-center justify-center bg-blue p-10">
-    <img src="/images/logo-box.png" alt="Velero Capital" className="w-3/5 max-w-xs" />
+  <div className="flex h-full w-full items-center justify-center border border-rule bg-paper p-10">
+    <img src="/images/logo-box.png" alt="Velero Capital" className="w-3/5 max-w-sm" />
   </div>
 );
 const Portrait = (src: string, alt: string) => <img src={src} alt={alt} className="h-full w-full object-cover object-top grayscale" />;
@@ -45,7 +45,7 @@ function Feature() {
   const s = slides[i];
   return (
     <section className="wrap" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} aria-roledescription="carousel">
-      <div className="grid min-h-[calc(100vh-4rem)] grid-cols-1 items-end gap-8 py-8 lg:grid-cols-12 lg:py-10">
+      <div className="grid min-h-[calc(100vh-5rem)] grid-cols-1 items-end gap-8 py-8 lg:grid-cols-12 lg:py-10">
         <div key={"img" + i} className="fade-in order-1 lg:order-2 lg:col-span-7 lg:col-start-6 lg:self-center">
           <Link to={s.to} className="block aspect-[4/3] w-full overflow-hidden bg-sand lg:aspect-[16/11]">{s.image}</Link>
         </div>

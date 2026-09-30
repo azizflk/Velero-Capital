@@ -19,7 +19,7 @@ export function SidebarPage({ title, intro, anchors = [], children }: { title: R
   return (
     <div className="wrap grid gap-10 py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
       <aside className="lg:col-span-3">
-        <div className="lg:sticky lg:top-24">
+        <div className="lg:sticky lg:top-28">
           <h1 className="display text-4xl sm:text-5xl lg:text-[44px] xl:text-5xl">{title}</h1>
           {intro && <p className="mt-5 max-w-xs text-[13px] leading-relaxed text-ink/80">{intro}</p>}
           {anchors.length > 0 && (
