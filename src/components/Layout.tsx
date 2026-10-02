@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 /** GC-style subpage: sticky left column with title, intro and anchors; content on the right. */
-export function SidebarPage({ title, intro, anchors = [], children }: { title: ReactNode; intro?: ReactNode; anchors?: { id: string; label: string }[]; children: ReactNode }) {
+const NO_ANCHORS: { id: string; label: string }[] = [];
+
+export function SidebarPage({ title, intro, anchors = NO_ANCHORS, aside, children }: { title: ReactNode; intro?: ReactNode; anchors?: { id: string; label: string }[]; aside?: ReactNode; children: ReactNode }) {
   const [active, setActive] = useState<string>("");
   useEffect(() => {
     if (!anchors.length) return;
@@ -30,6 +32,7 @@ export function SidebarPage({ title, intro, anchors = [], children }: { title: R
               <div className="rule" />
             </nav>
           )}
+          {aside && <div className="mt-8 max-w-xs">{aside}</div>}
         </div>
       </aside>
       <div className="lg:col-span-9 lg:col-start-4">{children}</div>

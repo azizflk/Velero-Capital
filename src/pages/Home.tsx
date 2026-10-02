@@ -25,8 +25,8 @@ const LogoMosaic = (
 );
 
 const slides: Slide[] = [
-  { eyebrow: "Velero Capital", title: "Guiding bold ideas to safe harbors", text: "We connect top-tier investors with high-growth Tech and Web3 innovators. Every opportunity we bring is curated, vetted, and shared only within our closed investor circle.", to: "/about-us/", image: LogoPanel },
-  { eyebrow: "Web3", title: "We don’t just talk Web3. We build it.", text: "A private investment syndicate connecting a trusted network of global investors with high-growth Web3 projects, from token design to investor-ready launches.", to: "/web3-services/", image: LogoMosaic },
+  { eyebrow: "Velero Capital", title: "Guiding bold ideas to safe harbors", text: "We connect top-tier investors with high-growth Tech and Web3 innovators. Every opportunity we bring is curated, vetted, and shared only within our closed investor circle.", to: "/famiglia/", image: LogoPanel },
+  { eyebrow: "Capital", title: "We don’t just talk Web3. We build it.", text: "A private investment syndicate connecting a trusted network of global investors with high-growth Web3 projects, from token design to investor-ready launches.", to: "/capital/", image: LogoMosaic },
   { eyebrow: "OTC Investment", title: "Daily OTC allocations into high-utility tokens", text: "Daily Over-The-Counter deals in utility tokens create steady cash flow and sustainable value for everyone involved. No obligations. No upfront costs. 100% transparent.", to: "/otc-investment/", image: Portrait("/team/kamala-aliyeva.jpg", "Kamala Aliyeva, Head of OTC") },
   { eyebrow: "Tech", title: "Scale without limits, on your terms", text: "You bring the vision, we bring the execution. From Dubai to Silicon Valley, our syndicate unlocks access to vetted early-stage ventures in AI, robotics, biotech, fintech and space.", to: "/tech-investments-part/", image: Portrait("/team/aziz-falak.jpg", "Aziz Falak, Founder") },
   { eyebrow: "Account Verification", title: "Beware of scammers", text: "We do not reach out through unofficial channels. If someone claims to represent Velero Capital, verify their Telegram handle or email before you reply.", to: "/verification/", image: Portrait("/team/lika-gazar.jpg", "Lika Gazar") },
@@ -84,7 +84,7 @@ export default function Home() {
             { title: "OTC Investment", text: "Daily Over-The-Counter OTC deals in utility tokens create steady cash flow and sustainable value—for everyone involved.", to: "/otc-investment/" },
             { title: "Strategic Investments", text: "Early-stage blockchain ventures, offering customized strategies, hands-on guidance, and critical resources to accelerate growth.", to: "/strategic-investments/" },
             { title: "Tech", text: "AI, robotics, health tech, and beyond — we partner early, scale fast, and connect you with the capital that counts.", to: "/tech-investments-part/" },
-            { title: "Advisory", text: "Growth with expert support in tokenomics, regulatory compliance, TGE on Tier 1 & 2 CEXs, market strategy, and capital raising.", to: "/strategic-investments/" },
+            { title: "Advisory", text: "Growth with expert support in tokenomics, regulatory compliance, TGE on Tier 1 & 2 CEXs, market strategy, and capital raising.", to: "/transformations/" },
           ]} cols={4} />
         </Section>
 

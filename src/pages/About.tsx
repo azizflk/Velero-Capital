@@ -8,12 +8,13 @@ const anchors = [
   { id: "vision", label: "Vision & mission" },
   { id: "values", label: "Core values" },
   { id: "apart", label: "What sets us apart" },
+  { id: "connect", label: "Connect with us" },
 ];
 
 export default function About() {
-  useTitle("About", "Velero Capital is a private investment syndicate headquartered in Dubai, UAE and San Francisco, CA, backing early-stage Web3 and Tech startups.");
+  useTitle("Famiglia", "Velero Capital is a private investment syndicate headquartered in Dubai, UAE and San Francisco, CA, backing early-stage Web3 and Tech startups.");
   return (
-    <SidebarPage title="About: empowering innovation through strategic capital" intro="Velero Capital is a private investment syndicate headquartered in Dubai, UAE and San Francisco, CA dedicated to backing early-stage Web3/blockchain and Tech startup ecosystems." anchors={anchors}>
+    <SidebarPage title="Famiglia: empowering innovation through strategic capital" intro="Velero Capital is a private investment syndicate headquartered in Dubai, UAE and San Francisco, CA dedicated to backing early-stage Web3/blockchain and Tech startup ecosystems." anchors={anchors}>
       <Section>
         <Prose>
           <p>We’re a vibrant network of investors, industry experts, dealmakers, and operational leaders. Only approved projects and investors can participate.</p>
@@ -49,6 +50,14 @@ export default function About() {
 
       <Section id="apart" title="What sets us apart">
         <Cols cols={3} items={differentiators} />
+      </Section>
+
+      <Section id="connect" title="Connect with us">
+        <Cols cols={3} items={[
+          { title: "Our Team", text: "The operators shaping the future of tech and Web3.", to: "/team/" },
+          { title: "Account Verification", text: "Confirm that a Telegram handle or email is officially associated with Velero Capital.", to: "/verification/" },
+          { title: "Contact", text: "Our portfolio managers are hands-on, offering daily support.", to: "/contact-us/" },
+        ]} />
       </Section>
     </SidebarPage>
   );

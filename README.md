@@ -20,11 +20,14 @@ npm run preview    # serve the production build locally
 | Page copy, nav, footer, team, partners, stats, FAQs | `src/data/site.ts` |
 | Official Telegram handles / email domains for the verifier | `officialAccounts` in `src/data/site.ts` |
 | Pages (one file per route) | `src/pages/` |
+| Top nav headers and dropdowns | `nav` in `src/data/site.ts` |
+| Search index (what the Search overlay can find) | `src/data/search.ts` |
+| News & Content cards | `stories` in `src/pages/Stories.tsx` |
 | Shared UI (nav, footer, hero, cards, ticker, forms) | `src/components/` |
 | Logos, team photos | `public/` |
 | Layout primitives (sidebar page, sections, columns, quote) | `src/components/Layout.tsx` |
 
-Routes keep the old WordPress slugs (`/otc-investment/`, `/about-us/`, …) so existing links and SEO carry over. Dead links from the old site (`/advisory/`, `/web3-and-crypto-marketing/`, `/tech-startups-investments-part/`) redirect to the closest page.
+Top-level sections are Portfolio, Capital, Famiglia, Transformations, News & Content and Our Team, plus a Search overlay (also Cmd/Ctrl+K). Old WordPress slugs still resolve: `/otc-investment/`, `/strategic-investments/` and `/tech-investments-part/` are live pages under Capital, while `/web3-services/` and `/about-us/` redirect to `/capital/` and `/famiglia/`. Dead links from the old site (`/advisory/`, `/web3-and-crypto-marketing/`, `/tech-startups-investments-part/`) redirect to the closest page.
 
 ## Forms
 

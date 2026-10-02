@@ -1,20 +1,36 @@
 export const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || "info@velero.capital";
 
-export const nav = [
+export type NavItem = { label: string; to: string; children?: { label: string; to: string }[] };
+export const nav: NavItem[] = [
+  { label: "Portfolio", to: "/portfolio/" },
   {
-    label: "Web3",
-    to: "/web3-services/",
+    label: "Capital",
+    to: "/capital/",
     children: [
-      { label: "Overview", to: "/web3-services/" },
       { label: "OTC Investment", to: "/otc-investment/" },
       { label: "Strategic Investments", to: "/strategic-investments/" },
+      { label: "Tech", to: "/tech-investments-part/" },
     ],
   },
-  { label: "Tech", to: "/tech-investments-part/" },
-  { label: "About", to: "/about-us/" },
-  { label: "Team", to: "/team/" },
-  { label: "Verification", to: "/verification/" },
-  { label: "Contact", to: "/contact-us/" },
+  {
+    label: "Famiglia",
+    to: "/famiglia/",
+    children: [
+      { label: "About Velero", to: "/famiglia/" },
+      { label: "Account Verification", to: "/verification/" },
+      { label: "Contact", to: "/contact-us/" },
+    ],
+  },
+  {
+    label: "Transformations",
+    to: "/transformations/",
+    children: [
+      { label: "Advisory", to: "/transformations/#advisory" },
+      { label: "Web3 & Crypto Marketing", to: "/transformations/#marketing" },
+    ],
+  },
+  { label: "News & Content", to: "/stories/" },
+  { label: "Our Team", to: "/team/" },
 ];
 
 export const social = [
