@@ -7,7 +7,7 @@ import { CONTACT_EMAIL, offices } from "@/data/site";
 import { submitForm } from "@/lib/forms";
 import { useTitle } from "@/lib/useTitle";
 
-const types = ["Web3 - OTC Investment", "Web3 - Fundraising", "Web3 - Crypto Marketing", "Tech Startup Investments", "Partnerships"];
+const types = ["Late-Stage & Pre-IPO", "Secondaries", "Real Estate", "Co-Investments & Syndicates", "Advisory Services", "Partnerships"];
 
 export default function Contact() {
   useTitle("Contact", "Get in touch with Velero Capital. Our portfolio managers are hands-on, offering daily support.");
@@ -19,9 +19,9 @@ export default function Contact() {
     setState(r.ok ? "sent" : "error");
   };
   return (
-    <SidebarPage title="Contact" intro="Our portfolio managers are hands-on, offering daily support. From marketing to community-building, our incubation and growth team works alongside your project to connect you with the resources and network you need to succeed.">
+    <SidebarPage title="Contact" intro="Tell us about your mandate — whether you are an investor seeking access or a company seeking advice — and the right member of our team will come back to you.">
       <Section>
-        <div className="grid gap-12 lg:grid-cols-12">
+        <div className="grid gap-12 grid-cols-1 lg:grid-cols-12">
           <div className="lg:col-span-8">
             {state === "sent" ? (
               <p className="border-t border-rule py-4 text-[14px]">Thanks for reaching out. We’ll get back to you shortly.</p>
@@ -29,7 +29,7 @@ export default function Contact() {
               <form onSubmit={onSubmit} className="grid gap-7 sm:grid-cols-2">
                 <div><Label htmlFor="name">Full name</Label><Input id="name" name="name" required /></div>
                 <div><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" required /></div>
-                <div><Label htmlFor="listing">Project CMC / CG link</Label><Input id="listing" name="listing" type="url" placeholder="https://" /></div>
+                <div><Label htmlFor="listing">Organisation</Label><Input id="listing" name="organisation" placeholder="Family office, fund or company" /></div>
                 <div>
                   <Label htmlFor="type">Enquiry type</Label>
                   <Select id="type" name="type" required defaultValue="">

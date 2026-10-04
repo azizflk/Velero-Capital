@@ -11,14 +11,14 @@ type T = (typeof TYPES)[number];
 
 type Story = { type: Exclude<T, "All">; title: string; text: string; to: string; tile?: string; photo?: string };
 const stories: Story[] = [
-  { type: "Announcements", title: "Beware of scammers: verify before you reply", text: "We’ve seen increasing attempts of impersonation. Confirm any Telegram handle or email with our verification tool. We do not reach out through unofficial channels.", to: "/verification/", tile: "Verify" },
-  { type: "Announcements", title: "Only approved projects and investors can participate", text: "Every opportunity we bring is curated, vetted, and shared only within our closed investor circle.", to: "/contact-us/", tile: "Closed circle" },
-  { type: "Insights", title: "How daily OTC allocations work", text: "Token-for-USDT/USD deals at discounted rates deliver steady cash flow to projects while protecting retail markets from price shocks.", to: "/otc-investment/", photo: "/team/kamala-aliyeva.jpg" },
-  { type: "Insights", title: "Our ticket: $50k to $10M", text: "From initial ticket to Series A through OTC acquisitions and venture capital, prioritizing value over valuation.", to: "/strategic-investments/#ticket", tile: "$50K–$10M" },
-  { type: "Insights", title: "Six tech categories we back", text: "AI, robotics, biotechnology, space, fintech and healthcare technology — from seed stage to pre-IPO.", to: "/tech-investments-part/#categories", photo: "/team/aziz-falak.jpg" },
-  { type: "Insights", title: "From token design to investor-ready launches", text: "Tokenomics, compliance, TGE and listings: how our advisory team becomes part of yours.", to: "/transformations/", photo: "/team/rosie-gazar.jpg" },
-  { type: "Insights", title: "100% transparency, at every stage", text: "From deal flow to due diligence, we ensure complete visibility at every stage of the investment process.", to: "/famiglia/#apart", tile: "100%" },
-  { type: "Insights", title: "Smart risk and custom alerts", text: "Our proprietary alert system monitors on-chain signals, market trends, and ecosystem movements in real time. We don’t react — we anticipate.", to: "/famiglia/#apart", tile: "On-chain" },
+  { type: "Announcements", title: "Beware of scammers: verify before you reply", text: "We’ve seen increasing attempts of impersonation. Confirm any email address with our verification tool. We do not reach out through unofficial channels.", to: "/verification/", tile: "Verify" },
+  { type: "Announcements", title: "Only approved investors can participate", text: "Every opportunity we bring is curated, vetted, and shared only within our closed investor circle.", to: "/contact-us/", tile: "Closed circle" },
+  { type: "Insights", title: "Late-stage and pre-IPO: where we allocate", text: "Primary allocations in growth rounds of established private companies, typically Series C onward.", to: "/late-stage/", photo: "/team/aziz-falak.jpg" },
+  { type: "Insights", title: "How secondary transactions work", text: "Buying existing stakes from founders, employees, early investors and fund limited partners — and what we look for before we do.", to: "/secondaries/", tile: "Secondaries" },
+  { type: "Insights", title: "Real estate: direct deals, joint ventures and funds", text: "Institutional-quality real estate alongside established operators and sponsors.", to: "/real-estate/", tile: "Real estate" },
+  { type: "Insights", title: "Co-investing deal by deal", text: "Why most family offices access private markets alongside a lead sponsor, one transaction at a time.", to: "/co-investments/", photo: "/team/kamala-aliyeva.jpg" },
+  { type: "Insights", title: "A focused corporate finance practice", text: "Fundraising, corporate development, M&A, cap table and valuation work — senior-led and tightly scoped.", to: "/services/", photo: "/team/rosie-gazar.jpg" },
+  { type: "Insights", title: "100% transparency, at every stage", text: "From deal flow to due diligence, we ensure complete visibility at every stage of the investment process.", to: "/company/#apart", tile: "100%" },
 ];
 
 export default function Stories() {

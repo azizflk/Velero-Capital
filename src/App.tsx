@@ -3,18 +3,19 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
-import OTC from "@/pages/OTC";
-import Strategic from "@/pages/Strategic";
-import Tech from "@/pages/Tech";
 import Capital from "@/pages/Capital";
+import Investment from "@/pages/Investment";
+import { investments } from "@/data/investments";
 import Portfolio from "@/pages/Portfolio";
-import Transformations from "@/pages/Transformations";
+import Services from "@/pages/Services";
 import Stories from "@/pages/Stories";
 import About from "@/pages/About";
 import Team from "@/pages/Team";
 import Contact from "@/pages/Contact";
 import Verification from "@/pages/Verification";
 import NotFound from "@/pages/NotFound";
+import Privacy from "@/pages/Privacy";
+import CookieBanner from "@/components/CookieBanner";
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -38,25 +39,30 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/capital" element={<Capital />} />
-          <Route path="/famiglia" element={<About />} />
-          <Route path="/transformations" element={<Transformations />} />
+          {investments.map((i) => <Route key={i.slug} path={i.path.replace(/\/$/, "")} element={<Investment key={i.slug} item={i} />} />)}
+          <Route path="/otc-investment" element={<Navigate to="/secondaries/" replace />} />
+          <Route path="/strategic-investments" element={<Navigate to="/late-stage/" replace />} />
+          <Route path="/tech-investments-part" element={<Navigate to="/late-stage/" replace />} />
+          <Route path="/tech-startups-investments-part" element={<Navigate to="/late-stage/" replace />} />
+          <Route path="/tech" element={<Navigate to="/late-stage/" replace />} />
+          <Route path="/company" element={<About />} />
+          <Route path="/famiglia" element={<Navigate to="/company/" replace />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/transformations" element={<Navigate to="/services/" replace />} />
           <Route path="/stories" element={<Stories />} />
           <Route path="/web3-services" element={<Navigate to="/capital/" replace />} />
-          <Route path="/otc-investment" element={<OTC />} />
-          <Route path="/strategic-investments" element={<Strategic />} />
-          <Route path="/tech-investments-part" element={<Tech />} />
-          <Route path="/tech" element={<Navigate to="/tech-investments-part/" replace />} />
-          <Route path="/tech-startups-investments-part" element={<Navigate to="/tech-investments-part/" replace />} />
-          <Route path="/web3-and-crypto-marketing" element={<Navigate to="/transformations/#marketing" replace />} />
-          <Route path="/advisory" element={<Navigate to="/transformations/#advisory" replace />} />
-          <Route path="/about-us" element={<Navigate to="/famiglia/" replace />} />
+          <Route path="/web3-and-crypto-marketing" element={<Navigate to="/services/" replace />} />
+          <Route path="/advisory" element={<Navigate to="/services/" replace />} />
+          <Route path="/about-us" element={<Navigate to="/company/" replace />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/verification" element={<Verification />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
+      <CookieBanner />
     </div>
   );
 }

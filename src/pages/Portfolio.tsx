@@ -4,61 +4,48 @@ import Filters from "@/components/Filters";
 import Stats from "@/components/Stats";
 import Button from "@/components/Button";
 import { LogoRow } from "@/components/Logos";
-import { partners, trustedExchanges } from "@/data/site";
+import { coInvestors, realEstateInvestors } from "@/data/site";
+import { investments } from "@/data/investments";
 import { useTitle } from "@/lib/useTitle";
 
-const TYPES = ["All", "Trusted exchanges", "CEX", "DEX", "Chains"] as const;
+const TYPES = ["All", "Venture firms", "Real estate investors"] as const;
 type T = (typeof TYPES)[number];
 
-const web3Focus = ["DeFi", "GameFi", "RWA", "NFT & Metaverse", "Data & AI x Crypto"];
-const techFocus = ["Artificial Intelligence", "Robotics", "Biotechnology", "Space Technology", "Financial Technology", "Healthcare Technology"];
+const sectors = ["Artificial Intelligence", "Robotics", "Financial Technology", "Healthcare & Biotechnology", "Space Technology", "Real Estate"];
 
 export default function Portfolio() {
-  useTitle("Portfolio", "125+ raises supported and 8 unicorns in portfolio across Web3 and deep tech, with a network spanning the leading exchanges, DEXs and chains.");
+  useTitle("Portfolio", "$350M+ raised, placed and advised across every mandate since 2023, across late-stage companies, secondaries and real estate.");
   const [type, setType] = useState<T>("All");
   const show = (t: T) => type === "All" || type === t;
   return (
     <SidebarPage
       title="Portfolio"
-      intro="We back bold builders in crypto, DeFi, blockchain infrastructure and deep tech. Every opportunity is curated, vetted, and shared only within our closed investor circle."
+      intro="Late-stage companies, secondary positions and real estate, accessed through relationships. Every opportunity is curated, vetted, and shared only within our closed investor circle."
       aside={<Filters label="Network" options={TYPES} value={type} onChange={setType} />}
     >
       <Section><Stats compact /></Section>
 
       <Section title="Where we invest">
-        <div className="grid gap-10 sm:grid-cols-2">
-          <div>
-            <h3 className="display text-2xl">Web3</h3>
-            <ul className="mt-3">{web3Focus.map((f) => <li key={f} className="border-t border-rule py-2 text-[13px] last:border-b">{f}</li>)}</ul>
-          </div>
-          <div>
-            <h3 className="display text-2xl">Tech</h3>
-            <ul className="mt-3">{techFocus.map((f) => <li key={f} className="border-t border-rule py-2 text-[13px] last:border-b">{f}</li>)}</ul>
-          </div>
-        </div>
+        <Cols cols={4} items={investments.map((i) => ({ title: i.label, text: i.intro, to: i.path }))} />
       </Section>
 
-      <Section>
-        <Cols items={[
-          { title: "Stage", text: "Early entry from initial ticket to Series A, prioritizing value over valuation." },
-          { title: "Investment Size", text: "$50k – $10,000,000" },
-          { title: "Geographic Reach", text: "Global, with boots on the ground in Dubai, San Francisco Bay Area and Singapore." },
-        ]} />
+      <Section title="Sectors">
+        <ul className="grid max-w-3xl gap-x-8 sm:grid-cols-2">
+          {sectors.map((s) => <li key={s} className="border-t border-rule py-2.5 text-[14px]">{s}</li>)}
+        </ul>
       </Section>
 
-      <Section id="network" title="Our network">
-        <Prose className="mb-8"><p>Our portfolio companies list, trade and build with top-tier companies in the industry.</p></Prose>
+      <Section id="network" title="Who we invest alongside">
+        <Prose className="mb-8"><p>Our investors participate alongside the sponsors that lead the rounds and own the assets.</p></Prose>
         <div className="space-y-10">
-          {show("Trusted exchanges") && <LogoRow title="Trusted exchanges" logos={trustedExchanges} />}
-          {show("CEX") && <LogoRow title="CEX" logos={partners.CEX} />}
-          {show("DEX") && <LogoRow title="DEX" logos={partners.DEX} />}
-          {show("Chains") && <LogoRow title="Chains" logos={partners.Chains} />}
+          {show("Venture firms") && <LogoRow title="Venture firms" logos={[...coInvestors[0], ...coInvestors[1]]} />}
+          {show("Real estate investors") && <LogoRow title="Real estate investors" logos={[...realEstateInvestors[0], ...realEstateInvestors[1]]} />}
         </div>
       </Section>
 
-      <Section title="Join the portfolio">
-        <Prose><p>Only approved projects and investors can participate. Tell us what you’re building and we’ll come back with a proposal.</p></Prose>
-        <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/" variant="blue">Pitch us</Button><Button to="/capital/">How we invest</Button></div>
+      <Section title="Request the full portfolio">
+        <Prose><p>Position-level detail is shared with approved family offices and institutional investors on request.</p></Prose>
+        <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/" variant="blue">Get in Touch</Button><Button to="/capital/">How we invest</Button></div>
       </Section>
     </SidebarPage>
   );

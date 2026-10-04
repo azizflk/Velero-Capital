@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { CONTACT_EMAIL, offices, social } from "@/data/site";
+import SummariseWith from "./SummariseWith";
+import { openCookieSettings } from "@/lib/consent";
 
 const icons: Record<string, string> = {
   LinkedIn: "M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z",
@@ -25,12 +27,16 @@ export default function Footer() {
           <Link to="/contact-us/" className="hover:underline underline-offset-4">Contact</Link>
           <Link to="/team/" className="hover:underline underline-offset-4">Team</Link>
           <Link to="/verification/" className="hover:underline underline-offset-4">Account Verification</Link>
+          <Link to="/privacy/" className="hover:underline underline-offset-4">Privacy Policy</Link>
+          <button onClick={openCookieSettings} className="hover:underline underline-offset-4">Cookie settings</button>
           <a href={`mailto:${CONTACT_EMAIL}`} className="hover:underline underline-offset-4">{CONTACT_EMAIL}</a>
         </nav>
         <div className="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-x-12 gap-y-2 text-[12px] text-ink/60">
           {offices.map((o) => <span key={o.region}>{o.address}</span>)}
         </div>
       </div>
+
+      <SummariseWith />
 
       <div className="relative overflow-hidden bg-blue text-white">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,.14),transparent_55%)]" />

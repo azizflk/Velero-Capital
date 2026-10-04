@@ -12,19 +12,20 @@ const anchors = [
 ];
 
 export default function About() {
-  useTitle("Famiglia", "Velero Capital is a private investment syndicate headquartered in Dubai, UAE and San Francisco, CA, backing early-stage Web3 and Tech startups.");
+  useTitle("Company", "Velero Capital connects family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate.");
   return (
-    <SidebarPage title="Famiglia: empowering innovation through strategic capital" intro="Velero Capital is a private investment syndicate headquartered in Dubai, UAE and San Francisco, CA dedicated to backing early-stage Web3/blockchain and Tech startup ecosystems." anchors={anchors}>
+    <SidebarPage title="Company: empowering innovation through strategic capital" intro="Velero Capital is a private investment firm headquartered in Dubai, with offices in San Francisco, Los Angeles and Berlin." anchors={anchors}>
       <Section>
         <Prose>
-          <p>We’re a vibrant network of investors, industry experts, dealmakers, and operational leaders. Only approved projects and investors can participate.</p>
+          <p>We connect family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate. We’re a network of investors, industry experts, dealmakers, and operational leaders. Only approved investors can participate.</p>
         </Prose>
       </Section>
 
       <Section id="expertise">
-        <Cols cols={2} items={[
-          { title: "Blockchain & Web3", text: "Since 2017, our experts have been deeply involved in the blockchain and cryptocurrency space, advising as venture capital, strategic partnerships, investments, and fundraising. Our expertise spans project evaluation, cryptocurrency markets, tokenomics, and blockchain-based solutions." },
-          { title: "Tech", text: "We partner with high-potential tech across sectors such as AI, SaaS, robotics, fintech, health tech, and space tech. We support founders from seed stage to pre-IPO with capital, strategic guidance, and access to our global investor network." },
+        <Cols cols={3} items={[
+          { title: "Private Companies", text: "Primary allocations in late-stage and pre-IPO rounds, and secondary purchases of existing stakes from founders, employees, early investors and fund limited partners.", to: "/late-stage/" },
+          { title: "Real Estate", text: "Direct deals, joint ventures and fund positions in institutional-quality real estate, alongside established operators and sponsors.", to: "/real-estate/" },
+          { title: "Advisory", text: "A focused corporate finance practice covering fundraising, corporate development, M&A, cap table and equity advisory, and valuation.", to: "/services/" },
         ]} />
       </Section>
 
@@ -32,8 +33,8 @@ export default function About() {
 
       <Section id="vision">
         <Cols cols={2} items={[
-          { title: "Our Vision", text: "To accelerate the future of decentralised finance and innovation by empowering visionary founders and connecting global capital with the world’s most promising Web3 and tech." },
-          { title: "Our Mission", text: "We bridge the gap between bold ideas and strategic capital. We provide tailored investment solutions, deep market expertise, and global investor networks to help startups scale, disrupt markets, and create lasting impact." },
+          { title: "Our Vision", text: "To be the trusted route into private markets for family offices and institutions, connecting global capital with the companies and assets defining the future." },
+          { title: "Our Mission", text: "We bridge the gap between bold ideas and strategic capital. We provide tailored investment access, deep market expertise, and a global investor network to help companies scale and investors deploy with conviction." },
         ]} />
       </Section>
 
@@ -54,9 +55,9 @@ export default function About() {
 
       <Section id="connect" title="Connect with us">
         <Cols cols={3} items={[
-          { title: "Our Team", text: "The operators shaping the future of tech and Web3.", to: "/team/" },
-          { title: "Account Verification", text: "Confirm that a Telegram handle or email is officially associated with Velero Capital.", to: "/verification/" },
-          { title: "Contact", text: "Our portfolio managers are hands-on, offering daily support.", to: "/contact-us/" },
+          { title: "Our Team", text: "The operators behind every mandate.", to: "/team/" },
+          { title: "Account Verification", text: "Confirm that an email address is officially associated with Velero Capital.", to: "/verification/" },
+          { title: "Contact", text: "Tell us about your mandate and we’ll come back to you.", to: "/contact-us/" },
         ]} />
       </Section>
     </SidebarPage>

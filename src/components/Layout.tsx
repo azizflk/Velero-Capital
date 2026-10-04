@@ -19,7 +19,7 @@ export function SidebarPage({ title, intro, anchors = NO_ANCHORS, aside, childre
   }, [anchors]);
 
   return (
-    <div className="wrap grid gap-10 py-10 lg:grid-cols-12 lg:gap-8 lg:py-14">
+    <div className="wrap grid gap-10 py-10 grid-cols-1 lg:grid-cols-12 lg:gap-8 lg:py-14">
       <aside className="lg:col-span-3">
         <div className="lg:sticky lg:top-28">
           <h1 className="display text-4xl sm:text-5xl lg:text-[44px] xl:text-5xl">{title}</h1>
@@ -40,9 +40,10 @@ export function SidebarPage({ title, intro, anchors = NO_ANCHORS, aside, childre
   );
 }
 
-export function Section({ id, title, children, className = "" }: { id?: string; title?: ReactNode; children: ReactNode; className?: string }) {
+export function Section({ id, title, eyebrow, children, className = "" }: { id?: string; title?: ReactNode; eyebrow?: string; children: ReactNode; className?: string }) {
   return (
     <section id={id} className={`rule scroll-mt-24 py-10 first:border-t-0 first:pt-0 ${className}`}>
+      {eyebrow && <div className="eyebrow mb-1">{eyebrow}</div>}
       {title && <h2 className="display mb-6 text-4xl">{title}</h2>}
       {children}
     </section>
@@ -65,7 +66,7 @@ export function Cols({ items, cols = 3 }: { items: { title: string; text: string
 
 export function Quote({ text, name, role, photo }: { text: string; name: string; role: string; photo?: string }) {
   return (
-    <div className="grid items-center gap-8 lg:grid-cols-12">
+    <div className="grid items-center gap-8 grid-cols-1 lg:grid-cols-12">
       <blockquote className="lg:col-span-8">
         <p className="serif text-2xl leading-snug sm:text-3xl">“{text}”</p>
         <footer className="mt-5 text-[13px]"><span className="font-semibold">{name}</span><br /><span className="text-ink/70">{role}</span></footer>

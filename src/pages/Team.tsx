@@ -3,9 +3,9 @@ import { team } from "@/data/site";
 import { useTitle } from "@/lib/useTitle";
 
 export default function Team() {
-  useTitle("Team", "The operators shaping the future of tech and Web3 at Velero Capital.");
+  useTitle("Team", "The operators behind every Velero Capital mandate.");
   return (
-    <SidebarPage title="Team" intro="This is the team behind the curtain. The operators shaping the future of tech and Web3. Reach any of us directly on Telegram — and verify the handle first.">
+    <SidebarPage title="Team" intro="This is the team behind the curtain. The operators behind every mandate.">
       <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
         {team.map((m) => (
           <div key={m.name}>
@@ -19,7 +19,6 @@ export default function Team() {
             <div className="mt-3 text-[15px] font-semibold leading-tight">{m.name}</div>
             <div className="text-[12px] text-ink/70">{m.role}</div>
             <div className="mt-1.5 flex gap-3 text-[12px]">
-              {m.telegram && <a href={m.telegram} target="_blank" rel="noreferrer" className="textlink">Telegram</a>}
               {"linkedin" in m && m.linkedin && <a href={m.linkedin} target="_blank" rel="noreferrer" className="textlink">LinkedIn</a>}
             </div>
           </div>
