@@ -1,53 +1,129 @@
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { CONTACT_EMAIL, offices, social } from "@/data/site";
+import { CONTACT_EMAIL, nav, offices, social } from "@/data/site";
 import SummariseWith from "./SummariseWith";
+import { groups } from "@/data/solutions";
 import { openCookieSettings } from "@/lib/consent";
 
-const icons: Record<string, string> = {
-  LinkedIn: "M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z",
-  X: "M18.9 2H22l-6.8 7.8L23 22h-6.3l-4.9-6.4L6.2 22H3l7.3-8.3L2.6 2h6.4l4.4 5.9L18.9 2zm-1.1 18.1h1.7L7.3 3.8H5.4l12.4 16.3z",
-  Telegram: "M9.04 15.47 8.7 20.2c.48 0 .69-.21.94-.46l2.26-2.16 4.68 3.43c.86.47 1.47.22 1.7-.79l3.08-14.44c.28-1.26-.45-1.75-1.29-1.44L1.9 11.3c-1.24.48-1.22 1.17-.21 1.48l4.62 1.44 10.73-6.76c.5-.33.96-.15.58.18",
-  CoinMarketCap: "M20.7 14.3c-.6.4-1.3.4-1.7 0-.5-.5-.7-1.3-.7-2.3V8.7c0-1.6-.6-2.8-1.7-3.1-1.8-.5-3.1 1.6-3.6 2.4l-3.1 5V6.9c0-1.5-.5-2.4-1.5-2.7-.6-.2-1.6-.1-2.5 1.3L1.8 12.3A10.1 10.1 0 0 1 1 8.4C1 4.3 4.3 1 8.4 1s7.4 3.3 7.4 7.4v.1c0 2.5 1.4 3.4 2.6 3.4 1 0 2.3-.6 2.3-3.5v-.1C21.9 3.7 17.4 0 12 0S2 4 2 12s5 12 12 12c4.3 0 7.9-2.2 9.8-5.6l-3.1-4.1z",
-};
+/** Column heading in the module style: uppercase with a trailing slash, in the site's own typeface. */
+function Heading({ children }: { children: string }) {
+  return <h3 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-white">{children}/</h3>;
+}
+
+/** One row of a module list: a small elbow connector, then the entry. */
+function Row({ children }: { children: ReactNode }) {
+  return (
+    <li className="group/row flex items-start gap-3">
+      <span aria-hidden className="mt-[3px] h-2.5 w-4 shrink-0 border-b border-l border-white/40 transition-colors group-hover/row:border-white" />
+      <span className="text-[14px] leading-snug text-white/75 transition-colors group-hover/row:text-white">{children}</span>
+    </li>
+  );
+}
+
+function Module({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div>
+      <Heading>{title}</Heading>
+      <ul className="mt-5 space-y-3">{children}</ul>
+    </div>
+  );
+}
+
+const linkCls = "outline-none focus-visible:underline underline-offset-4";
+const find = (label: string) => nav.find((n) => n.label === label);
+
+function BackToTop() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const on = () => setShow(window.scrollY > 700);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Back to top"
+      className={`fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-blue text-white shadow-[0_10px_30px_-10px_rgba(2,60,207,.7)] transition-all hover:bg-blue-dark ${show ? "opacity-100" : "pointer-events-none translate-y-2 opacity-0"}`}
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+    </button>
+  );
+}
 
 export default function Footer() {
+  const capital = find("Capital");
+  const services = find("Services");
   return (
     <footer className="mt-24">
       <div className="rule" />
-      <div className="wrap py-14 text-center">
-        <h2 className="display text-3xl">Stay connected</h2>
-        <div className="mt-6 flex justify-center gap-3">
-          {social.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label} className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-paper transition-colors hover:bg-blue">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d={icons[s.label] ?? ""} /></svg>
-            </a>
-          ))}
-        </div>
-        <nav className="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-2 text-[13px]" aria-label="Footer">
-          <Link to="/contact-us/" className="hover:underline underline-offset-4">Contact</Link>
-          <Link to="/team/" className="hover:underline underline-offset-4">Team</Link>
-          <Link to="/verification/" className="hover:underline underline-offset-4">Account Verification</Link>
-          <Link to="/privacy/" className="hover:underline underline-offset-4">Privacy Policy</Link>
-          <button onClick={openCookieSettings} className="hover:underline underline-offset-4">Cookie settings</button>
-          <a href={`mailto:${CONTACT_EMAIL}`} className="hover:underline underline-offset-4">{CONTACT_EMAIL}</a>
-        </nav>
-        <div className="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-x-12 gap-y-2 text-[12px] text-ink/60">
-          {offices.map((o) => <span key={o.region}>{o.address}</span>)}
-        </div>
-      </div>
-
       <SummariseWith />
 
+      {/* Everything below sits on one blue field: the module columns, then the name moving across. */}
       <div className="relative overflow-hidden bg-blue text-white">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,.14),transparent_55%)]" />
-        <div className="wrap relative flex min-h-[46vw] flex-col justify-end pb-6 pt-24 sm:min-h-[34vw]">
-          <div className="display select-none whitespace-nowrap text-[15.5vw] leading-[0.85] tracking-[-0.02em]" aria-hidden="true">Velero Capital</div>
-          <div className="mt-6 flex flex-col gap-1 text-[11px] text-white/80 sm:flex-row sm:justify-between">
-            <span>©{new Date().getFullYear()} Velero Capital. All rights reserved.</span>
-            <span>Guiding bold ideas to safe harbours.</span>
+        <div className="wrap relative grid grid-cols-1 gap-12 pb-4 pt-16 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-3">
+            <Link to="/" aria-label="Velero Capital home"><img src="/images/logo-outline.png" alt="Velero Capital" className="h-12 w-auto brightness-0 invert" /></Link>
+            <p className="mt-5 text-[14px] leading-relaxed text-white/80">Access is the edge.<br />Private markets, by relationship.</p>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="mt-4 inline-block text-[14px] text-white/80 underline-offset-4 hover:text-white hover:underline">{CONTACT_EMAIL}</a>
+          </div>
+
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:col-span-9 lg:grid-cols-5">
+            <Module title="Solutions">
+            {groups.map((g) => <Row key={g.id}><Link to={`/solutions/#${g.id}`} className={linkCls}>{g.title}</Link></Row>)}
+          </Module>
+
+          <Module title="Capital">
+              {capital?.children?.map((c) => <Row key={c.to}><Link to={c.to} className={linkCls}>{c.label}</Link></Row>)}
+              <Row><Link to="/portfolio/" className={linkCls}>Portfolio</Link></Row>
+            </Module>
+
+            <Module title="Services">
+              {services?.children?.map((c) => <Row key={c.to}><Link to={c.to} className={linkCls}>{c.label}</Link></Row>)}
+            </Module>
+
+            <Module title="Company">
+              <Row><Link to="/company/" className={linkCls}>Inside Velero Capital</Link></Row>
+              <Row><Link to="/team/" className={linkCls}>Our Team</Link></Row>
+              <Row><Link to="/verification/" className={linkCls}>Account Verification</Link></Row>
+              <Row><Link to="/contact-us/" className={linkCls}>Inquiries</Link></Row>
+              <Row><Link to="/privacy/" className={linkCls}>Privacy Policy</Link></Row>
+              <Row><button onClick={openCookieSettings} className={`${linkCls} text-left`}>Cookie Settings</button></Row>
+            </Module>
+
+            <div className="space-y-12">
+              <Module title="Offices">
+                {offices.map((o) => <Row key={o.region}>{o.region === "United Arab Emirates" ? "Dubai" : o.region}</Row>)}
+              </Module>
+              <Module title="Socials">
+                {social.map((s) => (
+                  <Row key={s.label}>
+                    <a href={s.href} target="_blank" rel="noreferrer" className={linkCls}>
+                      {s.label} <span aria-hidden className="ml-1 text-white/70">↗</span>
+                    </a>
+                  </Row>
+                ))}
+              </Module>
+            </div>
           </div>
         </div>
+
+        {/* The name, moving: one continuous band that never stops. */}
+        <div className="relative pt-10 sm:pt-14" aria-hidden="true">
+          <div className="name-marquee flex w-max select-none">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <span key={i} className="display whitespace-nowrap pr-[0.35em] text-[22vw] leading-[0.9] tracking-[-0.02em] sm:text-[15.5vw]">Velero Capital</span>
+            ))}
+          </div>
+        </div>
+        <div className="wrap relative flex flex-col gap-1 pb-6 pt-6 text-[11px] text-white/80 sm:flex-row sm:justify-between">
+          <span>©{new Date().getFullYear()} Velero Capital. All rights reserved.</span>
+          <span>Access is the edge.</span>
+        </div>
       </div>
+
+      <BackToTop />
     </footer>
   );
 }

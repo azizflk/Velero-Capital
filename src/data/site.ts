@@ -1,7 +1,9 @@
 export const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || "info@velero.capital";
 
-export type NavItem = { label: string; to: string; children?: { label: string; to: string }[] };
+/** `mega` marks the item whose dropdown is the full-width Solutions panel. */
+export type NavItem = { label: string; to: string; mega?: boolean; children?: { label: string; to: string }[] };
 export const nav: NavItem[] = [
+  { label: "Solutions", to: "/solutions/", mega: true },
   { label: "Portfolio", to: "/portfolio/" },
   {
     label: "Capital",
@@ -14,34 +16,31 @@ export const nav: NavItem[] = [
     ],
   },
   {
+    label: "Services",
+    to: "/services/",
+    children: [
+      { label: "Fundraising Advisory", to: "/services/fundraising-advisory/" },
+      { label: "Corporate Development", to: "/services/corporate-development/" },
+      { label: "M&A Advisory", to: "/services/m-and-a-advisory/" },
+      { label: "Cap Table & Equity Advisory", to: "/services/cap-table-equity-advisory/" },
+      { label: "Valuation & Modelling", to: "/services/valuation-modelling/" },
+    ],
+  },
+  {
     label: "Company",
     to: "/company/",
     children: [
-      { label: "About Velero", to: "/company/" },
+      { label: "Inside Velero Capital", to: "/company/" },
       { label: "Account Verification", to: "/verification/" },
       { label: "Contact", to: "/contact-us/" },
     ],
   },
-  {
-    label: "Services",
-    to: "/services/",
-    children: [
-      { label: "Fundraising Advisory", to: "/services/#fundraising" },
-      { label: "Corporate Development", to: "/services/#corporate-development" },
-      { label: "M&A Advisory", to: "/services/#m-and-a" },
-      { label: "Cap Table & Equity Advisory", to: "/services/#cap-table" },
-      { label: "Valuation & Modelling", to: "/services/#valuation" },
-    ],
-  },
-  { label: "News & Content", to: "/stories/" },
   { label: "Our Team", to: "/team/" },
 ];
 
 export const social = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/107078065/" },
-  { label: "CoinMarketCap", href: "https://coinmarketcap.com/community/profile/velerocapital/" },
   { label: "X", href: "https://x.com/velerocapital" },
-  { label: "Telegram", href: "https://t.me/velerocapital" },
 ];
 
 export const offices = [

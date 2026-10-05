@@ -1,39 +1,8 @@
+import { Link } from "react-router-dom";
 import { SidebarPage, Section, Prose, List } from "@/components/Layout";
 import Button from "@/components/Button";
+import { services } from "@/data/services";
 import { useTitle } from "@/lib/useTitle";
-
-const services = [
-  {
-    id: "fundraising",
-    title: "Fundraising Advisory",
-    text: "End-to-end support across equity and structured raises. We shape the positioning and narrative, build the investor list and materials, then run the process and the negotiation — keeping the operating business protected and your options open through close.",
-    items: ["Positioning, narrative and investor materials", "Investor targeting and outreach strategy", "Process management and negotiation support"],
-  },
-  {
-    id: "corporate-development",
-    title: "Corporate Development",
-    text: "Embedded support for partnerships, licensing, commercial agreements and acquisition-led growth. We work as a flexible extension of your corporate development function, from origination through diligence and execution.",
-    items: ["Partnership and licensing strategy", "Commercial agreement structuring", "Target origination, diligence and execution"],
-  },
-  {
-    id: "m-and-a",
-    title: "M&A Advisory",
-    text: "Sell-side and buy-side advice covering preparation, valuation, structuring and execution. We are strongest in technically complex situations, where real sector fluency changes the outcome.",
-    items: ["Sell-side preparation and buyer outreach", "Buy-side screening and approach", "Valuation, structuring and execution"],
-  },
-  {
-    id: "cap-table",
-    title: "Cap Table & Equity Advisory",
-    text: "Cap table architecture, secondary transactions, anti-dilution analysis and equity programme design — including option pool sizing, refresh strategy and incentive structures aligned with long-term value creation.",
-    items: ["Cap table architecture and clean-up", "Secondary transactions and liquidity", "Option pools, refreshes and incentive design"],
-  },
-  {
-    id: "valuation",
-    title: "Valuation & Modelling",
-    text: "Operating and valuation models built to stand up to scrutiny, for board reviews, financings, transactions and strategic decisions.",
-    items: ["Operating and financial models", "Valuation analysis for rounds and transactions", "Board and strategic decision support"],
-  },
-];
 
 const anchors = services.map((s) => ({ id: s.id, label: s.title }));
 
@@ -43,19 +12,22 @@ export default function Services() {
     <SidebarPage title="Services: a focused corporate finance practice" intro="We advise across the financing and transaction lifecycle. Every engagement is senior-led, tightly scoped and run with the discipline of an institutional process, informed by investor-side judgment and operating experience." anchors={anchors}>
       <Section>
         <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => (
-            <a key={s.id} href={`#${s.id}`} className="group block border-t border-rule pt-4">
-              <div className="text-[12px] tabular-nums text-ink/50">{String(i + 1).padStart(2, "0")}</div>
-              <h3 className="display mt-1 text-2xl group-hover:text-blue">{s.title}</h3>
-            </a>
+          {services.map((s) => (
+            <Link key={s.id} to={s.path} className="group flex items-start justify-between gap-4 border-t border-rule pt-4">
+              <h3 className="display text-2xl group-hover:text-blue">{s.title}</h3>
+              <span aria-hidden className="mt-1 text-ink/40 transition-transform group-hover:translate-x-1 group-hover:text-blue">→</span>
+            </Link>
           ))}
         </div>
       </Section>
 
       {services.map((s) => (
-        <Section key={s.id} id={s.id} title={s.title}>
-          <div className="grid gap-8 grid-cols-1 lg:grid-cols-12">
-            <Prose className="lg:col-span-7"><p>{s.text}</p></Prose>
+        <Section key={s.id} id={s.id} title={<Link to={s.path} className="hover:text-blue">{s.title}</Link>}>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <Prose><p>{s.text}</p></Prose>
+              <div className="mt-6"><Button to={s.path}>Explore {s.title}</Button></div>
+            </div>
             <div className="lg:col-span-5"><List items={s.items} /></div>
           </div>
         </Section>

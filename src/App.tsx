@@ -8,7 +8,11 @@ import Investment from "@/pages/Investment";
 import { investments } from "@/data/investments";
 import Portfolio from "@/pages/Portfolio";
 import Services from "@/pages/Services";
-import Stories from "@/pages/Stories";
+import ServiceDetail from "@/pages/ServiceDetail";
+import { services } from "@/data/services";
+import Solutions from "@/pages/Solutions";
+import SolutionDetail from "@/pages/SolutionDetail";
+import { sectors } from "@/data/solutions";
 import About from "@/pages/About";
 import Team from "@/pages/Team";
 import Contact from "@/pages/Contact";
@@ -37,6 +41,8 @@ export default function App() {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/solutions" element={<Solutions />} />
+          {sectors.map((sc) => <Route key={sc.slug} path={sc.path.replace(/\/$/, "")} element={<SolutionDetail key={sc.slug} sector={sc} />} />)}
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/capital" element={<Capital />} />
           {investments.map((i) => <Route key={i.slug} path={i.path.replace(/\/$/, "")} element={<Investment key={i.slug} item={i} />} />)}
@@ -48,8 +54,10 @@ export default function App() {
           <Route path="/company" element={<About />} />
           <Route path="/famiglia" element={<Navigate to="/company/" replace />} />
           <Route path="/services" element={<Services />} />
+          {services.map((sv) => <Route key={sv.slug} path={sv.path.replace(/\/$/, "")} element={<ServiceDetail key={sv.slug} service={sv} />} />)}
           <Route path="/transformations" element={<Navigate to="/services/" replace />} />
-          <Route path="/stories" element={<Stories />} />
+          {/* News & Content is parked for now. The page lives on in src/pages/Stories.tsx; restore this route and the nav entry to bring it back. */}
+          <Route path="/stories" element={<Navigate to="/" replace />} />
           <Route path="/web3-services" element={<Navigate to="/capital/" replace />} />
           <Route path="/web3-and-crypto-marketing" element={<Navigate to="/services/" replace />} />
           <Route path="/advisory" element={<Navigate to="/services/" replace />} />

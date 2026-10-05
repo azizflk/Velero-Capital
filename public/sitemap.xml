@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://velero.capital/</loc></url>
+  <url><loc>https://velero.capital/solutions/</loc></url>
+  <url><loc>https://velero.capital/solutions/commercial-real-estate/</loc></url>
+  <url><loc>https://velero.capital/solutions/infrastructure/</loc></url>
+  <url><loc>https://velero.capital/solutions/data-centers-digital-infrastructure/</loc></url>
+  <url><loc>https://velero.capital/solutions/financial-institutions/</loc></url>
+  <url><loc>https://velero.capital/solutions/financial-sponsors/</loc></url>
+  <url><loc>https://velero.capital/solutions/technology/</loc></url>
+  <url><loc>https://velero.capital/solutions/quantum-computing/</loc></url>
+  <url><loc>https://velero.capital/solutions/blockchain/</loc></url>
+  <url><loc>https://velero.capital/solutions/media-telecom-entertainment/</loc></url>
+  <url><loc>https://velero.capital/solutions/innovation-economy/</loc></url>
+  <url><loc>https://velero.capital/solutions/oil-gas/</loc></url>
+  <url><loc>https://velero.capital/solutions/power-utilities/</loc></url>
+  <url><loc>https://velero.capital/solutions/renewable-energy/</loc></url>
+  <url><loc>https://velero.capital/solutions/metals-mining/</loc></url>
+  <url><loc>https://velero.capital/solutions/chemicals/</loc></url>
+  <url><loc>https://velero.capital/solutions/industrials/</loc></url>
+  <url><loc>https://velero.capital/solutions/business-services/</loc></url>
+  <url><loc>https://velero.capital/solutions/transportation-logistics/</loc></url>
+  <url><loc>https://velero.capital/solutions/maritime-shipping/</loc></url>
+  <url><loc>https://velero.capital/solutions/consumer-retail/</loc></url>
+  <url><loc>https://velero.capital/solutions/food-beverage/</loc></url>
+  <url><loc>https://velero.capital/solutions/health-care/</loc></url>
+  <url><loc>https://velero.capital/solutions/sports/</loc></url>
+  <url><loc>https://velero.capital/solutions/public-sector/</loc></url>
   <url><loc>https://velero.capital/portfolio/</loc></url>
   <url><loc>https://velero.capital/capital/</loc></url>
   <url><loc>https://velero.capital/late-stage/</loc></url>
@@ -9,7 +34,11 @@
   <url><loc>https://velero.capital/co-investments/</loc></url>
   <url><loc>https://velero.capital/company/</loc></url>
   <url><loc>https://velero.capital/services/</loc></url>
-  <url><loc>https://velero.capital/stories/</loc></url>
+  <url><loc>https://velero.capital/services/fundraising-advisory/</loc></url>
+  <url><loc>https://velero.capital/services/corporate-development/</loc></url>
+  <url><loc>https://velero.capital/services/m-and-a-advisory/</loc></url>
+  <url><loc>https://velero.capital/services/cap-table-equity-advisory/</loc></url>
+  <url><loc>https://velero.capital/services/valuation-modelling/</loc></url>
   <url><loc>https://velero.capital/team/</loc></url>
   <url><loc>https://velero.capital/verification/</loc></url>
   <url><loc>https://velero.capital/contact-us/</loc></url>

@@ -73,3 +73,7 @@ body { @apply bg-paper text-ink font-sans antialiased text-[15px] leading-relaxe
 /* Scroll line: eases toward the scroll position so dividers sweep across instead of snapping */
 .scroll-line { transition: stroke-dashoffset .45s cubic-bezier(.2,.7,.2,1); }
 @media (prefers-reduced-motion: reduce) { .scroll-line { transition: none; } }
+
+/* Footer wordmark: the name scrolls left forever. Four copies, shifted by half, so the loop is seamless. */
+.name-marquee { animation: marquee 28s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .name-marquee { animation: none; } }

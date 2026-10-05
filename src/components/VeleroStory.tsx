@@ -8,9 +8,9 @@ import { useEffect, useRef } from "react";
  * starts and ends on the baseline, and is stitched onto the path by `row()`.
  */
 /** `keep` scenes are never mirrored, even on a right-to-left row. Charts must always rise from left to right. */
-type Scene = { w: number; d: string; keep?: boolean };
+export type Scene = { w: number; d: string; keep?: boolean };
 
-const gap = (w: number): Scene => ({ w, d: `L ${w} 0` });
+export const gap = (w: number): Scene => ({ w, d: `L ${w} 0` });
 
 const person = (w: number): Scene => {
   const s = w / 50;
@@ -21,7 +21,7 @@ const person = (w: number): Scene => {
   };
 };
 
-const S = {
+export const S = {
   // Velero means sailboat
   wave: { w: 60, d: "C 10 14 20 14 30 0 C 40 -14 50 -14 60 0" },
   boat: { w: 220, d: "L 165 0 L 190 40 L 110 40 L 110 200 L 185 60 L 110 60 L 45 60 L 110 170 L 110 40 L 30 40 L 55 0 L 220 0" },
@@ -94,7 +94,7 @@ const coins: Scene = (() => {
 })();
 
 /** Stitch scenes along a baseline. dir = 1 runs left to right, -1 right to left. Returns the path and where the pen ends up. */
-function row(scenes: Scene[], startX: number, base: number, dir: 1 | -1) {
+export function row(scenes: Scene[], startX: number, base: number, dir: 1 | -1) {
   let x = startX;
   const out: string[] = [];
   for (const sc of scenes) {

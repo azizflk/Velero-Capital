@@ -4,6 +4,7 @@ import { differentiators } from "@/data/site";
 import { useTitle } from "@/lib/useTitle";
 
 const anchors = [
+  { id: "name", label: "The name" },
   { id: "expertise", label: "Expertise" },
   { id: "vision", label: "Vision & mission" },
   { id: "values", label: "Core values" },
@@ -15,9 +16,11 @@ export default function About() {
   useTitle("Company", "Velero Capital connects family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate.");
   return (
     <SidebarPage title="Company: empowering innovation through strategic capital" intro="Velero Capital is a private investment firm headquartered in Dubai, with offices in San Francisco, Los Angeles and Berlin." anchors={anchors}>
-      <Section>
-        <Prose>
-          <p>We connect family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate. We’re a network of investors, industry experts, dealmakers, and operational leaders. Only approved investors can participate.</p>
+      <Section id="name">
+        <h2 className="display text-2xl">Velero means sailing vessel in Spanish.</h2>
+        <Prose className="mt-3">
+          <p>The name reflects our role in navigating private markets and connecting capital with select investment opportunities. Velero Capital works with family offices and institutional investors across late-stage companies, secondary transactions, and real estate.</p>
+          <p>We’re a network of investors, industry experts, dealmakers, and operational leaders. Only approved investors can participate.</p>
         </Prose>
       </Section>
 

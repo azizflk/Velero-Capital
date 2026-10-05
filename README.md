@@ -27,7 +27,7 @@ npm run preview    # serve the production build locally
 | Logos, team photos | `public/` |
 | Layout primitives (sidebar page, sections, columns, quote) | `src/components/Layout.tsx` |
 
-Top-level sections are Portfolio, Capital, Company, Services, News & Content and Our Team, plus a Search overlay (also Cmd/Ctrl+K). Capital has four category pages (`/late-stage/`, `/secondaries/`, `/real-estate/`, `/co-investments/`), all rendered by `src/pages/Investment.tsx` from `src/data/investments.ts`. Old WordPress slugs redirect: `/otc-investment/` to Secondaries, `/strategic-investments/` and `/tech-investments-part/` to Late-Stage, `/web3-services/` to Capital, `/about-us/` to Company.
+Top-level sections are Portfolio, Capital, Company, Services and Our Team (News & Content is parked: the page file remains but is not linked or routed), plus a Search overlay (also Cmd/Ctrl+K). Capital has four category pages (`/late-stage/`, `/secondaries/`, `/real-estate/`, `/co-investments/`), all rendered by `src/pages/Investment.tsx` from `src/data/investments.ts`. Old WordPress slugs redirect: `/otc-investment/` to Secondaries, `/strategic-investments/` and `/tech-investments-part/` to Late-Stage, `/web3-services/` to Capital, `/about-us/` to Company.
 
 ## Forms
 

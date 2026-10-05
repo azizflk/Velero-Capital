@@ -15,9 +15,9 @@ export default function SummariseWith() {
   const prompt = `Read ${page} and summarise it for me: what Velero Capital does on this page, who it is for, how the engagement works and what it costs. Then tell me what questions I should ask them on a first call.`;
   const q = encodeURIComponent(prompt);
   return (
-    <div className="rule">
+    <div>
       <div className="wrap flex flex-col items-center justify-center gap-4 py-7 sm:flex-row sm:gap-6">
-        <span className="font-mono text-[12px] uppercase tracking-[0.18em] text-ink/60">Summarise this page with</span>
+        <span className="text-[12px] font-medium uppercase tracking-[0.18em] text-ink/60">Summarise this page with</span>
         <div className="flex flex-wrap justify-center gap-2.5">
           {tools.map((t) => (
             <a key={t.name} href={t.url(q)} target="_blank" rel="noopener noreferrer" className="pill" title={`Summarise this page with ${t.name}`}>
