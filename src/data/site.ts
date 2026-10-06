@@ -35,7 +35,6 @@ export const nav: NavItem[] = [
       { label: "Contact", to: "/contact-us/" },
     ],
   },
-  { label: "Our Team", to: "/team/" },
 ];
 
 export const social = [

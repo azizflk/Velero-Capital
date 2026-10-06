@@ -1,4 +1,3 @@
-import { team } from "./site";
 import { investments } from "./investments";
 import { services } from "./services";
 import { sectors } from "./solutions";
@@ -22,8 +21,6 @@ export const searchIndex: SearchDoc[] = [
   { section: "Services", title: "Services", text: "A focused corporate finance practice across the financing and transaction lifecycle. Senior-led, tightly scoped engagements on retainer.", to: "/services/" },
   ...services.map((sv) => ({ section: "Services", title: sv.title, text: `${sv.text} ${sv.work.map((w) => w.title).join(", ")}.`, to: sv.path })),
   { section: "Company", title: "Privacy Policy", text: "How Velero Capital handles personal data and cookies. Cookie settings, analytics, embedded media, your rights.", to: "/privacy/" },
-  { section: "Our Team", title: "Our Team", text: "The operators behind every mandate.", to: "/team/" },
-  ...team.map((m) => ({ section: "Our Team", title: m.name, text: m.role, to: "/team/" })),
 ];
 
 export function search(q: string): SearchDoc[] {

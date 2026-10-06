@@ -1,5 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { STORY_COMPLETE } from "./VeleroStory";
+import { S, STORY_COMPLETE, gap, row, type Scene } from "./VeleroStory";
+
+/** Shrink a hero scene so it fits under the closing section. */
+const scale = (sc: Scene, k: number): Scene => ({
+  ...sc,
+  w: sc.w * k,
+  d: sc.d.split(/\s+/).map((t) => (/^-?[\d.]+$/.test(t) ? String(+(Number(t) * k).toFixed(1)) : t)).join(" "),
+});
+
+/** The happy ending: after the last section the line sails home — a boat on the water reaching a lighthouse (kept facing the boat). */
+const ending = (k: number) => [gap(24), S.wave, S.wave, S.boat, S.wave, S.wave, S.wave, gap(10), { ...S.lighthouse, keep: true }, gap(16)].map((sc) => scale(sc, k));
+// How much further the page scrolls past the last divider while the ending draws itself.
+const ENDING_SCROLL = 220;
 
 type Pt = { x: number; y: number };
 
@@ -14,7 +26,8 @@ type Pt = { x: number; y: number };
 export default function ScrollLine() {
   const svg = useRef<SVGSVGElement>(null);
   const path = useRef<SVGPathElement>(null);
-  const geo = useRef<{ pts: Pt[]; cum: number[]; total: number; rootTop: number }>({ pts: [], cum: [], total: 0, rootTop: 0 });
+  const probe = useRef<SVGPathElement>(null);
+  const geo = useRef<{ pts: Pt[]; cum: number[]; total: number; rootTop: number; tail: number }>({ pts: [], cum: [], total: 0, rootTop: 0, tail: 0 });
   const [box, setBox] = useState({ w: 0, h: 0, d: "" });
 
   useEffect(() => {
@@ -47,6 +60,9 @@ export default function ScrollLine() {
           break;
         }
       }
+      // The ending is drawn once the line has reached the water, over the next stretch of scrolling.
+      const last = g.pts[g.pts.length - 1];
+      if (g.tail && tipY >= last.y) len += Math.min(1, (tipY - last.y) / ENDING_SCROLL) * g.tail;
       p.style.strokeDasharray = `${g.total}`;
       p.style.strokeDashoffset = `${Math.max(0, g.total - len)}`;
     };
@@ -80,12 +96,18 @@ export default function ScrollLine() {
         x = x === leftX ? rightX : leftX;
         pts.push({ x, y: tops[i] }); // across the divider to the other edge
       }
-      pts.push({ x, y: bottom });
+      // Down the last edge to the water line, then the ending sails back in from that edge.
+      const k = wr.width < 640 ? 0.3 : 0.42;
+      const water = bottom - 24;
+      pts.push({ x, y: water });
+      const tail = row(ending(k), x, water, x === rightX ? -1 : 1).d;
 
       const cum = [0];
       for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.abs(pts[i].x - pts[i - 1].x) + Math.abs(pts[i].y - pts[i - 1].y));
-      geo.current = { pts, cum, total: cum[cum.length - 1], rootTop: rr.top + window.scrollY };
-      const d = pts.map((p, i) => `${i ? "L" : "M"} ${p.x} ${p.y}`).join(" ");
+      let tailLen = 0;
+      if (probe.current) { probe.current.setAttribute("d", `M ${x} ${water} ${tail}`); tailLen = probe.current.getTotalLength(); }
+      geo.current = { pts, cum, total: cum[cum.length - 1] + tailLen, rootTop: rr.top + window.scrollY, tail: tailLen };
+      const d = pts.map((p, i) => `${i ? "L" : "M"} ${p.x} ${p.y}`).join(" ") + " " + tail;
       setBox((b) => (b.d === d && b.w === Math.round(rr.width) && b.h === Math.round(rr.height) ? b : { w: Math.round(rr.width), h: Math.round(rr.height), d }));
       draw();
     };
@@ -110,6 +132,7 @@ export default function ScrollLine() {
   return (
     <svg ref={svg} width={box.w} height={box.h} viewBox={`0 0 ${box.w || 1} ${box.h || 1}`} className="pointer-events-none absolute left-0 top-0 z-10 overflow-visible text-ink" aria-hidden="true">
       <path ref={path} className="scroll-line" d={box.d} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ strokeDasharray: 1, strokeDashoffset: 1 }} />
+      <path ref={probe} fill="none" stroke="none" />
     </svg>
   );
 }

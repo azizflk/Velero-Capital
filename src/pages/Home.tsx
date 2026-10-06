@@ -4,7 +4,7 @@ import { Section, Cols } from "@/components/Layout";
 import LogoBelt from "@/components/LogoBelt";
 import VeleroStory from "@/components/VeleroStory";
 import ScrollLine from "@/components/ScrollLine";
-import TeamSlideshow from "@/components/TeamSlideshow";
+import MatchEngine from "@/components/MatchEngine";
 import { coInvestors, realEstateInvestors } from "@/data/site";
 import { investments } from "@/data/investments";
 import { useTitle } from "@/lib/useTitle";
@@ -75,7 +75,7 @@ function Approach() {
           <div className="pt-2"><Button to="/contact-us/">Get in Touch</Button></div>
         </div>
         <div className="lg:col-span-5">
-          <TeamSlideshow />
+          <MatchEngine className="mx-auto max-w-md lg:-mt-12" />
         </div>
       </div>
     </Section>
@@ -123,7 +123,7 @@ function Portfolio() {
 
 function CTA() {
   return (
-    <section className="rule py-16 text-center sm:py-24">
+    <section className="rule pb-44 pt-16 text-center sm:pb-52 sm:pt-24">
       <h2 className="display mx-auto max-w-3xl text-4xl sm:text-5xl">Direct Access to the Private Companies and Assets Shaping the Future</h2>
       <p className="mx-auto mt-4 max-w-md text-[13px] text-ink/70">Late-stage, pre-IPO, secondary and real estate opportunities, shared with approved investors.</p>
       <div className="mt-8"><Button to="/contact-us/">Get in Touch</Button></div>

@@ -14,7 +14,6 @@ import Solutions from "@/pages/Solutions";
 import SolutionDetail from "@/pages/SolutionDetail";
 import { sectors } from "@/data/solutions";
 import About from "@/pages/About";
-import Team from "@/pages/Team";
 import Contact from "@/pages/Contact";
 import Verification from "@/pages/Verification";
 import NotFound from "@/pages/NotFound";
@@ -62,7 +61,7 @@ export default function App() {
           <Route path="/web3-and-crypto-marketing" element={<Navigate to="/services/" replace />} />
           <Route path="/advisory" element={<Navigate to="/services/" replace />} />
           <Route path="/about-us" element={<Navigate to="/company/" replace />} />
-          <Route path="/team" element={<Team />} />
+          <Route path="/team" element={<Navigate to="/company/" replace />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/privacy" element={<Privacy />} />

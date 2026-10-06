@@ -37,7 +37,7 @@ export const menus: Record<string, Menu> = {
       ] },
       { title: "Overview", items: [
         { label: "How we invest", to: "/capital/", desc: "The four categories and how a deal runs." },
-        { label: "Portfolio", to: "/portfolio/", desc: "Sectors, and who we invest alongside." },
+        { label: "Portfolio", to: "/portfolio/", desc: "Industries, and who we invest alongside." },
       ] },
     ],
   },
@@ -70,7 +70,6 @@ export const menus: Record<string, Menu> = {
     groups: [
       { title: "About", items: [
         { label: "Inside Velero Capital", to: "/company/", desc: "Who we are, and what the name means." },
-        { label: "Our Team", to: "/team/", desc: "The people behind every mandate." },
       ] },
       { title: "Trust", items: [
         { label: "Account Verification", to: "/verification/", desc: "Check that an email is officially ours." },

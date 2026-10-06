@@ -29,7 +29,7 @@ export default function Portfolio() {
         <Cols cols={4} items={investments.map((i) => ({ title: i.label, text: i.intro, to: i.path }))} />
       </Section>
 
-      <Section title="Sectors">
+      <Section title="Industries">
         <ul className="grid max-w-3xl gap-x-8 sm:grid-cols-2">
           {sectors.map((s) => <li key={s} className="border-t border-rule py-2.5 text-[14px]">{s}</li>)}
         </ul>

@@ -58,7 +58,6 @@ export default function About() {
 
       <Section id="connect" title="Connect with us">
         <Cols cols={3} items={[
-          { title: "Our Team", text: "The operators behind every mandate.", to: "/team/" },
           { title: "Account Verification", text: "Confirm that an email address is officially associated with Velero Capital.", to: "/verification/" },
           { title: "Contact", text: "Tell us about your mandate and we’ll come back to you.", to: "/contact-us/" },
         ]} />
