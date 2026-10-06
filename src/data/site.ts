@@ -1,4 +1,4 @@
-export const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || "info@velero.capital";
+export const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || "contact@velero.capital";
 
 /** `mega` marks the item whose dropdown is the full-width Solutions panel. */
 export type NavItem = { label: string; to: string; mega?: boolean; children?: { label: string; to: string }[] };
