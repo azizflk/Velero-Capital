@@ -19,8 +19,8 @@ function Hero() {
         <div className="fade-in order-1 lg:col-span-5 lg:col-start-1">
           <div className="eyebrow">Velero Capital</div>
           <h1 className="display mt-1 text-5xl sm:text-6xl lg:text-[72px]">Access is the edge.</h1>
-          <p className="mt-4 max-w-lg text-[13px] leading-relaxed text-ink/80">We connect family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate.</p>
-          <div className="mt-6 flex gap-3"><Button to="/contact-us/">Get in Touch</Button><Button to="/capital/">How we invest</Button></div>
+          <p className="mt-4 max-w-lg text-[13px] leading-relaxed text-ink/80">We connect family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate — and advise founders and companies on fundraising, M&amp;A and corporate finance.</p>
+          <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/">Get in Touch</Button><Button to="/capital/">How we invest</Button><Button to="/services/">Our services</Button></div>
         </div>
       </div>
     </section>
