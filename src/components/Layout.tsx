@@ -42,7 +42,7 @@ export function SidebarPage({ title, intro, anchors = NO_ANCHORS, aside, childre
 
 export function Section({ id, title, eyebrow, children, className = "" }: { id?: string; title?: ReactNode; eyebrow?: string; children: ReactNode; className?: string }) {
   return (
-    <section id={id} className={`rule scroll-mt-24 py-10 first:border-t-0 first:pt-0 ${className}`}>
+    <section id={id} className={`scroll-mt-24 border-t border-rule py-10 first:border-t-0 first:pt-0 ${className}`}>
       {eyebrow && <div className="eyebrow mb-1">{eyebrow}</div>}
       {title && <h2 className="display mb-6 text-4xl">{title}</h2>}
       {children}

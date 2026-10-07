@@ -136,7 +136,7 @@ export default function Home() {
   return (
     <div className="relative">
       <Hero />
-      <div className="wrap" data-scroll-sections>
+      <div className="wrap [&>section:first-child]:border-t [&>section:first-child]:pt-10" data-scroll-sections>
         <WhyUs />
         <Approach />
         <Sectors />
