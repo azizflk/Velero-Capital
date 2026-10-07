@@ -39,7 +39,6 @@ export const nav: NavItem[] = [
 
 export const social = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/107078065/" },
-  { label: "X", href: "https://x.com/velerocapital" },
 ];
 
 export const offices = [
