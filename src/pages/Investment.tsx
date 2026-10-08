@@ -1,6 +1,6 @@
 import { SidebarPage, Section, Cols, Prose, List } from "@/components/Layout";
 import Button from "@/components/Button";
-import LogoBelt from "@/components/LogoBelt";
+import LogoWall from "@/components/LogoWall";
 import OneLineArt from "@/components/OneLineArt";
 import { coInvestors, realEstateInvestors } from "@/data/site";
 import { process, type Investment as Inv } from "@/data/investments";
@@ -55,14 +55,7 @@ export default function Investment({ item }: { item: Inv }) {
       </Section>
 
       {belt && (
-        <Section>
-          <div className="eyebrow mb-3">{item.beltLabel}</div>
-          <div className="border-y border-rule">
-            <LogoBelt items={belt[0]} direction="left" />
-            <div className="rule" />
-            <LogoBelt items={belt[1]} direction="right" />
-          </div>
-        </Section>
+        <Section><LogoWall caption={item.beltLabel ?? ""} rows={belt} /></Section>
       )}
 
       <Section id="enquire" title="Investor access">
