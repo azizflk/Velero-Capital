@@ -61,7 +61,6 @@ export const stats = [
   { value: 50, prefix: "$", suffix: "M+", title: "M&A advised", note: "buy-side and sell-side mandates" },
   { value: 3000, prefix: "", suffix: "+", title: "Investor network", note: "family offices, institutions and LPs met on mandates" },
 ];
-export const STATS_NOTE = `Figures stated by the firm from its own records as at ${STATS_ASOF}; unaudited. They aggregate capital raised, placed and advised and are not a measure of investment performance.`;
 
 /** Venture firms shown in the homepage co-invest marquee. Two rows, no firm appears twice. */
 export type VC = { name: string; src: string };

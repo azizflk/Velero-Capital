@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { stats, STATS_NOTE } from "@/data/site";
+import { stats } from "@/data/site";
 import { useInView } from "@/lib/useInView";
 
 function Counter({ value, prefix = "", suffix = "", go }: { value: number; prefix?: string; suffix?: string; go: boolean }) {
@@ -27,7 +27,6 @@ export default function Stats({ compact = false }: { compact?: boolean }) {
           </div>
         ))}
       </div>
-      <p className="mt-3 text-[11px] leading-relaxed text-ink/60">{STATS_NOTE}</p>
     </div>
   );
 }
