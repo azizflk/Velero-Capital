@@ -21,7 +21,7 @@ export default function Portfolio() {
   return (
     <SidebarPage
       title="Portfolio"
-      intro="Late-stage companies, secondary positions and real estate, accessed through relationships. Every opportunity is curated, vetted, and shared only within our closed investor circle."
+      intro="Late-stage companies, secondary positions and real estate, accessed through relationships. Every opportunity is reviewed and shared only with eligible investors whose mandate it fits."
       aside={<Filters label="Network" options={TYPES} value={type} onChange={setType} />}
     >
       <Section><Stats compact /></Section>
@@ -45,9 +45,9 @@ export default function Portfolio() {
         <LogoNote className="mt-4" />
       </Section>
 
-      <Section title="Request the full portfolio">
-        <Prose><p>Position-level detail is shared with approved family offices and institutional investors on request.</p></Prose>
-        <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/" variant="blue">Get in Touch</Button><Button to="/capital/">How we invest</Button></div>
+      <Section title="Investor access">
+        <Prose><p>Specific opportunities are discussed only with eligible family offices and institutional investors whose mandate they fit, after review and under confidentiality terms.</p></Prose>
+        <div className="mt-6 flex flex-wrap gap-3"><Button to="/investor-access/" variant="blue">Investor Access</Button><Button to="/capital/">Explore Our Strategies</Button></div>
       </Section>
     </SidebarPage>
   );

@@ -15,12 +15,12 @@ const anchors = [
 export default function About() {
   useTitle("Company", "Velero Capital connects family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate.");
   return (
-    <SidebarPage title="Company: empowering innovation through strategic capital" intro="Velero Capital is a private investment firm headquartered in Dubai, with offices in San Francisco, Los Angeles and Berlin." anchors={anchors}>
+    <SidebarPage title="Company: an independent private-markets firm" intro="Velero Capital is an independent private-markets investment-access and advisory firm headquartered in Dubai, with offices in San Francisco, Los Angeles and Berlin." anchors={anchors}>
       <Section id="name">
         <h2 className="display text-2xl">Velero means sailing vessel in Spanish.</h2>
         <Prose className="mt-3">
           <p>The name reflects our role in navigating private markets and connecting capital with select investment opportunities. Velero Capital works with family offices and institutional investors across late-stage companies, secondary transactions, and real estate.</p>
-          <p>We’re a network of investors, industry experts, dealmakers, and operational leaders. Only approved investors can participate.</p>
+          <p>We are a small senior team working with a network of investors, industry specialists, dealmakers and operators. Velero Capital does not manage a fund or invest its own balance sheet: our role is to source, review and structure opportunities for eligible investors, and to advise companies on their own transactions. Opportunities are shared only with eligible investors whose mandate they fit.</p>
         </Prose>
       </Section>
 
@@ -36,19 +36,19 @@ export default function About() {
 
       <Section id="vision">
         <Cols cols={2} items={[
-          { title: "Our Vision", text: "To be the trusted route into private markets for family offices and institutions, connecting global capital with the companies and assets defining the future." },
-          { title: "Our Mission", text: "We bridge the gap between bold ideas and strategic capital. We provide tailored investment access, deep market expertise, and a global investor network to help companies scale and investors deploy with conviction." },
+          { title: "Our Vision", text: "To be the firm that family offices and institutions trust for select, well-reviewed access to private markets, across Dubai, the United States and Europe." },
+          { title: "Our Mission", text: "To connect eligible investors with private-market opportunities that fit their mandate, on terms set out clearly in advance, and to advise companies with the same discipline on fundraising and transactions." },
         ]} />
       </Section>
 
       <Section id="values" title="Our core values">
         <Cols cols={3} items={[
-          { title: "Innovation-First", text: "We back ideas that challenge the status quo and shape the future." },
-          { title: "Integrity & Trust", text: "We build long-term partnerships based on transparency, alignment, and reliability." },
-          { title: "Global Connectivity", text: "From Dubai to Silicon Valley, we unite founders and investors across borders." },
-          { title: "Agility", text: "We move fast, act boldly, and adapt quickly to market shifts." },
-          { title: "Founder-Focused", text: "We support entrepreneurs with more than just capital — offering strategic insight, operational guidance, and hands-on partnership." },
-          { title: "Excellence", text: "We aim for top-tier execution in everything we do — from deal sourcing to value creation." },
+          { title: "Selectivity", text: "We share only what has been reviewed and fits a mandate, and we decline most of what we see." },
+          { title: "Integrity", text: "Terms, costs and conflicts are disclosed in writing before any commitment." },
+          { title: "Discretion", text: "Investors’ mandates and participation, and companies’ information, are held in confidence." },
+          { title: "Discipline", text: "The same review of the company or asset, the terms and the counterparties, on every opportunity, large or small." },
+          { title: "Alignment", text: "Investors come in on terms no worse than the lead sponsor’s, with reporting that passes through to every participant." },
+          { title: "Global Reach", text: "Dubai, San Francisco, Los Angeles and Berlin: relationships on both sides of the capital flow between the Gulf, the United States and Europe." },
         ]} />
       </Section>
 
@@ -58,8 +58,9 @@ export default function About() {
 
       <Section id="connect" title="Connect with us">
         <Cols cols={3} items={[
+          { title: "Investor Access", text: "How family offices and institutions work with us, from enquiry to transaction.", to: "/investor-access/" },
+          { title: "Submit an Opportunity", text: "For companies, shareholders, sponsors and intermediaries.", to: "/submit-an-opportunity/" },
           { title: "Account Verification", text: "Confirm that an email address is officially associated with Velero Capital.", to: "/verification/" },
-          { title: "Contact", text: "Tell us about your mandate and we’ll come back to you.", to: "/contact-us/" },
         ]} />
       </Section>
     </SidebarPage>

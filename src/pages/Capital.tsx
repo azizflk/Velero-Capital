@@ -7,9 +7,9 @@ import { useTitle } from "@/lib/useTitle";
 const anchors = [...investments.map((i) => ({ id: i.slug, label: i.label })), { id: "process", label: "How it works" }];
 
 export default function Capital() {
-  useTitle("Capital", "Velero Capital connects family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate.");
+  useTitle("Investment Strategies", "Velero Capital connects family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate.");
   return (
-    <SidebarPage title="Capital: select private-market opportunities" intro="We connect family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate. Every opportunity is sourced through relationships, vetted, and shared only with approved investors." anchors={anchors}>
+    <SidebarPage title="Investment strategies: late-stage, secondaries and real estate" intro="We connect family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate. Every opportunity is sourced through relationships, vetted, and shared only with approved investors." anchors={anchors}>
       <Section>
         <Cols cols={4} items={investments.map((i) => ({ title: i.label, text: i.intro, to: `#${i.slug}` }))} />
       </Section>

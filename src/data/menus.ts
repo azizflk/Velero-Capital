@@ -7,6 +7,8 @@ export type Menu = {
   headline: string;
   text: string;
   cta: { label: string; to: string };
+  /** the button at the foot of the panel; defaults to Investor Access */
+  action?: { label: string; to: string };
   groups: MenuGroup[];
 };
 
@@ -17,6 +19,7 @@ export const menus: Record<string, Menu> = {
     headline: "Sector knowledge. Disciplined execution.",
     text: "An understanding of each industry’s capital, cycle and counterparties, applied to every mandate.",
     cta: { label: "Explore the sectors we serve", to: "/solutions/" },
+    action: { label: "Discuss a mandate", to: "/contact-us/" },
     groups: groups.map((g) => ({ title: g.title, to: `/solutions/#${g.id}`, items: g.sectors.map((s) => ({ label: s.title, to: s.path })) })),
   },
   Capital: {
@@ -32,12 +35,13 @@ export const menus: Record<string, Menu> = {
       { title: "Real assets", items: [
         { label: "Real Estate", to: "/real-estate/", desc: "Direct deals, joint ventures and fund positions." },
       ] },
-      { title: "Deal access", items: [
-        { label: "Co-Investments & Syndicates", to: "/co-investments/", desc: "Deal by deal, alongside a lead sponsor." },
+      { title: "Structures", items: [
+        { label: "Co-Investments & Syndicates", to: "/co-investments/", desc: "How investors participate, deal by deal." },
       ] },
       { title: "Overview", items: [
-        { label: "How we invest", to: "/capital/", desc: "The four categories and how a deal runs." },
-        { label: "Portfolio", to: "/portfolio/", desc: "Industries, and who we invest alongside." },
+        { label: "Investment strategies", to: "/capital/", desc: "The three strategies and how a deal runs." },
+        { label: "Investor Access", to: "/investor-access/", desc: "The staged process, from enquiry to transaction." },
+        { label: "Portfolio", to: "/portfolio/", desc: "Industries, and the investor landscape." },
       ] },
     ],
   },
@@ -46,6 +50,7 @@ export const menus: Record<string, Menu> = {
     headline: "A focused corporate finance practice.",
     text: "Senior-led, tightly scoped engagements across the financing and transaction lifecycle.",
     cta: { label: "Explore all services", to: "/services/" },
+    action: { label: "Discuss an engagement", to: "/contact-us/?role=founder&goal=services" },
     groups: [
       { title: "Capital raising", items: [
         { label: "Fundraising Advisory", to: "/services/fundraising-advisory/", desc: "Equity and structured raises, end to end." },
@@ -70,6 +75,10 @@ export const menus: Record<string, Menu> = {
     groups: [
       { title: "About", items: [
         { label: "Inside Velero Capital", to: "/company/", desc: "Who we are, and what the name means." },
+      ] },
+      { title: "Work with us", items: [
+        { label: "Investor Access", to: "/investor-access/", desc: "For family offices and institutions." },
+        { label: "Submit an Opportunity", to: "/submit-an-opportunity/", desc: "For companies, shareholders and sponsors." },
       ] },
       { title: "Trust", items: [
         { label: "Account Verification", to: "/verification/", desc: "Check that an email is officially ours." },

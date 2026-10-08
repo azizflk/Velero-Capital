@@ -19,6 +19,8 @@ import Verification from "@/pages/Verification";
 import NotFound from "@/pages/NotFound";
 import Privacy from "@/pages/Privacy";
 import Legal from "@/pages/Legal";
+import InvestorAccess from "@/pages/InvestorAccess";
+import SubmitOpportunity from "@/pages/SubmitOpportunity";
 import CookieBanner from "@/components/CookieBanner";
 
 function ScrollToTop() {
@@ -37,8 +39,9 @@ export default function App() {
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-blue focus:px-4 focus:py-2 focus:text-white">Skip to content</a>
       <Nav />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/solutions" element={<Solutions />} />
@@ -67,6 +70,8 @@ export default function App() {
           <Route path="/verification" element={<Verification />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/legal" element={<Legal />} />
+          <Route path="/investor-access" element={<InvestorAccess />} />
+          <Route path="/submit-an-opportunity" element={<SubmitOpportunity />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

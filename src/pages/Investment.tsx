@@ -66,9 +66,9 @@ export default function Investment({ item }: { item: Inv }) {
         </Section>
       )}
 
-      <Section id="enquire" title="Request access">
-        <Prose><p>Opportunities are shared only with approved family offices and institutional investors. Tell us about your mandate and we’ll come back to you.</p></Prose>
-        <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/" variant="blue">Get in Touch</Button><Button to="/capital/">All investment categories</Button></div>
+      <Section id="enquire" title="Investor access">
+        <Prose><p>Opportunities are shared only with eligible family offices and institutional investors whose mandate they fit, after review. Access and allocation are never guaranteed.</p></Prose>
+        <div className="mt-6 flex flex-wrap gap-3"><Button to="/investor-access/" variant="blue">Investor Access</Button><Button to="/capital/">All strategies</Button></div>
       </Section>
     </SidebarPage>
   );

@@ -1,13 +1,18 @@
-import { useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { S, gap, row } from "@/components/VeleroStory";
 import { CONTACT_EMAIL, offices } from "@/data/site";
 import { submitForm } from "@/lib/forms";
 import { useTitle } from "@/lib/useTitle";
 
-type Role = "investor" | "founder";
+type Role = "investor" | "founder" | "sponsor";
+const ROLES: Role[] = ["investor", "founder", "sponsor"];
 type Goal = "raise" | "services";
+const GOALS: Goal[] = ["raise", "services"];
 
+const sponsorRoles = ["Company / issuer", "Existing shareholder", "Real estate sponsor, developer or owner", "Fund manager (GP)", "Adviser, placement agent or introducer", "Other"];
+const opportunityTypes = ["Primary round", "Secondary block of shares", "Real estate transaction", "Fund interest (LP stake)", "Other"];
+const authorities = ["Owner or principal", "Authorised representative of the principal", "Introducer with a written mandate", "Introducer without a mandate yet"];
 const investorTypes = ["Family office", "Institutional investor", "Fund or asset manager", "Venture or private equity firm", "Individual professional investor", "Other"];
 const strategies = ["Late-Stage & Pre-IPO", "Secondaries", "Real Estate", "Co-Investments & Syndicates"];
 const tickets = ["Under USD 1m", "USD 1m to 5m", "USD 5m to 20m", "USD 20m to 50m", "USD 50m+", "Varies by opportunity"];
@@ -45,7 +50,7 @@ function Pick<T extends string>({ legend, name, value, onChange, options }: { le
   return (
     <fieldset className="sm:col-span-2">
       <legend className="mb-2 block text-[13px] font-semibold">{legend}</legend>
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className={`grid gap-3 ${options.length > 2 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
         {options.map((o) => {
           const on = value === o.value;
           return (
@@ -123,9 +128,16 @@ export default function Contact() {
     const want = (params.get("service") || "").toLowerCase();
     return services.find((i) => i.toLowerCase() === want) ?? "";
   }, [params]);
-  const [role, setRole] = useState<Role | null>(preset ? "founder" : null);
-  const [goal, setGoal] = useState<Goal | null>(preset ? "services" : null);
+  const r0 = params.get("role") as Role | null, g0 = params.get("goal") as Goal | null;
+  const [role, setRole] = useState<Role | null>(preset ? "founder" : r0 && ROLES.includes(r0) ? r0 : null);
+  const [goal, setGoal] = useState<Goal | null>(preset ? "services" : g0 && GOALS.includes(g0) ? g0 : null);
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  // Links such as /contact-us/?role=investor can arrive while the page is already open; follow them.
+  useEffect(() => {
+    if (preset) { setRole("founder"); setGoal("services"); return; }
+    if (r0 && ROLES.includes(r0)) setRole(r0);
+    if (g0 && GOALS.includes(g0)) setGoal(g0);
+  }, [preset, r0, g0]);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -135,7 +147,7 @@ export default function Contact() {
     setState("sending");
     const fields: Record<string, string> = {};
     for (const k of new Set(data.keys())) fields[k] = data.getAll(k).map(String).join(", ");
-    const about = role === "investor" ? "Investor" : goal === "raise" ? "Founder raising capital" : "Founder, advisory services";
+    const about = role === "investor" ? "Investor" : role === "sponsor" ? "Opportunity submission" : goal === "raise" ? "Founder raising capital" : "Founder, advisory services";
     const r = await submitForm(`Website enquiry: ${about}`, fields);
     setState(r.ok ? "sent" : "error");
   };
@@ -153,7 +165,7 @@ export default function Contact() {
             <div className="lg:col-span-7">
               <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">Let’s talk</div>
               <h1 className="display mt-3 text-5xl sm:text-6xl lg:text-7xl">We’d like to hear from you</h1>
-              <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/85">Whether you are raising capital, buying or selling a business, seeking liquidity or looking for access to private markets, it starts with a confidential conversation with a senior member of our team.</p>
+              <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/85">Whether you are an investor looking for private-market opportunities, a founder raising capital, or a sponsor introducing a transaction, it starts with a confidential conversation with a senior member of our team.</p>
             </div>
             <div className="lg:col-span-5"><Skyline /></div>
           </div>
@@ -176,8 +188,9 @@ export default function Contact() {
             <form onSubmit={onSubmit} className="mt-8 grid gap-5 sm:grid-cols-2">
               <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
               <Pick legend="I am" name="i_am" value={role} onChange={setRole} options={[
-                { value: "investor", title: "An investor", text: "I want to join the Velero investor network and see opportunities." },
+                { value: "investor", title: "An investor", text: "I want to see opportunities that fit my mandate." },
                 { value: "founder", title: "A founder", text: "I want to raise capital or use Velero’s advisory services." },
+                { value: "sponsor", title: "A sponsor or intermediary", text: "I’m introducing a company, a shareholder position or a real estate transaction." },
               ]} />
 
               {role === "founder" && (
@@ -232,12 +245,29 @@ export default function Contact() {
                 </>
               )}
 
-              {(role === "investor" || (role === "founder" && goal)) && (<>
+              {role === "sponsor" && (
+                <>
+                  <Field label="Name"><input name="name" required className={box} autoComplete="name" /></Field>
+                  <Field label="Firm"><input name="organisation" required className={box} autoComplete="organization" /></Field>
+                  <Field label="Email"><input name="email" type="email" required className={box} autoComplete="email" /></Field>
+                  <Field label="Phone" optional><input name="phone" type="tel" className={box} autoComplete="tel" /></Field>
+                  <Field label="Your role"><Choice name="sponsor_role" placeholder="Select your role…" options={sponsorRoles} /></Field>
+                  <Field label="Your authority"><Choice name="authority" placeholder="Select…" options={authorities} /></Field>
+                  <Field label="Opportunity type"><Choice name="opportunity_type" placeholder="Select a type…" options={opportunityTypes} /></Field>
+                  <Field label="Size sought"><Choice name="raise" placeholder="Select an amount…" options={raises} /></Field>
+                  <Field label="Company or asset based in"><input name="jurisdiction" required className={box} placeholder="Country or region" /></Field>
+                  <Field label="Target timing"><Choice name="timing" placeholder="Select timing…" options={timings} /></Field>
+                  <Field label="Materials available" wide><Choice name="materials" placeholder="Select readiness…" options={materials} /></Field>
+                  <Field label="The opportunity" wide><textarea name="objective" required rows={5} className={`${box} resize-y`} placeholder="The company or asset, its stage or status, the size sought, who is involved and any transfer restrictions or consents. Please do not include confidential documents." /></Field>
+                </>
+              )}
+
+              {(role === "investor" || role === "sponsor" || (role === "founder" && goal)) && (<>
               <div className="space-y-3 text-[13px] sm:col-span-2">
                 {role === "investor" && <label className="flex items-start gap-3"><input type="checkbox" name="confirm_professional" value="yes" required className="mt-0.5 h-4 w-4 accent-[#023ccf]" /><span>I confirm that I am, or represent, a professional or accredited investor in my jurisdiction.</span></label>}
                 <label className="flex items-start gap-3"><input type="checkbox" name="confirm_authority" value="yes" required className="mt-0.5 h-4 w-4 accent-[#023ccf]" /><span>I confirm that I have authority to make this enquiry, or am acting for an authorised decision-maker.</span></label>
                 <label className="flex items-start gap-3"><input type="checkbox" name="confirm_terms" value="yes" required className="mt-0.5 h-4 w-4 accent-[#023ccf]" /><span>I understand that any engagement is subject to due diligence and to a written scope, responsibilities and commercial terms.</span></label>
-                <label className="flex items-start gap-3"><input type="checkbox" name="confirm_privacy" value="yes" required className="mt-0.5 h-4 w-4 accent-[#023ccf]" /><span>I agree to the <Link to="/privacy/" className="textlink">privacy policy</Link>.</span></label>
+                <label className="flex items-start gap-3"><input type="checkbox" name="confirm_privacy" value="yes" required className="mt-0.5 h-4 w-4 accent-[#023ccf]" /><span>I agree to the <Link to="/privacy/" className="textlink">privacy policy</Link> and have read the <Link to="/legal/" className="textlink">legal and disclosures</Link> page.</span></label>
               </div>
 
               <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
@@ -291,7 +321,7 @@ export default function Contact() {
             ))}
           </div>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <Link to="/services/" className="pill">Review how we work</Link>
+            <Link to="/investor-access/" className="pill">How investor access works</Link>
             <Link to="/verification/" className="pill">Verify official contacts</Link>
             <Link to="/privacy/" className="pill">Privacy policy</Link>
           </div>

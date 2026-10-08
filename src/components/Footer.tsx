@@ -94,6 +94,8 @@ export default function Footer() {
 
             <Module title="Company">
               <Row><Link to="/company/" className={linkCls}>Inside Velero Capital</Link></Row>
+              <Row><Link to="/investor-access/" className={linkCls}>Investor Access</Link></Row>
+              <Row><Link to="/submit-an-opportunity/" className={linkCls}>Submit an Opportunity</Link></Row>
               <Row><Link to="/verification/" className={linkCls}>Account Verification</Link></Row>
               <Row><Link to="/contact-us/" className={linkCls}>Inquiries</Link></Row>
               <Row><Link to="/privacy/" className={linkCls}>Privacy Policy</Link></Row>

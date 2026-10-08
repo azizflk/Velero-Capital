@@ -48,7 +48,7 @@ export default function ServiceDetail({ service }: { service: Service }) {
         <Prose>
           <p>Each engagement is led by a senior member of the team, scoped up front and typically run on a retainer, so our advice stays independent of any single outcome. Tell us where you are and we’ll propose a scope.</p>
         </Prose>
-        <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/" variant="blue">Initiate contact</Button><Button to="/services/">All services</Button></div>
+        <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/?role=founder&goal=services" variant="blue">Discuss an engagement</Button><Button to="/services/">All services</Button></div>
       </Section>
 
       <Section title="Other services">

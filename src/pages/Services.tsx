@@ -37,7 +37,7 @@ export default function Services() {
         <Prose>
           <p>Engagements are scoped up front and typically run on a retainer, so our advice stays independent of any single outcome. Tell us where you are in the financing or transaction lifecycle and we’ll propose a scope.</p>
         </Prose>
-        <div className="mt-6"><Button to="/contact-us/" variant="blue">Initiate contact</Button></div>
+        <div className="mt-6"><Button to="/contact-us/?role=founder&goal=services" variant="blue">Discuss an engagement</Button></div>
       </Section>
     </SidebarPage>
   );

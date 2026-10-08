@@ -31,6 +31,8 @@ export const nav: NavItem[] = [
     to: "/company/",
     children: [
       { label: "Inside Velero Capital", to: "/company/" },
+      { label: "Investor Access", to: "/investor-access/" },
+      { label: "Submit an Opportunity", to: "/submit-an-opportunity/" },
       { label: "Account Verification", to: "/verification/" },
       { label: "Contact", to: "/contact-us/" },
       { label: "Legal & Disclosures", to: "/legal/" },
@@ -131,27 +133,27 @@ export const realEstateInvestors: [VC[], VC[]] = [
 
 export const differentiators = [
   {
-    title: "100% Transparency",
-    text: "At Velero Capital, transparency isn’t just a feature — it’s our foundation. From deal flow to due diligence, we ensure complete visibility at every stage of the investment process, keeping our partners informed, aligned, and confident.",
+    title: "Transparent Terms",
+    text: "Structure, costs and reporting are set out in writing before any commitment, and investors see the same information we have reviewed.",
   },
   {
-    title: "Collaborative Approach",
-    text: "We do more than place capital — we become part of your team. Our hands-on model connects investors, founders and seasoned operators through a global network built on relationships, not platforms.",
+    title: "Relationships, Not Platforms",
+    text: "Opportunities come through the founders, sponsors and shareholders who lead and own them, and investors are known to us by mandate, not by sign-up.",
   },
   {
-    title: "Disciplined Risk",
-    text: "We track market signals, sector trends and secondary pricing closely, so decisions are made early and on evidence. We don’t react — we anticipate.",
+    title: "Selectivity",
+    text: "We decline most of what we see. What is shared has been reviewed against the strategy, the counterparties, the information available and the terms.",
   },
 ];
 
 export const faqs = [
   {
     q: "What does Velero Capital invest in?",
-    a: "Select private-market opportunities across four areas: late-stage and pre-IPO companies, secondary transactions, real estate, and deal-by-deal co-investments and syndicates.",
+    a: "Velero Capital does not invest its own capital. It connects eligible investors with select private-market opportunities in three strategies — late-stage and pre-IPO companies, secondary transactions and institutional real estate — through direct holdings, co-investments alongside a lead sponsor, or dedicated deal-by-deal vehicles.",
   },
   {
     q: "Who can invest with Velero Capital?",
-    a: "We work with family offices and institutional investors. Opportunities are shared only with approved investors, on a deal-by-deal basis.",
+    a: "Family offices, institutional investors and other professional or accredited investors who meet the eligibility rules of their jurisdiction. Opportunities are shared only with eligible investors whose mandate they fit, on a deal-by-deal basis, and access is never guaranteed.",
   },
   {
     q: "How do secondary transactions work?",

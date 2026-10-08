@@ -45,7 +45,7 @@ function MegaPanel({ menu, onPick }: { menu: Menu; onPick: () => void }) {
             {Array.from({ length: fillers }).map((_, k) => <div key={k} className="border-b border-r border-rule" />)}
           </div>
           <div className="flex justify-end py-5">
-            <Link to="/contact-us/" onClick={onPick} className="pill pill-blue">Discuss a mandate <span aria-hidden>→</span></Link>
+            <Link to={menu.action?.to ?? "/investor-access/"} onClick={onPick} className="pill pill-blue">{menu.action?.label ?? "Investor Access"} <span aria-hidden>→</span></Link>
           </div>
         </div>
       </div>

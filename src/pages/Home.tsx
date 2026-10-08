@@ -20,7 +20,8 @@ function Hero() {
           <div className="eyebrow">Velero Capital</div>
           <h1 className="display mt-1 text-5xl sm:text-6xl lg:text-[72px]">Access is the edge.</h1>
           <p className="mt-4 max-w-lg text-[13px] leading-relaxed text-ink/80">We connect family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate — and advise founders and companies on fundraising, M&amp;A and corporate finance.</p>
-          <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/">Get in Touch</Button><Button to="/capital/">How we invest</Button><Button to="/services/">Our services</Button></div>
+          <p className="mt-3 text-[13px] font-semibold">Private-market opportunities. Institutional discipline.</p>
+          <div className="mt-6 flex flex-wrap gap-3"><Button to="/investor-access/" variant="blue">Investor Access</Button><Button to="/capital/">Explore Our Strategies</Button><Button to="/submit-an-opportunity/">Submit an Opportunity</Button></div>
         </div>
       </div>
     </section>
@@ -33,15 +34,15 @@ function WhyUs() {
       <div className="grid gap-x-8 gap-y-10 grid-cols-1 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <h3 className="display text-2xl">Direct Access</h3>
-          <p className="mt-2 text-[13px] leading-relaxed text-ink/80">Sourcing proprietary opportunities through founder, sponsor and shareholder relationships across late-stage, secondary and real estate markets.</p>
+          <p className="mt-2 text-[13px] leading-relaxed text-ink/80">Opportunities sourced through founder, sponsor and shareholder relationships across late-stage, secondary and real estate markets, not through listing platforms.</p>
         </div>
         <div className="lg:col-span-4">
-          <h3 className="display text-2xl">Institutional Execution</h3>
-          <p className="mt-2 text-[13px] leading-relaxed text-ink/80">We operate with speed, discretion, and certainty of capital — enabling participation in competitive transactions where timing and execution determine allocation.</p>
+          <h3 className="display text-2xl">Institutional Discipline</h3>
+          <p className="mt-2 text-[13px] leading-relaxed text-ink/80">Every opportunity is reviewed before it is shared: the company or asset, the terms and the counterparties. Structure, costs and reporting are set out in writing for each transaction.</p>
         </div>
         <div className="lg:col-span-4">
-          <h3 className="display text-2xl">For Global Investors</h3>
-          <p className="mt-2 text-[13px] leading-relaxed text-ink/80">We work with family offices and institutional investors from Dubai to Silicon Valley and Berlin, prioritizing long-term relationships and meaningful capital deployment.</p>
+          <h3 className="display text-2xl">A Qualified Investor Network</h3>
+          <p className="mt-2 text-[13px] leading-relaxed text-ink/80">Family offices and institutional investors from Dubai to San Francisco and Berlin, each with a defined mandate, so that what we share is relevant and handled with discretion.</p>
         </div>
       </div>
       <div className="mt-12"><Stats /></div>
@@ -64,16 +65,16 @@ function Approach() {
       <div className="grid items-start gap-10 grid-cols-1 lg:grid-cols-12">
         <div className="space-y-8 lg:col-span-7">
           {[
-            { title: "Proprietary Access", text: "Select access to late-stage venture rounds, growth equity, secondary transactions and institutional real estate." },
-            { title: "Direct & Efficient Structures", text: "Flexible investment vehicles — from direct holdings to deal-by-deal syndicates — designed to minimize friction and align incentives." },
-            { title: "Global Investor Network", text: "Connecting family offices, institutions and qualified investors to vetted opportunities shared only within our closed investor circle." },
+            { title: "Relationship-Sourced Access", text: "Select opportunities in late-stage and pre-IPO rounds, secondary transactions and institutional real estate, sourced through the people who lead and own them." },
+            { title: "Clear Structures", text: "Participation is structured to suit the transaction: a direct holding, a co-investment alongside a lead sponsor, or a dedicated vehicle, with terms and costs agreed before any commitment." },
+            { title: "A Mandate-Led Network", text: "Family offices and institutions tell us what they look for; opportunities are shared only with eligible investors whose mandate they fit." },
           ].map((it) => (
             <div key={it.title} className="border-t border-rule pt-5">
               <h3 className="display text-2xl">{it.title}</h3>
               <p className="mt-2 max-w-lg text-[13px] leading-relaxed text-ink/80">{it.text}</p>
             </div>
           ))}
-          <div className="pt-2"><Button to="/contact-us/">Get in Touch</Button></div>
+          <div className="pt-2"><Button to="/investor-access/" variant="blue">Investor Access</Button></div>
         </div>
         <div className="lg:col-span-5">
           <MatchEngine className="mx-auto max-w-md lg:-mt-12" />
@@ -85,8 +86,10 @@ function Approach() {
 
 function Sectors() {
   return (
-    <Section eyebrow="Where We Invest" title="Sectors Of Conviction">
+    <Section eyebrow="Investment Strategies" title="Late-Stage. Secondaries. Real Estate.">
+      <p className="mb-8 max-w-2xl text-[14px] leading-relaxed text-ink/80">Three strategies, and the structures through which investors participate in them. Each opportunity is reviewed on its own terms and shared only where it fits an investor’s mandate.</p>
       <Cols cols={2} items={investments.map((i) => ({ title: i.label, text: i.summary, to: i.path }))} />
+      <div className="mt-10"><Button to="/capital/">Explore Our Strategies</Button></div>
     </Section>
   );
 }
@@ -115,10 +118,10 @@ function Portfolio() {
     { title: "Real Estate", text: "Logistics, residential, hospitality and mixed-use assets with established operators." },
   ];
   return (
-    <Section eyebrow="Our Portfolio" title="Companies Shaping The Future">
-      <p className="mb-10 max-w-2xl text-[14px] leading-relaxed text-ink/80">Curated access to late-stage, pre-IPO and secondary opportunities — connecting global investors with the companies and assets shaping the future.</p>
+    <Section eyebrow="Sector Focus" title="The Industries We Follow">
+      <p className="mb-10 max-w-2xl text-[14px] leading-relaxed text-ink/80">The private companies and assets our investors ask for most. Sector focus guides sourcing; it is not a promise that an opportunity is available in any sector at a given time.</p>
       <Cols cols={3} items={sectors} />
-      <div className="mt-10"><Button to="/portfolio/">Request Full Portfolio</Button></div>
+      <div className="mt-10"><Button to="/portfolio/">Industries and investor landscape</Button></div>
     </Section>
   );
 }
@@ -126,9 +129,9 @@ function Portfolio() {
 function CTA() {
   return (
     <section className="rule pb-44 pt-16 text-center sm:pb-52 sm:pt-24">
-      <h2 className="display mx-auto max-w-3xl text-4xl sm:text-5xl">Direct Access to the Private Companies and Assets Shaping the Future</h2>
-      <p className="mx-auto mt-4 max-w-md text-[13px] text-ink/70">Late-stage, pre-IPO, secondary and real estate opportunities, shared with approved investors.</p>
-      <div className="mt-8"><Button to="/contact-us/">Get in Touch</Button></div>
+      <h2 className="display mx-auto max-w-3xl text-4xl sm:text-5xl">Private-Market Opportunities. Institutional Discipline.</h2>
+      <p className="mx-auto mt-4 max-w-md text-[13px] text-ink/70">Late-stage, pre-IPO, secondary and real estate opportunities, shared with eligible investors after review.</p>
+      <div className="mt-8 flex flex-wrap justify-center gap-3"><Button to="/investor-access/" variant="blue">Investor Access</Button><Button to="/submit-an-opportunity/">Submit an Opportunity</Button></div>
     </section>
   );
 }
