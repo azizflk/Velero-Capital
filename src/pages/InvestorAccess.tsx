@@ -73,7 +73,7 @@ export default function InvestorAccess() {
           </div>
         </div>
         <Prose className="mt-8 text-[13px]">
-          <p>Submitting an enquiry does not make you a client of Velero Capital and does not create any obligation on either side. Please read our <Link to="/legal/" className="textlink">legal and disclosures</Link> page before contacting us.</p>
+          <p>Our <Link to="/legal/" className="textlink">legal and disclosures</Link> page sets out the basis on which we work with investors.</p>
         </Prose>
       </Section>
 

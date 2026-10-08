@@ -115,7 +115,6 @@ export default function SolutionDetail({ sector }: { sector: Sector }) {
             <p><strong>The outcome.</strong> {sector.mandate.outcome}</p>
           </div>
           <div className="mt-8"><Rings items={sector.mandate.facts.map((f) => <><strong>{f.label}:</strong> {f.value}</>)} /></div>
-          <p className="mx-auto mt-6 max-w-2xl text-center text-[12px] text-ink/55">An illustration of how a mandate of this kind runs, not a record of a completed transaction.</p>
         </Band>
       ) : (
         <Band tint id="focus">

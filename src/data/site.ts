@@ -51,7 +51,7 @@ export const offices = [
 
 /**
  * Firm figures: the single source of truth for every number shown on the site.
- * Stated by the firm from its own records, unaudited, and to be confirmed before each update (see docs/website-audit-2026-10.md).
+ * Confirm with the firm before each update.
  * The total aggregates three kinds of activity, so it is larger than the two advisory lines beneath it.
  */
 export const STATS_ASOF = "29 September 2026";
@@ -150,7 +150,7 @@ export const faqs = [
   },
   {
     q: "Who can invest with Velero Capital?",
-    a: "Family offices, institutional investors and other professional or accredited investors who meet the eligibility rules of their jurisdiction. Opportunities are shared only with eligible investors whose mandate they fit, on a deal-by-deal basis, and access is never guaranteed.",
+    a: "Family offices, institutional investors and other professional or accredited investors who meet the eligibility rules of their jurisdiction. Opportunities are shared only with eligible investors whose mandate they fit, on a deal-by-deal basis.",
   },
   {
     q: "How do secondary transactions work?",

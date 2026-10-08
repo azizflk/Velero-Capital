@@ -18,7 +18,6 @@ const anchors = [
   { id: "no-advice", label: "No advice" },
   { id: "risk", label: "Risk" },
   { id: "access", label: "Access and allocations" },
-  { id: "statements", label: "Statements and figures" },
   { id: "identity", label: "Corporate identification" },
   { id: "contact", label: "Contact" },
 ];
@@ -63,13 +62,6 @@ export default function Legal() {
       <Section id="access" title="Access and allocations">
         <Prose>
           <p>Velero Capital does not guarantee access to any opportunity, allocation in any transaction, or a particular price or timing. Opportunities depend on counterparties, availability and the outcome of our review, and may be withdrawn at any time.</p>
-        </Prose>
-      </Section>
-
-      <Section id="statements" title="Statements and figures">
-        <Prose>
-          <p>Figures on this website describing capital raised, placed or advised, and the size of our investor network, are stated by the firm from its own records as at the date shown with them. They are unaudited, aggregate several kinds of activity, and are not a measure of investment performance.</p>
-          <p>Sector pages describe the kinds of mandate we take on and are written in general terms. Where an example is described as illustrative, it is not a record of a completed transaction.</p>
         </Prose>
       </Section>
 

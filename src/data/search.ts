@@ -22,7 +22,7 @@ export const searchIndex: SearchDoc[] = [
   ...services.map((sv) => ({ section: "Services", title: sv.title, text: `${sv.text} ${sv.work.map((w) => w.title).join(", ")}.`, to: sv.path })),
   { section: "Company", title: "Investor Access", text: "How family offices and institutional investors work with Velero Capital: enquiry, eligibility, mandate alignment, confidentiality and verification, review of opportunities, transaction engagement.", to: "/investor-access/" },
   { section: "Company", title: "Submit an Opportunity", text: "For companies raising capital, shareholders seeking liquidity, real estate sponsors and intermediaries: what to include, screening, engagement.", to: "/submit-an-opportunity/" },
-  { section: "Company", title: "Legal & Disclosures", text: "Important information: no offer or solicitation, eligibility, no advice, risk, access and allocations, figures, corporate identification.", to: "/legal/" },
+  { section: "Company", title: "Legal & Disclosures", text: "Important information: no offer or solicitation, eligibility, no advice, risk, access and allocations, corporate identification.", to: "/legal/" },
   { section: "Company", title: "Privacy Policy", text: "How Velero Capital handles personal data and cookies. Cookie settings, analytics, embedded media, your rights.", to: "/privacy/" },
 ];
 

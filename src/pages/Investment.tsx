@@ -59,7 +59,7 @@ export default function Investment({ item }: { item: Inv }) {
       )}
 
       <Section id="enquire" title="Investor access">
-        <Prose><p>Opportunities are shared only with eligible family offices and institutional investors whose mandate they fit, after review. Access and allocation are never guaranteed.</p></Prose>
+        <Prose><p>Opportunities are shared only with eligible family offices and institutional investors whose mandate they fit, after review.</p></Prose>
         <div className="mt-6 flex flex-wrap gap-3"><Button to="/investor-access/" variant="blue">Investor Access</Button><Button to="/capital/">All strategies</Button></div>
       </Section>
     </SidebarPage>

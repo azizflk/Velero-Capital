@@ -106,7 +106,7 @@ function Portfolio() {
   ];
   return (
     <Section eyebrow="Sector Focus" title="The Industries We Follow">
-      <p className="mb-10 max-w-2xl text-[14px] leading-relaxed text-ink/80">The private companies and assets our investors ask for most. Sector focus guides sourcing; it is not a promise that an opportunity is available in any sector at a given time.</p>
+      <p className="mb-10 max-w-2xl text-[14px] leading-relaxed text-ink/80">The private companies and assets our investors ask for most, and where our sourcing is focused.</p>
       <Cols cols={3} items={sectors} />
       <div className="mt-10"><Button to="/portfolio/">Industries and investor landscape</Button></div>
     </Section>
