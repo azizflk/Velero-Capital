@@ -15,7 +15,7 @@ const anchors = [
 export default function About() {
   useTitle("Company", "Velero Capital connects family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate.");
   return (
-    <SidebarPage title="Company: an independent private-markets firm" intro="Velero Capital is an independent private-markets investment-access and advisory firm headquartered in Dubai, with offices in San Francisco, Los Angeles and Berlin." anchors={anchors}>
+    <SidebarPage title="Company: an independent private-markets firm" intro="Velero Capital is an independent private-markets investment-access and advisory firm headquartered in Dubai, with an office in San Francisco." anchors={anchors}>
       <Section id="name">
         <h2 className="display text-2xl">Velero means sailing vessel in Spanish.</h2>
         <Prose className="mt-3">
@@ -36,7 +36,7 @@ export default function About() {
 
       <Section id="vision">
         <Cols cols={2} items={[
-          { title: "Our Vision", text: "To be the firm that family offices and institutions trust for select, well-reviewed access to private markets, across Dubai, the United States and Europe." },
+          { title: "Our Vision", text: "To be the firm that family offices and institutions trust for select, well-reviewed access to private markets, across the Gulf and the United States." },
           { title: "Our Mission", text: "To connect eligible investors with private-market opportunities that fit their mandate, on terms set out clearly in advance, and to advise companies with the same discipline on fundraising and transactions." },
         ]} />
       </Section>
@@ -48,7 +48,7 @@ export default function About() {
           { title: "Discretion", text: "Investors’ mandates and participation, and companies’ information, are held in confidence." },
           { title: "Discipline", text: "The same review of the company or asset, the terms and the counterparties, on every opportunity, large or small." },
           { title: "Alignment", text: "Investors come in on terms no worse than the lead sponsor’s, with reporting that passes through to every participant." },
-          { title: "Global Reach", text: "Dubai, San Francisco, Los Angeles and Berlin: relationships on both sides of the capital flow between the Gulf, the United States and Europe." },
+          { title: "Global Reach", text: "Dubai and San Francisco: relationships on both sides of the capital flow between the Gulf and the United States." },
         ]} />
       </Section>
 

@@ -42,7 +42,7 @@ export default function Solutions() {
           { title: "M&A & transactions", text: "Buy-side, sell-side and cross-border M&A, and joint ventures." },
           { title: "Alternatives & secondaries", text: "Co-investment and pre-IPO secondary access across private companies and real estate." },
           { title: "Strategy & execution", text: "Modelling, investor documentation and fundraising support behind every raise." },
-          { title: "Senior-led, everywhere", text: "Led from Dubai with offices in San Francisco, Los Angeles and Berlin, and a senior team member on every mandate." },
+          { title: "Senior-led, everywhere", text: "Led from Dubai with an office in San Francisco, and a senior team member on every mandate." },
         ]} />
       </Section>
 

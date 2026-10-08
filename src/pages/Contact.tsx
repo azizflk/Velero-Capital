@@ -79,14 +79,9 @@ function Checks({ legend, name, options }: { legend: string; name: string; optio
   );
 }
 
-// Berlin, in the same pen as the scenes on the homepage.
-const tvTower = { w: 60, d: "L 26 0 L 28 190 C 6 190 6 226 30 226 L 30 312 L 30 226 C 54 226 54 190 32 190 L 34 0 L 60 0" };
-const gate = { w: 180, d: "L 6 0 L 6 100 L 22 100 L 22 0 L 34 0 L 34 100 L 50 100 L 50 0 L 62 0 L 62 100 L 78 100 L 78 0 L 90 0 L 90 100 L 106 100 L 106 0 L 118 0 L 118 100 L 134 100 L 134 0 L 146 0 L 146 100 L 168 100 L 168 122 L 116 122 L 116 136 L 96 136 L 84 158 L 72 136 L 52 136 L 52 122 L 0 122 L 0 100 L 162 100 L 162 0 L 180 0" };
-
 const cities = [
   { label: "San Francisco", scenes: [S.bridge, gap(20), S.pyramid] },
   { label: "Dubai", scenes: [S.dubai, S.palm] },
-  { label: "Berlin", scenes: [tvTower, gap(20), gate] },
 ];
 
 /** Three cities on one unbroken line. */
@@ -103,7 +98,7 @@ function Skyline() {
   });
   return (
     <div>
-      <svg viewBox={`0 0 ${W} ${H}`} className="block w-full text-white" role="img" aria-label="One-line drawing of San Francisco, Dubai and Berlin">
+      <svg viewBox={`0 0 ${W} ${H}`} className="block w-full text-white" role="img" aria-label="One-line drawing of San Francisco and Dubai">
         <path d={`M 0 ${base} L ${start} ${base} ${row(scenes, start, base, 1).d} L ${W} ${base}`} pathLength={1} className="one-line" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
       </svg>
       <div className="relative mt-3 h-4">

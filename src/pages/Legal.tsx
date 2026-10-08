@@ -83,7 +83,7 @@ export default function Legal() {
 
       <Section id="identity" title="Corporate identification">
         <Prose>
-          <p>Velero Capital operates from offices in Dubai, San Francisco, Los Angeles and Berlin. Details of the legal entities through which it contracts, their registration numbers and registered addresses, are provided in engagement and transaction documentation and are available on request.</p>
+          <p>Velero Capital operates from offices in Dubai and San Francisco. Details of the legal entities through which it contracts, their registration numbers and registered addresses, are provided in engagement and transaction documentation and are available on request.</p>
         </Prose>
       </Section>
 

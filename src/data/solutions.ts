@@ -563,7 +563,7 @@ export const commonFaqs = [
   { q: "How are fees structured?", a: "Terms are agreed in writing before any work begins, and reflect the size, scope and complexity of the mandate." },
   { q: "How long does a mandate take?", a: "It depends on how ready the business is for diligence and on the structure. We set out a timetable at the start and keep to it." },
   { q: "What is the process for a mandate?", a: "A short, confidential scoping conversation and a non-disclosure agreement. We then structure the requirement, prepare the materials, run the process with investors and lenders, and negotiate through to close, with a senior team member leading at every step." },
-  { q: "Where does Velero Capital work?", a: "We are headquartered in Dubai, with offices in San Francisco, Los Angeles and Berlin, and we run mandates across borders." },
+  { q: "Where does Velero Capital work?", a: "We are headquartered in Dubai, with an office in San Francisco, and we run mandates across borders." },
   { q: "How do I start a conversation?", a: "Use the contact form or email us. Every mandate is led by a senior team member from the first conversation." },
   { q: "Is my information kept confidential?", a: "Yes. Confidential information is handled under the engagement terms and any non-disclosure agreement in place." },
 ];

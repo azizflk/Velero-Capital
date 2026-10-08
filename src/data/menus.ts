@@ -70,7 +70,7 @@ export const menus: Record<string, Menu> = {
   Company: {
     eyebrow: "Company",
     headline: "Velero means sailing vessel.",
-    text: "A private investment firm headquartered in Dubai, with offices in San Francisco, Los Angeles and Berlin.",
+    text: "A private investment firm headquartered in Dubai, with an office in San Francisco.",
     cta: { label: "Inside Velero Capital", to: "/company/" },
     groups: [
       { title: "About", items: [

@@ -47,8 +47,6 @@ export const social = [
 export const offices = [
   { region: "United Arab Emirates", address: "Meydan Grandstand, Meydan Road, Nad Al Sheba, Dubai, UAE" },
   { region: "San Francisco", address: "San Francisco, CA, USA" },
-  { region: "Los Angeles", address: "Los Angeles, CA, USA" },
-  { region: "Berlin", address: "Berlin, Germany" },
 ];
 
 /**

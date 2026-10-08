@@ -93,7 +93,7 @@ export default function SolutionDetail({ sector }: { sector: Sector }) {
             <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-blue">Overview</div>
             <div className="mt-3 h-px w-10 bg-blue" />
             <p className="mt-8 text-[19px] font-semibold leading-relaxed">{sector.overview}</p>
-            <p className="mt-5 text-[15px] leading-relaxed text-ink/80">Velero Capital advises {lower} clients from Dubai, San Francisco, Los Angeles and Berlin, with a senior member of the team leading from the first call to close.</p>
+            <p className="mt-5 text-[15px] leading-relaxed text-ink/80">Velero Capital advises {lower} clients from Dubai and San Francisco, with a senior member of the team leading from the first call to close.</p>
           </div>
         </div>
       </section>

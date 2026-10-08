@@ -42,7 +42,7 @@ function WhyUs() {
         </div>
         <div className="lg:col-span-4">
           <h3 className="display text-2xl">A Qualified Investor Network</h3>
-          <p className="mt-2 text-[13px] leading-relaxed text-ink/80">Family offices and institutional investors from Dubai to San Francisco and Berlin, each with a defined mandate, so that what we share is relevant and handled with discretion.</p>
+          <p className="mt-2 text-[13px] leading-relaxed text-ink/80">Family offices and institutional investors in Dubai, San Francisco and beyond, each with a defined mandate, so that what we share is relevant and handled with discretion.</p>
         </div>
       </div>
       <div className="mt-12"><Stats /></div>
