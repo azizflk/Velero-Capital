@@ -1,6 +1,6 @@
 import { SidebarPage, Section, Cols, Prose, List } from "@/components/Layout";
 import Button from "@/components/Button";
-import LogoBelt, { LogoNote } from "@/components/LogoBelt";
+import LogoBelt from "@/components/LogoBelt";
 import OneLineArt from "@/components/OneLineArt";
 import { coInvestors, realEstateInvestors } from "@/data/site";
 import { process, type Investment as Inv } from "@/data/investments";
@@ -62,7 +62,6 @@ export default function Investment({ item }: { item: Inv }) {
             <div className="rule" />
             <LogoBelt items={belt[1]} direction="right" />
           </div>
-          <LogoNote className="mt-3" />
         </Section>
       )}
 

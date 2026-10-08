@@ -4,7 +4,6 @@ import Filters from "@/components/Filters";
 import Stats from "@/components/Stats";
 import Button from "@/components/Button";
 import { LogoRow } from "@/components/Logos";
-import { LogoNote } from "@/components/LogoBelt";
 import { coInvestors, realEstateInvestors } from "@/data/site";
 import { investments } from "@/data/investments";
 import { useTitle } from "@/lib/useTitle";
@@ -42,7 +41,6 @@ export default function Portfolio() {
           {show("Venture firms") && <LogoRow title="Venture firms" logos={[...coInvestors[0], ...coInvestors[1]]} />}
           {show("Real estate investors") && <LogoRow title="Real estate investors" logos={[...realEstateInvestors[0], ...realEstateInvestors[1]]} />}
         </div>
-        <LogoNote className="mt-4" />
       </Section>
 
       <Section title="Investor access">

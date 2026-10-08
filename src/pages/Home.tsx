@@ -1,7 +1,7 @@
 import Stats from "@/components/Stats";
 import Button from "@/components/Button";
 import { Section, Cols } from "@/components/Layout";
-import LogoBelt, { LogoNote } from "@/components/LogoBelt";
+import LogoBelt from "@/components/LogoBelt";
 import VeleroStory from "@/components/VeleroStory";
 import ScrollLine from "@/components/ScrollLine";
 import MatchEngine from "@/components/MatchEngine";
@@ -53,7 +53,6 @@ function WhyUs() {
           <div className="rule" />
           <LogoBelt items={coInvestors[1]} direction="right" />
         </div>
-        <LogoNote className="mt-3" />
       </div>
     </Section>
   );
@@ -103,7 +102,6 @@ function RealEstate() {
         <div className="rule" />
         <LogoBelt items={realEstateInvestors[1]} direction="right" />
       </div>
-      <LogoNote className="mt-3" />
     </Section>
   );
 }
