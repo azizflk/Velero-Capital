@@ -128,14 +128,14 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="wrap relative space-y-3 pb-6 pt-6 text-[11px] leading-relaxed text-white/75">
+        <div className="wrap relative flex flex-col gap-3 pb-6 pt-6 text-[11px] leading-relaxed text-white/75 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
           <p className="max-w-3xl">
             Nothing on this website is an offer to sell or a solicitation of an offer to buy any security. Opportunities are shared only with eligible investors, on a
             case-by-case basis, and access or allocation is never guaranteed. Private-market investments carry significant risk, including the loss of capital.{" "}
             <Link to="/legal/" className="text-white underline-offset-4 hover:underline">Legal &amp; disclosures</Link>
           </p>
           {US_NOTICE && <p className="max-w-3xl">{US_NOTICE}</p>}
-          <p>©{new Date().getFullYear()} Velero Capital. All rights reserved.</p>
+          <p className="shrink-0 sm:text-right">©{new Date().getFullYear()} Velero Capital. All rights reserved.</p>
         </div>
       </div>
 
