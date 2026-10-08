@@ -19,7 +19,6 @@ const anchors = [
   { id: "risk", label: "Risk" },
   { id: "access", label: "Access and allocations" },
   { id: "statements", label: "Statements and figures" },
-  { id: "third-parties", label: "Third parties" },
   { id: "identity", label: "Corporate identification" },
   { id: "contact", label: "Contact" },
 ];
@@ -71,13 +70,6 @@ export default function Legal() {
         <Prose>
           <p>Figures on this website describing capital raised, placed or advised, and the size of our investor network, are stated by the firm from its own records as at the date shown with them. They are unaudited, aggregate several kinds of activity, and are not a measure of investment performance.</p>
           <p>Sector pages describe the kinds of mandate we take on and are written in general terms. Where an example is described as illustrative, it is not a record of a completed transaction.</p>
-        </Prose>
-      </Section>
-
-      <Section id="third-parties" title="Third parties">
-        <Prose>
-          <p>Names and logos of investment firms shown on this website identify lead investors active in the markets we describe. They are the property of their owners and do not indicate any partnership, endorsement, sponsorship or affiliation with Velero Capital, nor that those firms have participated in any transaction with us.</p>
-          <p>Links to third-party websites are provided for convenience. We are not responsible for their content.</p>
         </Prose>
       </Section>
 
