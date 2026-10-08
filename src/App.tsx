@@ -18,6 +18,7 @@ import Contact from "@/pages/Contact";
 import Verification from "@/pages/Verification";
 import NotFound from "@/pages/NotFound";
 import Privacy from "@/pages/Privacy";
+import Legal from "@/pages/Legal";
 import CookieBanner from "@/components/CookieBanner";
 
 function ScrollToTop() {
@@ -55,7 +56,7 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           {services.map((sv) => <Route key={sv.slug} path={sv.path.replace(/\/$/, "")} element={<ServiceDetail key={sv.slug} service={sv} />} />)}
           <Route path="/transformations" element={<Navigate to="/services/" replace />} />
-          {/* News & Content is parked for now. The page lives on in src/pages/Stories.tsx; restore this route and the nav entry to bring it back. */}
+          {/* The old News & Content section was retired; its address goes home. */}
           <Route path="/stories" element={<Navigate to="/" replace />} />
           <Route path="/web3-services" element={<Navigate to="/capital/" replace />} />
           <Route path="/web3-and-crypto-marketing" element={<Navigate to="/services/" replace />} />
@@ -65,6 +66,7 @@ export default function App() {
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/legal" element={<Legal />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

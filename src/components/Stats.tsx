@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { stats } from "@/data/site";
+import { stats, STATS_NOTE } from "@/data/site";
 import { useInView } from "@/lib/useInView";
 
 function Counter({ value, prefix = "", suffix = "", go }: { value: number; prefix?: string; suffix?: string; go: boolean }) {
@@ -17,14 +17,17 @@ function Counter({ value, prefix = "", suffix = "", go }: { value: number; prefi
 export default function Stats({ compact = false }: { compact?: boolean }) {
   const { ref, inView } = useInView<HTMLDivElement>(0.2);
   return (
-    <div ref={ref} data-stats className="grid grid-cols-1 gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
-      {stats.map((s) => (
-        <div key={s.title} className="bg-paper p-5 sm:p-6">
-          <div className={`display ${compact ? "text-4xl" : "text-5xl sm:text-6xl"}`}><Counter value={s.value} prefix={s.prefix} suffix={s.suffix} go={inView} /></div>
-          <div className="mt-3 text-[14px] font-semibold">{s.title}</div>
-          <div className="mt-0.5 text-[13px] text-ink/70">{s.note}</div>
-        </div>
-      ))}
+    <div ref={ref} data-stats>
+      <div className="grid grid-cols-1 gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((s) => (
+          <div key={s.title} className="bg-paper p-5 sm:p-6">
+            <div className={`display ${compact ? "text-4xl" : "text-5xl sm:text-6xl"}`}><Counter value={s.value} prefix={s.prefix} suffix={s.suffix} go={inView} /></div>
+            <div className="mt-3 text-[14px] font-semibold">{s.title}</div>
+            <div className="mt-0.5 text-[13px] text-ink/70">{s.note}</div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-3 text-[11px] leading-relaxed text-ink/60">{STATS_NOTE}</p>
     </div>
   );
 }

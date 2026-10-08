@@ -36,7 +36,7 @@ export const investments: Investment[] = [
     ],
     lookFor: ["Category leaders with durable revenue growth", "Experienced management and institutional co-investors", "A credible path to IPO or strategic exit", "Valuation supported by fundamentals, not momentum"],
     belt: "venture",
-    beltLabel: "Rounds led by the leading venture firms",
+    beltLabel: "The lead investors in late-stage venture",
   },
   {
     slug: "secondaries",
@@ -68,7 +68,7 @@ export const investments: Investment[] = [
     ],
     lookFor: ["Operators and sponsors with a long, audited track record", "Assets in markets with durable demand", "Conservative leverage and clear business plans", "Alignment: sponsors investing alongside our investors"],
     belt: "realEstate",
-    beltLabel: "Alongside the leading real estate investors",
+    beltLabel: "The institutional real estate market",
     extra: { title: "Sectors", items: ["Logistics and industrial", "Residential and multifamily", "Hospitality", "Office and mixed-use"] },
   },
   {
@@ -86,6 +86,6 @@ export const investments: Investment[] = [
     ],
     lookFor: ["A credible lead sponsor with capital at risk", "Terms no worse than the lead’s own", "Transparent vehicle costs and carried interest", "Reporting that passes through to every investor"],
     belt: "venture",
-    beltLabel: "Co-invest alongside leading venture firms",
+    beltLabel: "The lead investors in late-stage venture",
   },
 ];

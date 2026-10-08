@@ -33,6 +33,7 @@ export const nav: NavItem[] = [
       { label: "Inside Velero Capital", to: "/company/" },
       { label: "Account Verification", to: "/verification/" },
       { label: "Contact", to: "/contact-us/" },
+      { label: "Legal & Disclosures", to: "/legal/" },
     ],
   },
 ];
@@ -48,23 +49,19 @@ export const offices = [
   { region: "Berlin", address: "Berlin, Germany" },
 ];
 
-export const STATS_ASOF = "9.29.26";
+/**
+ * Firm figures: the single source of truth for every number shown on the site.
+ * Stated by the firm from its own records, unaudited, and to be confirmed before each update (see docs/website-audit-2026-10.md).
+ * The total aggregates three kinds of activity, so it is larger than the two advisory lines beneath it.
+ */
+export const STATS_ASOF = "29 September 2026";
 export const stats = [
-  { value: 350, prefix: "$", suffix: "M+", title: "Raised, placed and advised", note: "across every mandate since 2023" },
-  { value: 65, prefix: "$", suffix: "M+", title: "Capital raising", note: "raised for companies and funds" },
-  { value: 50, prefix: "$", suffix: "M+", title: "M&A advisory", note: "advised on buy and sell-side" },
-  { value: 3000, prefix: "", suffix: "+", title: "Investors and LPs", note: "met for mandates" },
+  { value: 350, prefix: "$", suffix: "M+", title: "Raised, placed and advised", note: "aggregate transaction value across all mandates since 2023" },
+  { value: 65, prefix: "$", suffix: "M+", title: "Capital raised", note: "for companies and funds, as fundraising adviser" },
+  { value: 50, prefix: "$", suffix: "M+", title: "M&A advised", note: "buy-side and sell-side mandates" },
+  { value: 3000, prefix: "", suffix: "+", title: "Investor network", note: "family offices, institutions and LPs met on mandates" },
 ];
-
-export const trustedExchanges = [
-  { name: "Binance", src: "/logos/cex/binance.svg" },
-  { name: "Kraken", src: "/logos/cex/kraken.svg" },
-  { name: "Bybit", src: "/logos/cex/bybit.svg" },
-  { name: "Bitfinex", src: "/logos/cex/bitfinex.svg" },
-  { name: "Gate.io", src: "/logos/cex/gateio.svg" },
-  { name: "MEXC", src: "/logos/cex/mexc.svg" },
-  { name: "HTX", src: "/logos/cex/htx.svg" },
-];
+export const STATS_NOTE = `Figures stated by the firm from its own records as at ${STATS_ASOF}; unaudited. They aggregate capital raised, placed and advised and are not a measure of investment performance.`;
 
 /** Venture firms shown in the homepage co-invest marquee. Two rows, no firm appears twice. */
 export type VC = { name: string; src: string };
@@ -131,49 +128,6 @@ export const realEstateInvestors: [VC[], VC[]] = [
     { name: "Apollo Global Management", src: "/logos/re/apollo.svg" },
   ],
 ];
-
-export const partners = {
-  CEX: [
-    { name: "Binance", src: "/logos/cex/binance.svg" },
-    { name: "Gate.io", src: "/logos/cex/gateio.svg" },
-    { name: "KuCoin", src: "/logos/cex/kucoin.svg" },
-    { name: "Huobi", src: "/logos/cex/huobi.svg" },
-    { name: "OKX", src: "/logos/cex/okx.svg" },
-    { name: "MEXC", src: "/logos/cex/mexc.svg" },
-    { name: "Bitget", src: "/logos/cex/bitget.svg" },
-    { name: "Bitfinex", src: "/logos/cex/bitfinex.svg" },
-    { name: "Bybit", src: "/logos/cex/bybit.svg" },
-    { name: "BitMart", src: "/logos/cex/bitmart.svg" },
-    { name: "Coinbase", src: "/logos/cex/coinbase.svg" },
-    { name: "LBank", src: "/logos/cex/lbank.svg" },
-    { name: "XT.com", src: "/logos/cex/xt.png" },
-  ],
-  DEX: [
-    { name: "Pangolin", src: "/logos/dex/pangolin.png" },
-    { name: "Uniswap", src: "/logos/dex/uniswap.svg" },
-    { name: "Injective", src: "/logos/dex/injective.png" },
-    { name: "Trader Joe", src: "/logos/dex/traderjoe.png" },
-    { name: "Injective Protocol", src: "/logos/dex/injective-protocol.svg" },
-    { name: "Perpetual Protocol", src: "/logos/dex/perpetual.svg" },
-    { name: "SushiSwap", src: "/logos/dex/sushiswap.png" },
-    { name: "dYdX", src: "/logos/dex/dydx.webp" },
-    { name: "OpenOcean", src: "/logos/dex/openocean.png" },
-    { name: "PancakeSwap", src: "/logos/dex/pancakeswap.png" },
-    { name: "QuickSwap", src: "/logos/dex/quickswap.png" },
-  ],
-  Chains: [
-    { name: "Ethereum", src: "/logos/chains/ethereum.png" },
-    { name: "Harmony", src: "/logos/chains/harmony.png" },
-    { name: "Cosmos", src: "/logos/chains/cosmos.png" },
-    { name: "Avalanche", src: "/logos/chains/avalanche.png" },
-    { name: "BNB Smart Chain", src: "/logos/chains/bsc.png" },
-    { name: "Tezos", src: "/logos/chains/tezos.png" },
-    { name: "NEAR", src: "/logos/chains/near.png" },
-    { name: "Polygon", src: "/logos/chains/polygon.png" },
-    { name: "Algorand", src: "/logos/chains/algorand.svg" },
-  ],
-};
-
 
 export const differentiators = [
   {

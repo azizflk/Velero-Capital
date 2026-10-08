@@ -6,6 +6,11 @@ import { useEffect, useRef } from "react";
  */
 type Item = { name: string; src: string };
 
+/** Shown under every row of third-party logos. The names identify lead investors in the market, not relationships with Velero. */
+export function LogoNote({ className = "" }: { className?: string }) {
+  return <p className={`text-[11px] leading-relaxed text-ink/60 ${className}`}>Logos identify lead investors active in this market. They are the property of their owners and do not indicate a partnership, endorsement or affiliation with Velero Capital, or participation in any transaction with us.</p>;
+}
+
 export default function LogoBelt({ items, direction = "left", speed = 40 }: { items: Item[]; direction?: "left" | "right"; speed?: number }) {
   const track = useRef<HTMLDivElement>(null);
 

@@ -20,6 +20,7 @@ export const searchIndex: SearchDoc[] = [
   { section: "Company", title: "Contact", text: "Get in touch. Enquiry: late-stage and pre-IPO, secondaries, real estate, co-investments, advisory services, partnerships. Offices in Dubai, San Francisco, Los Angeles and Berlin.", to: "/contact-us/" },
   { section: "Services", title: "Services", text: "A focused corporate finance practice across the financing and transaction lifecycle. Senior-led, tightly scoped engagements on retainer.", to: "/services/" },
   ...services.map((sv) => ({ section: "Services", title: sv.title, text: `${sv.text} ${sv.work.map((w) => w.title).join(", ")}.`, to: sv.path })),
+  { section: "Company", title: "Legal & Disclosures", text: "Important information: no offer or solicitation, eligibility, no advice, risk, access and allocations, figures, third-party logos, corporate identification.", to: "/legal/" },
   { section: "Company", title: "Privacy Policy", text: "How Velero Capital handles personal data and cookies. Cookie settings, analytics, embedded media, your rights.", to: "/privacy/" },
 ];
 

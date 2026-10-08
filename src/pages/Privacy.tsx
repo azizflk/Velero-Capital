@@ -17,7 +17,7 @@ export default function Privacy() {
     <SidebarPage title="Privacy policy" intro="How Velero Capital handles personal data and cookies on this website. Last updated October 2026." anchors={anchors}>
       <Section id="collect" title="What we collect">
         <Prose>
-          <p>We collect only what you choose to send us. When you submit the contact form we receive your name, email address, organisation, enquiry type and message.</p>
+          <p>We collect only what you choose to send us. When you submit an enquiry we receive the details you enter: who you are and your organisation, how to reach you, and what you tell us about your investment interests, your company or the opportunity you are introducing. We do not ask for bank, card or identity-document details on this website.</p>
           <p>The account verification tool runs entirely in your browser. The email address you enter there is not sent to us or stored.</p>
         </Prose>
       </Section>

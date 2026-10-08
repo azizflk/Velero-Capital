@@ -74,6 +74,7 @@ export const menus: Record<string, Menu> = {
       { title: "Trust", items: [
         { label: "Account Verification", to: "/verification/", desc: "Check that an email is officially ours." },
         { label: "Privacy Policy", to: "/privacy/", desc: "How we handle personal data." },
+        { label: "Legal & Disclosures", to: "/legal/", desc: "Eligibility, risk and the basis of what we share." },
       ] },
       { title: "Contact", items: [
         { label: "Contact", to: "/contact-us/", desc: "Tell us about your mandate." },

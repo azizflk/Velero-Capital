@@ -1,7 +1,7 @@
 import Stats from "@/components/Stats";
 import Button from "@/components/Button";
 import { Section, Cols } from "@/components/Layout";
-import LogoBelt from "@/components/LogoBelt";
+import LogoBelt, { LogoNote } from "@/components/LogoBelt";
 import VeleroStory from "@/components/VeleroStory";
 import ScrollLine from "@/components/ScrollLine";
 import MatchEngine from "@/components/MatchEngine";
@@ -46,12 +46,13 @@ function WhyUs() {
       </div>
       <div className="mt-12"><Stats /></div>
       <div className="mt-10">
-        <div className="eyebrow mb-3">Co-invest alongside leading venture firms</div>
+        <div className="eyebrow mb-3">The lead investors in late-stage venture</div>
         <div className="border-y border-rule">
           <LogoBelt items={coInvestors[0]} direction="left" />
           <div className="rule" />
           <LogoBelt items={coInvestors[1]} direction="right" />
         </div>
+        <LogoNote className="mt-3" />
       </div>
     </Section>
   );
@@ -92,13 +93,14 @@ function Sectors() {
 
 function RealEstate() {
   return (
-    <Section eyebrow="Real Estate" title="Alongside The Leading Real Estate Investors">
-      <p className="mb-8 max-w-2xl text-[14px] leading-relaxed text-ink/80">Institutional real estate sits beside our private company positions. We track and co-invest alongside the platforms that define the asset class across logistics, residential, office and retail.</p>
+    <Section eyebrow="Real Estate" title="The Institutional Real Estate Market">
+      <p className="mb-8 max-w-2xl text-[14px] leading-relaxed text-ink/80">Institutional real estate sits beside late-stage companies and secondaries in what we offer investors. We follow the platforms that define the asset class across logistics, residential, office and retail, and look for transactions with sponsors of that standard.</p>
       <div className="border-y border-rule">
         <LogoBelt items={realEstateInvestors[0]} direction="left" />
         <div className="rule" />
         <LogoBelt items={realEstateInvestors[1]} direction="right" />
       </div>
+      <LogoNote className="mt-3" />
     </Section>
   );
 }

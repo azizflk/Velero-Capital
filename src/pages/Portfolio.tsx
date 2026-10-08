@@ -4,6 +4,7 @@ import Filters from "@/components/Filters";
 import Stats from "@/components/Stats";
 import Button from "@/components/Button";
 import { LogoRow } from "@/components/Logos";
+import { LogoNote } from "@/components/LogoBelt";
 import { coInvestors, realEstateInvestors } from "@/data/site";
 import { investments } from "@/data/investments";
 import { useTitle } from "@/lib/useTitle";
@@ -14,7 +15,7 @@ type T = (typeof TYPES)[number];
 const sectors = ["Artificial Intelligence", "Robotics", "Financial Technology", "Healthcare & Biotechnology", "Space Technology", "Real Estate"];
 
 export default function Portfolio() {
-  useTitle("Portfolio", "$350M+ raised, placed and advised across every mandate since 2023, across late-stage companies, secondaries and real estate.");
+  useTitle("Portfolio", "Where Velero Capital works: late-stage companies, secondaries and real estate, the industries we focus on, and the investor landscape we operate in.");
   const [type, setType] = useState<T>("All");
   const show = (t: T) => type === "All" || type === t;
   return (
@@ -35,12 +36,13 @@ export default function Portfolio() {
         </ul>
       </Section>
 
-      <Section id="network" title="Who we invest alongside">
-        <Prose className="mb-8"><p>Our investors participate alongside the sponsors that lead the rounds and own the assets.</p></Prose>
+      <Section id="network" title="The investor landscape">
+        <Prose className="mb-8"><p>The lead investors whose rounds and assets define the markets we work in. Our investors look for transactions sponsored at this standard.</p></Prose>
         <div className="space-y-10">
           {show("Venture firms") && <LogoRow title="Venture firms" logos={[...coInvestors[0], ...coInvestors[1]]} />}
           {show("Real estate investors") && <LogoRow title="Real estate investors" logos={[...realEstateInvestors[0], ...realEstateInvestors[1]]} />}
         </div>
+        <LogoNote className="mt-4" />
       </Section>
 
       <Section title="Request the full portfolio">

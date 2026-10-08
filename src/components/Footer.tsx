@@ -30,6 +30,15 @@ function Module({ title, children }: { title: string; children: ReactNode }) {
 }
 
 const linkCls = "outline-none focus-visible:underline underline-offset-4";
+
+/**
+ * U.S. regulatory notice. Kept switched off: it is a statement of fact about a chaperoning agreement with a named
+ * U.S. broker-dealer, and must only be shown once that agreement is signed and the broker-dealer's compliance team has
+ * approved the wording. Set the text to enable it.
+ */
+const US_NOTICE: string = "";
+// Wording held for that day: "Velero Capital’s U.S.-related activities are conducted under SEC Rule 15a-6 through a
+// chaperoning arrangement with a U.S. registered broker-dealer that is a FINRA and SIPC member."
 const find = (label: string) => nav.find((n) => n.label === label);
 
 function BackToTop() {
@@ -88,6 +97,7 @@ export default function Footer() {
               <Row><Link to="/verification/" className={linkCls}>Account Verification</Link></Row>
               <Row><Link to="/contact-us/" className={linkCls}>Inquiries</Link></Row>
               <Row><Link to="/privacy/" className={linkCls}>Privacy Policy</Link></Row>
+              <Row><Link to="/legal/" className={linkCls}>Legal &amp; Disclosures</Link></Row>
               <Row><button onClick={openCookieSettings} className={`${linkCls} text-left`}>Cookie Settings</button></Row>
             </Module>
 
@@ -116,9 +126,15 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="wrap relative flex flex-col gap-1 pb-6 pt-6 text-[11px] text-white/80 sm:flex-row sm:justify-between">
-          <span>©{new Date().getFullYear()} Velero Capital. All rights reserved.</span>
-          <span>Access is the edge.</span>
+        <div className="wrap relative space-y-3 pb-6 pt-6 text-[11px] leading-relaxed text-white/75">
+          <p className="max-w-3xl">
+            Nothing on this website is an offer to sell or a solicitation of an offer to buy any security. Opportunities are shared only with eligible investors, on a
+            case-by-case basis, and access or allocation is never guaranteed. Private-market investments carry significant risk, including the loss of capital.
+            Third-party names and logos do not indicate partnership, endorsement or affiliation.{" "}
+            <Link to="/legal/" className="text-white underline-offset-4 hover:underline">Legal &amp; disclosures</Link>
+          </p>
+          {US_NOTICE && <p className="max-w-3xl">{US_NOTICE}</p>}
+          <p>©{new Date().getFullYear()} Velero Capital. All rights reserved.</p>
         </div>
       </div>
 
