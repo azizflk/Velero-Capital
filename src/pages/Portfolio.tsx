@@ -11,10 +11,8 @@ import { useTitle } from "@/lib/useTitle";
 const TYPES = ["All", "Venture firms", "Real estate investors"] as const;
 type T = (typeof TYPES)[number];
 
-const sectors = ["Artificial Intelligence", "Robotics", "Financial Technology", "Healthcare & Biotechnology", "Space Technology", "Real Estate"];
-
 export default function Portfolio() {
-  useTitle("Portfolio", "Where Velero Capital works: late-stage companies, secondaries and real estate, the industries we focus on, and the investor landscape we operate in.");
+  useTitle("Portfolio", "Where Velero Capital works: late-stage companies, secondaries and real estate, and the investor landscape we operate in.");
   const [type, setType] = useState<T>("All");
   const show = (t: T) => type === "All" || type === t;
   return (
@@ -27,12 +25,6 @@ export default function Portfolio() {
 
       <Section title="Where we invest">
         <Cols cols={4} items={investments.map((i) => ({ title: i.label, text: i.intro, to: i.path }))} />
-      </Section>
-
-      <Section title="Industries">
-        <ul className="grid max-w-3xl gap-x-8 sm:grid-cols-2">
-          {sectors.map((s) => <li key={s} className="border-t border-rule py-2.5 text-[14px]">{s}</li>)}
-        </ul>
       </Section>
 
       <Section id="network" title="The investor landscape">

@@ -41,7 +41,7 @@ export const menus: Record<string, Menu> = {
       { title: "Overview", items: [
         { label: "Investment strategies", to: "/capital/", desc: "The three strategies and how a deal runs." },
         { label: "Investor Access", to: "/investor-access/", desc: "The staged process, from enquiry to transaction." },
-        { label: "Portfolio", to: "/portfolio/", desc: "Industries, and the investor landscape." },
+        { label: "Portfolio", to: "/portfolio/", desc: "Where we work, and the investor landscape." },
       ] },
     ],
   },
