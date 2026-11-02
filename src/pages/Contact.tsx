@@ -20,7 +20,7 @@ const horizons = ["Ready to allocate now", "Within 3 months", "Within 6 to 12 mo
 
 const stages = ["Seed", "Series A", "Series B", "Series C or later", "Pre-IPO", "Real estate project", "Other"];
 const raises = ["Under USD 5m", "USD 5m to 20m", "USD 20m to 50m", "USD 50m to 100m", "USD 100m+", "Not yet determined"];
-const services = ["Fundraising Advisory", "Corporate Development", "M&A Advisory", "Cap Table & Equity Advisory", "Valuation & Modelling"];
+const services = ["Fundraising Advisory", "Corporate Development", "M&A Advisory", "Cap Table & Equity Advisory", "Valuation & Modelling", "Joint Ventures & Partnerships", "Strategic Introductions", "Market Entry & Trade Access", "Legal & Advisory Coordination", "Cross-Border Relationship Management"];
 const timings = ["Under 30 days", "30 to 90 days", "3 to 6 months", "6 to 12 months", "Planning stage"];
 const materials = ["Financial model and data room", "Financial model and investor materials", "Historical financial statements", "Initial company or project summary", "Preparation required"];
 

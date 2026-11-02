@@ -24,6 +24,11 @@ export const nav: NavItem[] = [
       { label: "M&A Advisory", to: "/services/m-and-a-advisory/" },
       { label: "Cap Table & Equity Advisory", to: "/services/cap-table-equity-advisory/" },
       { label: "Valuation & Modelling", to: "/services/valuation-modelling/" },
+      { label: "Joint Ventures & Partnerships", to: "/services/joint-ventures-partnerships/" },
+      { label: "Strategic Introductions", to: "/services/strategic-introductions/" },
+      { label: "Market Entry & Trade Access", to: "/services/market-entry-trade-access/" },
+      { label: "Legal & Advisory Coordination", to: "/services/legal-advisory-coordination/" },
+      { label: "Cross-Border Relationship Management", to: "/services/cross-border-relationship-management/" },
     ],
   },
   {
@@ -158,7 +163,7 @@ export const faqs = [
   },
   {
     q: "What advisory services does Velero Capital offer?",
-    a: "A focused corporate finance practice: fundraising advisory, corporate development, M&A advisory, cap table and equity advisory, and valuation and modelling.",
+    a: "A focused corporate finance and cross-border practice: fundraising advisory, corporate development, M&A advisory, cap table and equity advisory, valuation and modelling, joint ventures and partnerships, strategic introductions, market entry and trade access, legal and advisory coordination, and cross-border relationship management.",
   },
 ];
 

@@ -7,9 +7,9 @@ import { useTitle } from "@/lib/useTitle";
 const anchors = services.map((s) => ({ id: s.id, label: s.title }));
 
 export default function Services() {
-  useTitle("Services", "A focused corporate finance practice: fundraising advisory, corporate development, M&A, cap table and equity advisory, and valuation and modelling.");
+  useTitle("Services", "Corporate finance and cross-border advisory: fundraising, corporate development, M&A, cap table and equity, valuation, joint ventures, strategic introductions, market entry and trade access, adviser coordination and cross-border relationship management.");
   return (
-    <SidebarPage title="Services: a focused corporate finance practice" intro="We advise across the financing and transaction lifecycle. Every engagement is senior-led, tightly scoped and run with the discipline of an institutional process, informed by investor-side judgment and operating experience." anchors={anchors}>
+    <SidebarPage title="Services: corporate finance and cross-border advisory" intro="We advise across the financing and transaction lifecycle. Every engagement is senior-led, tightly scoped and run with the discipline of an institutional process, informed by investor-side judgment and operating experience." anchors={anchors}>
       <Section>
         <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
