@@ -7,6 +7,8 @@ import ScrollLine from "@/components/ScrollLine";
 import MatchEngine from "@/components/MatchEngine";
 import { coInvestors, realEstateInvestors } from "@/data/site";
 import { investments } from "@/data/investments";
+import { menus } from "@/data/menus";
+import { Link } from "react-router-dom";
 import { useTitle } from "@/lib/useTitle";
 
 function Hero() {
@@ -113,6 +115,42 @@ function Portfolio() {
   );
 }
 
+function ServicesHome() {
+  const groups = menus.Services.groups;
+  const pick = (titles: string[]) => groups.filter((g) => titles.includes(g.title)).flatMap((g) => g.items);
+  const columns = [
+    { title: "Corporate finance", intro: "For companies and shareholders preparing a raise, a transaction or a decision that depends on the numbers.", items: pick(["Capital raising", "Transactions", "Equity", "Analysis"]) },
+    { title: "Cross-border", intro: "For businesses and investors working between the Gulf, the United States and wider international markets.", items: pick(["Partnerships", "Cross-border"]) },
+  ];
+  return (
+    <Section eyebrow="Advisory Services" title="Corporate Finance And Cross-Border Advisory">
+      <p className="mb-10 max-w-2xl text-[14px] leading-relaxed text-ink/80">Alongside investor access, we advise founders, companies and sponsors on their own transactions. Every engagement is senior-led, scoped in writing and run with the discipline of an institutional process.</p>
+      <div className="grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-2">
+        {columns.map((c) => (
+          <div key={c.title}>
+            <div className="eyebrow">{c.title}</div>
+            <p className="mt-2 max-w-md text-[13px] leading-relaxed text-ink/70">{c.intro}</p>
+            <ul className="mt-5">
+              {c.items.map((it) => (
+                <li key={it.to} className="border-t border-rule">
+                  <Link to={it.to} className="group flex items-baseline justify-between gap-6 py-3.5">
+                    <span>
+                      <span className="display block text-xl group-hover:text-blue">{it.label}</span>
+                      {it.desc && <span className="mt-0.5 block text-[13px] text-ink/70">{it.desc}</span>}
+                    </span>
+                    <span aria-hidden className="shrink-0 text-ink/40 transition-transform group-hover:translate-x-1 group-hover:text-blue">→</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div className="mt-10 flex flex-wrap gap-3"><Button to="/services/">Explore our services</Button><Button to="/contact-us/?role=founder&goal=services">Discuss an engagement</Button></div>
+    </Section>
+  );
+}
+
 function CTA() {
   return (
     <section className="rule pb-44 pt-16 text-center sm:pb-52 sm:pt-24">
@@ -134,6 +172,7 @@ export default function Home() {
         <Sectors />
         <RealEstate />
         <Portfolio />
+        <ServicesHome />
         <CTA />
       </div>
       <ScrollLine />
