@@ -64,7 +64,7 @@ export const S = {
 } satisfies Record<string, Scene> as Record<string, Scene>;
 
 /** Candlestick chart: each candle is drawn in turn and joined to the next, so the trend reads as one climbing line. */
-const candles: Scene = (() => {
+export const candles: Scene = (() => {
   const cs = [
     [30, 20, 40, 90, 105],
     [75, 50, 70, 130, 150],
@@ -81,7 +81,7 @@ const candles: Scene = (() => {
 })();
 
 /** Three stacks of coins, each taller than the last. */
-const coins: Scene = (() => {
+export const coins: Scene = (() => {
   const d: string[] = [];
   [3, 5, 8].forEach((n, i) => {
     const x = 5 + i * 55;

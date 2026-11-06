@@ -276,7 +276,7 @@ export default function Contact() {
 
         <aside className="lg:col-span-5">
           <div className="rounded-xl bg-blue p-8 text-white lg:sticky lg:top-28">
-            <h2 className="display text-3xl">Get in touch</h2>
+            <h2 className="display text-3xl">Questions?</h2>
             <dl className="mt-6">
               <div className="border-b border-white/20 pb-5">
                 <dt className="text-[14px] font-semibold">Email</dt>

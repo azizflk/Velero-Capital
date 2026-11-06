@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -23,6 +23,9 @@ import InvestorAccess from "@/pages/InvestorAccess";
 import SubmitOpportunity from "@/pages/SubmitOpportunity";
 import CookieBanner from "@/components/CookieBanner";
 
+// The walkthrough film draws real site content, so it loads in its own chunk.
+const Walkthrough = lazy(() => import("@/pages/Walkthrough"));
+
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
@@ -36,6 +39,9 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+  // The walkthrough film stands alone: no header, footer or cookie banner around it.
+  if (pathname.replace(/\/+$/, "") === "/walkthrough") return <Suspense fallback={<div style={{ position: "fixed", inset: 0, background: "#023ccf" }} />}><Walkthrough /></Suspense>;
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />

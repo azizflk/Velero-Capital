@@ -76,7 +76,8 @@ export default function Nav() {
       <header className="sticky top-0 z-50 border-b border-rule bg-paper/95 backdrop-blur">
         <div className="wrap flex h-20 items-center justify-between">
           {/* Blue logo by default; the outlined version fades in while the pointer (or keyboard focus) is on it. */}
-          <Link to="/" className="group/logo relative flex h-12 items-center" aria-label="Velero Capital home">
+          {/* Already on the home page, a click reloads it fresh instead of doing nothing. */}
+          <Link to="/" className="group/logo relative flex h-12 items-center" aria-label="Velero Capital home" onClick={(e) => { if (pathname.replace(/\/+$/, "") === "") { e.preventDefault(); window.location.assign("/"); } }}>
             <img src="/images/logo-blue.png" alt="Velero Capital" className="h-12 w-auto transition-opacity duration-200 group-hover/logo:opacity-0 group-focus-visible/logo:opacity-0" />
             <img src="/images/logo-outline.png" alt="" aria-hidden="true" className="pointer-events-none absolute left-0 top-0 h-12 w-auto max-w-none opacity-0 transition-opacity duration-200 group-hover/logo:opacity-100 group-focus-visible/logo:opacity-100" />
           </Link>

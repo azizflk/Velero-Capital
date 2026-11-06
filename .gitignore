@@ -8,3 +8,6 @@ dist
 .vercel
 .env*
 *.tsbuildinfo
+
+# rendered walkthrough videos
+film-out/
