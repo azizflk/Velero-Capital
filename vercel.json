@@ -2,14 +2,14 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [
         {
           "type": "host",
           "value": "www.velero.capital"
         }
       ],
-      "destination": "https://velero.capital/:path*",
+      "destination": "https://velero.capital/$1",
       "permanent": true
     },
     {
