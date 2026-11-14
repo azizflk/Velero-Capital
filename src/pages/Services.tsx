@@ -2,12 +2,16 @@ import { Link } from "react-router-dom";
 import { SidebarPage, Section, Prose, List } from "@/components/Layout";
 import Button from "@/components/Button";
 import { services } from "@/data/services";
-import { useTitle } from "@/lib/useTitle";
+import { ORIGIN, useTitle } from "@/lib/useTitle";
 
 const anchors = services.map((s) => ({ id: s.id, label: s.title }));
 
 export default function Services() {
-  useTitle("Services", "Corporate finance and cross-border advisory: fundraising, corporate development, M&A, cap table and equity, valuation, joint ventures, strategic introductions, market entry and trade access, adviser coordination and cross-border relationship management.");
+  useTitle("Services", "Corporate finance and cross-border advisory: fundraising, M&A, corporate development, cap table, valuation, joint ventures, market entry and strategic introductions.", {
+    full: "Corporate Finance & Cross-Border Advisory Services | Velero Capital",
+    pageType: "CollectionPage",
+    jsonLd: [{ "@type": "ItemList", name: "Velero Capital advisory services", itemListElement: services.map((s, i) => ({ "@type": "ListItem", position: i + 1, name: s.title, url: ORIGIN + s.path })) }],
+  });
   return (
     <SidebarPage title="Services: corporate finance and cross-border advisory" intro="We advise across the financing and transaction lifecycle. Every engagement is senior-led, tightly scoped and run with the discipline of an institutional process, informed by investor-side judgment and operating experience." anchors={anchors}>
       <Section>

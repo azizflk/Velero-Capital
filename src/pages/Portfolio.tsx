@@ -12,7 +12,7 @@ const TYPES = ["All", "Venture firms", "Real estate investors"] as const;
 type T = (typeof TYPES)[number];
 
 export default function Portfolio() {
-  useTitle("Portfolio", "Where Velero Capital works: late-stage companies, secondaries and real estate, and the investor landscape we operate in.");
+  useTitle("Portfolio", "Where Velero Capital works: late-stage companies, secondaries and real estate, and the investor landscape we operate in.", { full: "Portfolio: Strategies & the Investor Landscape | Velero Capital" });
   const [type, setType] = useState<T>("All");
   const show = (t: T) => type === "All" || type === t;
   return (

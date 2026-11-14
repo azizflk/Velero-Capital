@@ -12,7 +12,7 @@ const anchors = [
 ];
 
 export default function SubmitOpportunity() {
-  useTitle("Submit an Opportunity", "How companies, shareholders, real estate sponsors and intermediaries introduce an opportunity to Velero Capital: what to include, how we screen it, and how an engagement is agreed.");
+  useTitle("Submit an Opportunity", "How companies, shareholders, real estate sponsors and intermediaries introduce an opportunity to Velero Capital, and how each submission is screened.");
   return (
     <SidebarPage title="Submit an opportunity: for companies, shareholders and sponsors" intro="If you are raising capital, selling a position or bringing a transaction to market, this is how to introduce it to us. We review every submission; we take on only those that fit our strategies and our investors’ mandates." anchors={anchors}>
       <Section id="who" title="Who this is for">

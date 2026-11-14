@@ -3,12 +3,23 @@ import { SidebarPage, Section, Cols, Prose } from "@/components/Layout";
 import FAQ from "@/components/FAQ";
 import Button from "@/components/Button";
 import { groups, sectors } from "@/data/solutions";
-import { useTitle } from "@/lib/useTitle";
+import { faqPage, useTitle } from "@/lib/useTitle";
 
 const anchors = groups.map((g) => ({ id: g.id, label: g.title }));
 
+const questions = [
+  { q: "Which industries does Velero Capital serve?", a: `${sectors.length} sectors in seven groups: real estate and infrastructure; financial services; technology, media and telecom; energy, power and resources; industrials and mobility; consumer, healthcare and sports; and the public sector.` },
+  { q: "How is this different from Capital and Services?", a: "Capital and Services describe what we do. Solutions describes who we serve. Most mandates combine the two: a sector view and the right capital product." },
+  { q: "How does our work vary by sector?", a: "Each sector page sets out the clients we serve, our role on mandates, and what matters most when capital is raised in that industry." },
+  { q: "What is the process for a mandate?", a: "A short, confidential scoping conversation and a non-disclosure agreement. We then structure the requirement, prepare the materials, run the process with investors and lenders, and negotiate through to close, with a senior team member leading at every step." },
+];
+
 export default function Solutions() {
-  useTitle("Solutions", `Sector-specialist capital and advisory across ${sectors.length} industries, from real estate and infrastructure to technology, energy, healthcare and the public sector.`);
+  useTitle("Solutions", `Sector-specialist capital and advisory across ${sectors.length} industries, from real estate and infrastructure to technology, energy, healthcare and the public sector.`, {
+    full: `Sectors We Serve: Capital & Advisory Across ${sectors.length} Industries | Velero Capital`,
+    pageType: "CollectionPage",
+    jsonLd: [faqPage("/solutions/", questions)],
+  });
   return (
     <SidebarPage title="Solutions: the sectors we serve" intro={`Capital and advice shaped to each industry. We cover ${sectors.length} sectors in seven groups, and bring to each an understanding of its capital, its cycle and its counterparties.`} anchors={anchors}>
       <Section title="Who we serve">
@@ -47,12 +58,7 @@ export default function Solutions() {
       </Section>
 
       <Section id="questions" title="Questions, answered">
-        <FAQ items={[
-          { q: "Which industries does Velero Capital serve?", a: `${sectors.length} sectors in seven groups: real estate and infrastructure; financial services; technology, media and telecom; energy, power and resources; industrials and mobility; consumer, healthcare and sports; and the public sector.` },
-          { q: "How is this different from Capital and Services?", a: "Capital and Services describe what we do. Solutions describes who we serve. Most mandates combine the two: a sector view and the right capital product." },
-          { q: "How does our work vary by sector?", a: "Each sector page sets out the clients we serve, our role on mandates, and what matters most when capital is raised in that industry." },
-          { q: "What is the process for a mandate?", a: "A short, confidential scoping conversation and a non-disclosure agreement. We then structure the requirement, prepare the materials, run the process with investors and lenders, and negotiate through to close, with a senior team member leading at every step." },
-        ]} />
+        <FAQ items={questions} />
       </Section>
 
       <Section title="Start a conversation">

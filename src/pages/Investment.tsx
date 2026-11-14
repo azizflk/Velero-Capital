@@ -4,7 +4,7 @@ import LogoWall from "@/components/LogoWall";
 import OneLineArt from "@/components/OneLineArt";
 import { coInvestors, realEstateInvestors } from "@/data/site";
 import { process, type Investment as Inv } from "@/data/investments";
-import { useTitle } from "@/lib/useTitle";
+import { serviceNode, useTitle } from "@/lib/useTitle";
 
 const anchors = [
   { id: "overview", label: "Overview" },
@@ -14,7 +14,11 @@ const anchors = [
 ];
 
 export default function Investment({ item }: { item: Inv }) {
-  useTitle(item.label, item.summary);
+  useTitle(item.label, item.seo.description, {
+    full: item.seo.title,
+    crumbs: [{ name: "Investment Strategies", path: "/capital/" }],
+    jsonLd: [serviceNode({ path: item.path, name: item.label, description: item.summary, serviceType: "Private-market investment access", audience: "Family offices and institutional investors", offers: item.points.map((p) => p.title) })],
+  });
   const belt = item.belt === "realEstate" ? realEstateInvestors : item.belt === "venture" ? coInvestors : null;
   return (
     <SidebarPage title={item.title} intro={item.intro} anchors={anchors}>

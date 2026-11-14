@@ -78,8 +78,8 @@ export default function Nav() {
           {/* Blue logo by default; the outlined version fades in while the pointer (or keyboard focus) is on it. */}
           {/* Already on the home page, a click reloads it fresh instead of doing nothing. */}
           <Link to="/" className="group/logo relative flex h-12 items-center" aria-label="Velero Capital home" onClick={(e) => { if (pathname.replace(/\/+$/, "") === "") { e.preventDefault(); window.location.assign("/"); } }}>
-            <img src="/images/logo-blue.png" alt="Velero Capital" className="h-12 w-auto transition-opacity duration-200 group-hover/logo:opacity-0 group-focus-visible/logo:opacity-0" />
-            <img src="/images/logo-outline.png" alt="" aria-hidden="true" className="pointer-events-none absolute left-0 top-0 h-12 w-auto max-w-none opacity-0 transition-opacity duration-200 group-hover/logo:opacity-100 group-focus-visible/logo:opacity-100" />
+            <img src="/images/logo-blue.png" alt="Velero Capital" width={935} height={403} className="h-12 w-auto transition-opacity duration-200 group-hover/logo:opacity-0 group-focus-visible/logo:opacity-0" />
+            <img src="/images/logo-outline.png" alt="" aria-hidden="true" width={935} height={403} className="pointer-events-none absolute left-0 top-0 h-12 w-auto max-w-none opacity-0 transition-opacity duration-200 group-hover/logo:opacity-100 group-focus-visible/logo:opacity-100" />
           </Link>
 
           <nav className="hidden items-center gap-6 lg:flex xl:gap-8" aria-label="Main" onMouseLeave={() => setShut(false)}>

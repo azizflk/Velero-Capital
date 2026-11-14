@@ -1,7 +1,7 @@
 import { SidebarPage, Section, Cols, Prose, List } from "@/components/Layout";
 import Button from "@/components/Button";
 import { services, type Service } from "@/data/services";
-import { useTitle } from "@/lib/useTitle";
+import { serviceNode, useTitle } from "@/lib/useTitle";
 
 const anchors = [
   { id: "overview", label: "Overview" },
@@ -13,7 +13,10 @@ const anchors = [
 ];
 
 export default function ServiceDetail({ service }: { service: Service }) {
-  useTitle(service.title, service.text);
+  useTitle(service.title, service.text, {
+    crumbs: [{ name: "Services", path: "/services/" }],
+    jsonLd: [serviceNode({ path: service.path, name: service.title, description: service.text, serviceType: service.title, audience: "Founders, companies, shareholders and sponsors", offers: service.work.map((w) => w.title) })],
+  });
   const others = services.filter((s) => s.slug !== service.slug);
   return (
     <SidebarPage title={service.title} intro={service.intro} anchors={anchors}>

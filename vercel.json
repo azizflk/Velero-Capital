@@ -1,3 +1,194 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.velero.capital"
+        }
+      ],
+      "destination": "https://velero.capital/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/otc-investment",
+      "destination": "/secondaries/",
+      "permanent": true
+    },
+    {
+      "source": "/otc-investment/",
+      "destination": "/secondaries/",
+      "permanent": true
+    },
+    {
+      "source": "/strategic-investments",
+      "destination": "/late-stage/",
+      "permanent": true
+    },
+    {
+      "source": "/strategic-investments/",
+      "destination": "/late-stage/",
+      "permanent": true
+    },
+    {
+      "source": "/tech-investments-part",
+      "destination": "/late-stage/",
+      "permanent": true
+    },
+    {
+      "source": "/tech-investments-part/",
+      "destination": "/late-stage/",
+      "permanent": true
+    },
+    {
+      "source": "/tech-startups-investments-part",
+      "destination": "/late-stage/",
+      "permanent": true
+    },
+    {
+      "source": "/tech-startups-investments-part/",
+      "destination": "/late-stage/",
+      "permanent": true
+    },
+    {
+      "source": "/tech",
+      "destination": "/late-stage/",
+      "permanent": true
+    },
+    {
+      "source": "/tech/",
+      "destination": "/late-stage/",
+      "permanent": true
+    },
+    {
+      "source": "/famiglia",
+      "destination": "/company/",
+      "permanent": true
+    },
+    {
+      "source": "/famiglia/",
+      "destination": "/company/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/company/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us/",
+      "destination": "/company/",
+      "permanent": true
+    },
+    {
+      "source": "/team",
+      "destination": "/company/",
+      "permanent": true
+    },
+    {
+      "source": "/team/",
+      "destination": "/company/",
+      "permanent": true
+    },
+    {
+      "source": "/transformations",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/transformations/",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/advisory",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/advisory/",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/web3-and-crypto-marketing",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/web3-and-crypto-marketing/",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/web3-services",
+      "destination": "/capital/",
+      "permanent": true
+    },
+    {
+      "source": "/web3-services/",
+      "destination": "/capital/",
+      "permanent": true
+    },
+    {
+      "source": "/stories",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/stories/",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/walkthrough",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/walkthrough/",
+      "destination": "/app.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/walkthrough",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/walkthrough/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/app.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ]
 }

@@ -12,7 +12,7 @@ const anchors = [
 ];
 
 export default function Privacy() {
-  useTitle("Privacy Policy", "How Velero Capital handles personal data and cookies on this website.");
+  useTitle("Privacy Policy", "How Velero Capital handles personal data and cookies on this website: what we collect, how we use it, and your rights.");
   return (
     <SidebarPage title="Privacy policy" intro="How Velero Capital handles personal data and cookies on this website. Last updated October 2026." anchors={anchors}>
       <Section id="collect" title="What we collect">

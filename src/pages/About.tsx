@@ -1,7 +1,8 @@
 import { SidebarPage, Section, Cols, Prose } from "@/components/Layout";
 import Stats from "@/components/Stats";
-import { differentiators } from "@/data/site";
-import { useTitle } from "@/lib/useTitle";
+import FAQ from "@/components/FAQ";
+import { differentiators, faqs } from "@/data/site";
+import { faqPage, useTitle } from "@/lib/useTitle";
 
 const anchors = [
   { id: "name", label: "The name" },
@@ -9,11 +10,16 @@ const anchors = [
   { id: "vision", label: "Vision & mission" },
   { id: "values", label: "Core values" },
   { id: "apart", label: "What sets us apart" },
+  { id: "questions", label: "Questions" },
   { id: "connect", label: "Connect with us" },
 ];
 
 export default function About() {
-  useTitle("Company", "Velero Capital connects family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate.");
+  useTitle("Company", "Velero Capital is an independent private-markets investment-access and advisory firm headquartered in Dubai, with an office in San Francisco.", {
+    full: "About Velero Capital | Independent Private-Markets Firm in Dubai",
+    pageType: "AboutPage",
+    jsonLd: [faqPage("/company/", faqs)],
+  });
   return (
     <SidebarPage title="Company: an independent private-markets firm" intro="Velero Capital is an independent private-markets investment-access and advisory firm headquartered in Dubai, with an office in San Francisco." anchors={anchors}>
       <Section id="name">
@@ -54,6 +60,10 @@ export default function About() {
 
       <Section id="apart" title="What sets us apart">
         <Cols cols={3} items={differentiators} />
+      </Section>
+
+      <Section id="questions" title="Questions, answered">
+        <FAQ items={faqs} />
       </Section>
 
       <Section id="connect" title="Connect with us">

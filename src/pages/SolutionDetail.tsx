@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "@/components/Button";
 import { CONTACT_EMAIL } from "@/data/site";
 import { commonFaqs, groups, type Sector } from "@/data/solutions";
-import { useTitle } from "@/lib/useTitle";
+import { faqPage, serviceNode, useTitle } from "@/lib/useTitle";
 
 /** A full-width band. Bands alternate between the page colour and a warmer tint. */
 function Band({ tint = false, children, id }: { tint?: boolean; children: ReactNode; id?: string }) {
@@ -50,7 +50,8 @@ function Questions({ items }: { items: { q: string; a: string }[] }) {
             {it.q}
             <span aria-hidden className="text-xl leading-none text-blue">{open === i ? "–" : "+"}</span>
           </button>
-          {open === i && <p className="pb-5 pr-8 text-[14px] leading-relaxed text-ink/80">{it.a}</p>}
+          {/* Every answer stays in the page, so it can be read without opening the row; closed rows are only hidden. */}
+          <p hidden={open !== i} className="pb-5 pr-8 text-[14px] leading-relaxed text-ink/80">{it.a}</p>
         </div>
       ))}
     </div>
@@ -58,8 +59,16 @@ function Questions({ items }: { items: { q: string; a: string }[] }) {
 }
 
 export default function SolutionDetail({ sector }: { sector: Sector }) {
-  useTitle(sector.title, sector.tagline);
   const name = sector.title.replace(/ \((FIG|FSG)\)$/, "");
+  const questions = [...sector.faqs, ...commonFaqs];
+  useTitle(sector.title, sector.tagline.length >= 70 ? sector.tagline : `${sector.tagline} ${sector.overview}`, {
+    full: `${name}: Capital & Advisory | Velero Capital`,
+    crumbs: [{ name: "Solutions", path: "/solutions/" }],
+    jsonLd: [
+      serviceNode({ path: sector.path, name: `${name} capital and advisory`, description: sector.overview, serviceType: "Sector capital and corporate finance advisory", offers: sector.types.map((t) => t.title) }),
+      faqPage(sector.path, questions),
+    ],
+  });
   const lower = name.toLowerCase();
   const group = groups.find((g) => g.title === sector.group)!;
   const related = [...group.sectors.filter((s) => s.slug !== sector.slug), ...groups.flatMap((g) => g.sectors).filter((s) => s.group !== sector.group)].slice(0, 6);
@@ -143,7 +152,7 @@ export default function SolutionDetail({ sector }: { sector: Sector }) {
       {/* Questions */}
       <Band tint id="questions">
         <Head label="Questions, answered" title={<>{name}: frequently asked questions</>} />
-        <Questions items={[...sector.faqs, ...commonFaqs]} />
+        <Questions items={questions} />
       </Band>
 
       {/* Related */}

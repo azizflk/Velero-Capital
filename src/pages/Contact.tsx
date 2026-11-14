@@ -117,7 +117,7 @@ const steps = [
 ];
 
 export default function Contact() {
-  useTitle("Contact", "Start a confidential conversation with Velero Capital about raising capital, a transaction, liquidity, or access to private markets.");
+  useTitle("Contact", "Start a confidential conversation with Velero Capital about raising capital, a transaction, liquidity, or access to private markets.", { full: "Contact Velero Capital | Dubai & San Francisco", pageType: "ContactPage" });
   const [params] = useSearchParams();
   const preset = useMemo(() => {
     const want = (params.get("service") || "").toLowerCase();

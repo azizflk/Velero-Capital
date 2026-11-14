@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-const SITE = "https://www.velero.capital";
+const SITE = "https://velero.capital";
 
 const tools = [
   { name: "ChatGPT", url: (q: string) => `https://chatgpt.com/?q=${q}` },

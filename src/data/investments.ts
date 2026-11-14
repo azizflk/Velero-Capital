@@ -5,6 +5,8 @@ export type Investment = {
   title: string;
   intro: string;
   summary: string;
+  /** <title> and meta description for search engines */
+  seo: { title: string; description: string };
   points: { title: string; text: string }[];
   lookFor: string[];
   belt?: "venture" | "realEstate";
@@ -23,6 +25,7 @@ export const process = [
 export const investments: Investment[] = [
   {
     slug: "late-stage",
+    seo: { title: "Late-Stage & Pre-IPO Investment Access | Velero Capital", description: "Access to late-stage and pre-IPO rounds for family offices and institutional investors: primary allocations in established private companies, Series C onward." },
     art: "growth",
     path: "/late-stage/",
     label: "Late-Stage & Pre-IPO",
@@ -40,6 +43,7 @@ export const investments: Investment[] = [
   },
   {
     slug: "secondaries",
+    seo: { title: "Secondaries: Direct Secondaries & LP Fund Stakes | Velero Capital", description: "Secondary transactions for eligible investors: existing stakes from founders, employees and early investors, LP fund interests and structured liquidity." },
     art: "transfer",
     path: "/secondaries/",
     label: "Secondaries",
@@ -55,6 +59,7 @@ export const investments: Investment[] = [
   },
   {
     slug: "real-estate",
+    seo: { title: "Institutional Real Estate: Direct Deals, JVs & Funds | Velero Capital", description: "Institutional real estate for family offices and institutions: direct deals, joint ventures and fund positions with established operators and sponsors." },
     art: "skyline",
     path: "/real-estate/",
     label: "Real Estate",
@@ -73,6 +78,7 @@ export const investments: Investment[] = [
   },
   {
     slug: "co-investments",
+    seo: { title: "Co-Investments & Syndicates: Deal-by-Deal Participation | Velero Capital", description: "How investors participate with Velero Capital: co-investments alongside a lead sponsor and dedicated deal-by-deal vehicles, with terms set out in writing." },
     art: "syndicate",
     path: "/co-investments/",
     label: "Co-Investments & Syndicates",

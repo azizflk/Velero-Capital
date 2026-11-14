@@ -162,7 +162,7 @@ function CTA() {
 }
 
 export default function Home() {
-  useTitle("Home");
+  useTitle("Home", "Velero Capital gives family offices and institutions access to late-stage companies, secondaries and real estate, and advises on fundraising and M&A.");
   return (
     <div className="relative">
       <Hero />

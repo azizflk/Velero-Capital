@@ -73,7 +73,7 @@ export default function Footer() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,.14),transparent_55%)]" />
         <div className="wrap relative grid grid-cols-1 gap-12 pb-4 pt-16 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-3">
-            <Link to="/" aria-label="Velero Capital home"><img src="/images/logo-outline.png" alt="Velero Capital" className="h-12 w-auto brightness-0 invert" /></Link>
+            <Link to="/" aria-label="Velero Capital home"><img src="/images/logo-outline.png" alt="Velero Capital" width={935} height={403} loading="lazy" className="h-12 w-auto brightness-0 invert" /></Link>
             <p className="mt-5 text-[14px] leading-relaxed text-white/80">Access is the edge.<br />Private markets, by relationship.</p>
             <a href={`mailto:${CONTACT_EMAIL}`} className="mt-4 inline-block text-[14px] text-white/80 underline-offset-4 hover:text-white hover:underline">{CONTACT_EMAIL}</a>
           </div>

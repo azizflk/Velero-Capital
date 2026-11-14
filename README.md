@@ -9,7 +9,7 @@ Marketing site for Velero Capital, rebuilt as a static React app (previously Wor
 ```bash
 npm install
 npm run dev        # http://localhost:5180
-npm run build      # outputs to dist/
+npm run build      # builds, then prerenders every page to static HTML in dist/
 npm run preview    # serve the production build locally
 ```
 
@@ -41,8 +41,16 @@ The homepage ticker pulls 24h prices from Kraken's public API in the browser. No
 
 The build is static (`dist/`), so it works on any host.
 
-- **Vercel / Netlify:** connect the repo, build command `npm run build`, output `dist`. `vercel.json` already rewrites all routes to `index.html`.
+- **Vercel:** connect the repo, build command `npm run build`, output `dist`. Every page is a prerendered file, so there is no catch-all rewrite: unknown addresses get `404.html` with a 404 status. `vercel.json` holds the trailing-slash rule, the www and legacy-URL redirects, and the rewrite that serves the client-only walkthrough from `app.html`.
 - **Hostinger (current host):** upload the contents of `dist/` to `public_html`. The included `.htaccess` handles SPA routing on LiteSpeed/Apache.
+
+## Search and AI visibility
+
+The build prerenders each route (`scripts/prerender.mjs`, using `src/entry-server.tsx`), so crawlers that do not run JavaScript still get the full page. For each page it writes its own title, description, canonical URL, social tags and schema.org data, all set in the page component through `useTitle` (`src/lib/useTitle.ts`). The same step generates `sitemap.xml`, `llms.txt` and `llms-full.txt` from the route table and the data files, and fails the build if a page has a duplicate title or description, more or fewer than one `<h1>`, or an image without alt text.
+
+- A new page needs a route in `src/App.tsx`, an entry in `routes` in `src/entry-server.tsx`, and a `useTitle` call.
+- Site-wide Organization and WebSite data is in `index.html`; keep it in step with `src/data/site.ts`.
+- `public/robots.txt` names the AI crawlers that are allowed. Details and the remaining owner-side steps: `docs/seo-geo-2026-11.md`.
 
 ## Notes
 

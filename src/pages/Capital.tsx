@@ -7,7 +7,10 @@ import { useTitle } from "@/lib/useTitle";
 const anchors = [...investments.map((i) => ({ id: i.slug, label: i.label })), { id: "process", label: "How it works" }];
 
 export default function Capital() {
-  useTitle("Investment Strategies", "Velero Capital connects family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate.");
+  useTitle("Investment Strategies", "Three private-market strategies for family offices and institutional investors: late-stage and pre-IPO companies, secondaries and real estate, and how a deal runs.", {
+    full: "Investment Strategies: Late-Stage, Secondaries & Real Estate | Velero Capital",
+    pageType: "CollectionPage",
+  });
   return (
     <SidebarPage title="Investment strategies: late-stage, secondaries and real estate" intro="We connect family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate. Every opportunity is sourced through relationships, vetted, and shared only with approved investors." anchors={anchors}>
       <Section>

@@ -23,7 +23,7 @@ const steps = [
 ];
 
 export default function InvestorAccess() {
-  useTitle("Investor Access", "How family offices and institutional investors work with Velero Capital: enquiry, eligibility, mandate alignment, confidentiality, review of opportunities and transaction engagement.");
+  useTitle("Investor Access", "How family offices and institutional investors work with Velero Capital: enquiry, eligibility, mandate alignment, confidentiality, review and transaction.", { full: "Investor Access for Family Offices & Institutions | Velero Capital" });
   return (
     <SidebarPage title="Investor access: a staged, confidential process" intro="Opportunities are shared only with eligible investors whose mandate they fit, after a review on both sides. This page sets out how that works." anchors={anchors}>
       <Section id="who" title="Who we work with">
