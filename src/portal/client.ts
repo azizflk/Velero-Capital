@@ -69,7 +69,11 @@ export function useSession(): Session | null | undefined {
   return session;
 }
 
-export const signOut = async () => { await supabase.auth.signOut(); remember(null); };
+/** Signs out here. Even if the server cannot be reached, this browser forgets the sign-in. */
+export const signOut = async () => {
+  try { await supabase.auth.signOut(); } catch { await supabase.auth.signOut({ scope: "local" }).catch(() => undefined); }
+  remember(null);
+};
 
 /** Sets the tab title for a page of the account area. */
 export function usePageTitle(title: string) {

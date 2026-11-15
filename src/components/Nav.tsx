@@ -83,6 +83,23 @@ function ApplyButton({ to }: { to: string }) {
   return <Link to={to} className="frame-cta">Apply</Link>;
 }
 
+/** Once signed in, the framed button signs out instead. The account code loads only when it is pressed. */
+function LogoutButton({ onDone }: { onDone: () => void }) {
+  const [busy, setBusy] = useState(false);
+  const out = async () => {
+    setBusy(true);
+    try {
+      const { signOut } = await import("@/portal/client");
+      await signOut();
+    } catch {
+      try { localStorage.removeItem(SIGNED_IN_KEY); } catch { /* nothing more to clear */ }
+    }
+    setBusy(false);
+    onDone();
+  };
+  return <button type="button" onClick={() => void out()} disabled={busy} className="frame-cta disabled:opacity-60">{busy ? "Logging out…" : "Log out"}</button>;
+}
+
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [searching, setSearching] = useState(false);
@@ -94,9 +111,9 @@ export default function Nav() {
   const [signedIn, setSignedIn] = useState("");
   useEffect(() => { try { setSignedIn(localStorage.getItem(SIGNED_IN_KEY) ?? ""); } catch { /* storage blocked: keep “Login” */ } }, [pathname]);
   const email = signedIn.includes("@") ? signedIn : "";
-  // Login brings the visitor back to the page they were on; Apply takes them to the questions, signing in first if needed.
+  // Login brings the visitor back to the page they were on; Apply signs them in and opens the questions. Signed in, Apply becomes Log out.
   const account = PORTAL_ON ? { to: signedIn ? "/account/" : loginFor(isPortalPath(pathname) ? "/" : pathname), label: signedIn ? email || "My account" : "Login", email } : null;
-  const apply = PORTAL_ON ? (signedIn ? "/account/" : loginFor("/account/")) : null;
+  const apply = PORTAL_ON ? loginFor("/account/") : null;
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); setSearching(true); } };
@@ -148,7 +165,7 @@ export default function Nav() {
           {account && (
             <div className="flex items-center gap-1.5 min-[400px]:gap-2 sm:gap-3">
               <AccountButton {...account} />
-              {apply && <ApplyButton to={apply} />}
+              {signedIn ? <LogoutButton onDone={() => setSignedIn("")} /> : apply && <ApplyButton to={apply} />}
             </div>
           )}
 
