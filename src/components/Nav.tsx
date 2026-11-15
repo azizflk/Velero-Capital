@@ -4,7 +4,7 @@ import { nav } from "@/data/site";
 import { groups } from "@/data/solutions";
 import { menus, type Menu } from "@/data/menus";
 import Search from "./Search";
-import { PORTAL_ON, SIGNED_IN_KEY } from "@/lib/portal";
+import { PORTAL_ON, SIGNED_IN_KEY, isPortalPath, loginFor } from "@/lib/portal";
 
 const path = (to: string) => to.split("#")[0];
 
@@ -54,16 +54,21 @@ function MegaPanel({ menu, onPick }: { menu: Menu; onPick: () => void }) {
   );
 }
 
-/** The one filled button in the header: the way into the account area. */
+/** The filled button in the header: signing in, or the account once signed in. */
 function AccountButton({ to, label }: { to: string; label: string }) {
   return (
     <Link to={to} className="pill pill-blue pill-cta group/cta">
       {label}
-      <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 motion-reduce:transition-none motion-reduce:transform-none">
+      <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="hidden transition-transform duration-200 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 motion-reduce:transition-none motion-reduce:transform-none min-[400px]:block">
         <path d="M1.5 8.5 8.5 1.5M3 1.5h5.5V7" />
       </svg>
     </Link>
   );
+}
+
+/** “Apply”, drawn like the outlined logo: a plain ink frame that fills on hover. It opens the application questions. */
+function ApplyButton({ to }: { to: string }) {
+  return <Link to={to} className="frame-cta">Apply</Link>;
 }
 
 export default function Nav() {
@@ -76,7 +81,9 @@ export default function Nav() {
   // Someone already signed in on this browser is offered their account rather than the login page.
   const [signedIn, setSignedIn] = useState(false);
   useEffect(() => { try { setSignedIn(!!localStorage.getItem(SIGNED_IN_KEY)); } catch { /* storage blocked: keep “Login” */ } }, [pathname]);
-  const account = PORTAL_ON ? { to: signedIn ? "/account/" : "/login/", label: signedIn ? "My account" : "Login" } : null;
+  // Login brings the visitor back to the page they were on; Apply takes them to the questions, signing in first if needed.
+  const account = PORTAL_ON ? { to: signedIn ? "/account/" : loginFor(isPortalPath(pathname) ? "/" : pathname), label: signedIn ? "My account" : "Login" } : null;
+  const apply = PORTAL_ON ? (signedIn ? "/account/" : loginFor("/account/")) : null;
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); setSearching(true); } };
@@ -95,8 +102,8 @@ export default function Nav() {
           {/* Blue logo by default; the outlined version fades in while the pointer (or keyboard focus) is on it. */}
           {/* Already on the home page, a click reloads it fresh instead of doing nothing. */}
           <Link to="/" className="group/logo relative flex h-12 items-center" aria-label="Velero Capital home" onClick={(e) => { if (pathname.replace(/\/+$/, "") === "") { e.preventDefault(); window.location.assign("/"); } }}>
-            <img src="/images/logo-blue.png" alt="Velero Capital" width={935} height={403} className="h-12 w-auto transition-opacity duration-200 group-hover/logo:opacity-0 group-focus-visible/logo:opacity-0" />
-            <img src="/images/logo-outline.png" alt="" aria-hidden="true" width={935} height={403} className="pointer-events-none absolute left-0 top-0 h-12 w-auto max-w-none opacity-0 transition-opacity duration-200 group-hover/logo:opacity-100 group-focus-visible/logo:opacity-100" />
+            <img src="/images/logo-blue.png" alt="Velero Capital" width={935} height={403} className="h-9 w-auto transition-opacity min-[360px]:h-10 min-[400px]:h-12 duration-200 group-hover/logo:opacity-0 group-focus-visible/logo:opacity-0" />
+            <img src="/images/logo-outline.png" alt="" aria-hidden="true" width={935} height={403} className="pointer-events-none absolute left-0 top-0 h-9 w-auto min-[360px]:h-10 min-[400px]:h-12 max-w-none opacity-0 transition-opacity duration-200 group-hover/logo:opacity-100 group-focus-visible/logo:opacity-100" />
           </Link>
 
           <div className="flex items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8">
@@ -125,7 +132,12 @@ export default function Nav() {
             <button onClick={() => setSearching(true)} className="navlink">Search</button>
           </nav>
 
-          {account && <AccountButton {...account} />}
+          {account && (
+            <div className="flex items-center gap-1.5 min-[400px]:gap-2 sm:gap-3">
+              <AccountButton {...account} />
+              {apply && <ApplyButton to={apply} />}
+            </div>
+          )}
 
           <button className="-mr-2 p-2 lg:hidden" onClick={() => setOpen((v) => !v)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
