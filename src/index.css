@@ -30,8 +30,6 @@ body { @apply bg-paper text-ink font-sans antialiased text-[15px] leading-relaxe
 /* Controls */
 .pill { @apply inline-flex items-center gap-2 rounded-full border border-ink px-5 py-2 text-[13px] font-medium text-ink transition-colors hover:bg-ink hover:text-paper focus:outline-none focus-visible:ring-2 focus-visible:ring-blue disabled:opacity-50; }
 .pill-blue { @apply border-blue bg-blue text-white hover:bg-blue-dark hover:border-blue-dark; }
-/* A pill that only labels something (the signed-in address): no hover change, no pointer. */
-.pill-static, .pill-static:hover { @apply cursor-default border-blue bg-blue text-white; }
 /* The header's call to action: a little tighter on phones, and a focus ring that stands clear of the blue. */
 /* The outlined-logo frame: square corners, an ink rule, ink fill on hover. Same height as .pill-cta beside it. */
 .frame-cta { @apply inline-flex shrink-0 items-center whitespace-nowrap border-2 border-ink px-2.5 py-[5px] min-[360px]:px-3 text-[12px] font-bold uppercase tracking-[0.08em] text-ink transition-colors min-[400px]:tracking-[0.12em] duration-200 hover:bg-ink hover:text-paper focus:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:px-4 sm:py-[7px] sm:text-[13px]; }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { nav } from "@/data/site";
 import { groups } from "@/data/solutions";
@@ -54,20 +54,66 @@ function MegaPanel({ menu, onPick }: { menu: Menu; onPick: () => void }) {
   );
 }
 
-/** The filled button in the header: “Login”, or once signed in the address it was done with. */
-function AccountButton({ to, label, email }: { to: string; label: string; email?: string }) {
-  // Signed in, it only says who is signed in: a label, not a link. Apply leads into the account area.
-  if (email) {
-    return (
-      <span title={`Signed in as ${email}`} className="pill pill-blue pill-cta pill-static">
-        <span className="sr-only">Signed in as </span>
+/** Signs out on this browser. The account code loads only when it is needed. */
+async function logOut() {
+  try {
+    const { signOut } = await import("@/portal/client");
+    await signOut();
+  } catch {
+    try { localStorage.removeItem(SIGNED_IN_KEY); } catch { /* nothing more to clear */ }
+  }
+}
+
+/** Signed in: the address, which opens a small menu with “Log out”. */
+function AccountMenu({ email, onSignedOut }: { email: string; onSignedOut: () => void }) {
+  const [open, setOpen] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const box = useRef<HTMLDivElement>(null);
+  const button = useRef<HTMLButtonElement>(null);
+  // Close on a click elsewhere, or on Escape (which also returns focus to the button).
+  useEffect(() => {
+    if (!open) return;
+    const away = (e: PointerEvent) => { if (!box.current?.contains(e.target as Node)) setOpen(false); };
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") { setOpen(false); button.current?.focus(); } };
+    document.addEventListener("pointerdown", away);
+    document.addEventListener("keydown", esc);
+    return () => { document.removeEventListener("pointerdown", away); document.removeEventListener("keydown", esc); };
+  }, [open]);
+  const out = async () => {
+    setBusy(true);
+    await logOut();
+    setBusy(false);
+    setOpen(false);
+    onSignedOut();
+  };
+  return (
+    <div ref={box} className="relative">
+      <button ref={button} type="button" onClick={() => setOpen((v) => !v)} aria-haspopup="menu" aria-expanded={open} aria-label={`Signed in as ${email}. Account menu`} title={email} className="pill pill-blue pill-cta">
         {/* Phones have no room for an address: a person icon there, and the address heads the menu instead. */}
         <svg aria-hidden="true" width="15" height="20" viewBox="0 -2 16 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="sm:hidden"><circle cx="8" cy="5.5" r="3" /><path d="M2.5 14.5c.8-2.9 3-4.5 5.5-4.5s4.7 1.6 5.5 4.5" /></svg>
-        {/* A long address is cut short with an ellipsis; the full one is in the tooltip. */}
+        {/* A long address is cut short with an ellipsis; the full one is in the tooltip and the menu. */}
         <span className="hidden max-w-[13rem] truncate sm:block">{email}</span>
-      </span>
-    );
-  }
+        <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className={`hidden transition-transform duration-200 min-[400px]:block ${open ? "rotate-180" : ""}`}><path d="M2 3.5 5 6.5 8 3.5" /></svg>
+      </button>
+      {/* Under the header, right-aligned; on phones it spans the width so it never runs off the screen. */}
+      {open && (
+        <div role="menu" aria-label="Account" className="absolute right-0 top-full z-50 mt-2 w-60 border border-rule bg-paper p-2 shadow-[0_12px_30px_-12px_rgba(0,0,0,.25)] max-sm:fixed max-sm:inset-x-4 max-sm:top-[4.75rem] max-sm:mt-0 max-sm:w-auto">
+          <div className="px-3 pb-2 pt-1.5">
+            <span className="block text-[12px] text-ink/60">Signed in as</span>
+            <span className="block truncate text-[14px] font-medium">{email}</span>
+          </div>
+          <button type="button" role="menuitem" autoFocus onClick={() => void out()} disabled={busy} className="block w-full border-t border-rule px-3 py-2.5 text-left text-[15px] hover:bg-sand focus:bg-sand focus:outline-none disabled:opacity-60">
+            {busy ? "Logging out…" : "Log out"}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** The filled button in the header: “Login”, or once signed in the account menu. */
+function AccountButton({ to, label, email, onSignedOut }: { to: string; label: string; email?: string; onSignedOut: () => void }) {
+  if (email) return <AccountMenu email={email} onSignedOut={onSignedOut} />;
   return (
     <Link to={to} className="pill pill-blue pill-cta group/cta">
       {label}
@@ -83,23 +129,6 @@ function ApplyButton({ to }: { to: string }) {
   return <Link to={to} className="frame-cta">Apply</Link>;
 }
 
-/** Once signed in, the framed button signs out instead. The account code loads only when it is pressed. */
-function LogoutButton({ onDone }: { onDone: () => void }) {
-  const [busy, setBusy] = useState(false);
-  const out = async () => {
-    setBusy(true);
-    try {
-      const { signOut } = await import("@/portal/client");
-      await signOut();
-    } catch {
-      try { localStorage.removeItem(SIGNED_IN_KEY); } catch { /* nothing more to clear */ }
-    }
-    setBusy(false);
-    onDone();
-  };
-  return <button type="button" onClick={() => void out()} disabled={busy} className="frame-cta disabled:opacity-60">{busy ? "Logging out…" : "Log out"}</button>;
-}
-
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [searching, setSearching] = useState(false);
@@ -111,9 +140,10 @@ export default function Nav() {
   const [signedIn, setSignedIn] = useState("");
   useEffect(() => { try { setSignedIn(localStorage.getItem(SIGNED_IN_KEY) ?? ""); } catch { /* storage blocked: keep “Login” */ } }, [pathname]);
   const email = signedIn.includes("@") ? signedIn : "";
-  // Login brings the visitor back to the page they were on; Apply signs them in and opens the questions. Signed in, Apply becomes Log out.
+  // Login brings the visitor back to the page they were on. Apply opens the questions, signing in first if needed.
+  // Signed in, the address replaces Login and opens a menu with Log out.
   const account = PORTAL_ON ? { to: signedIn ? "/account/" : loginFor(isPortalPath(pathname) ? "/" : pathname), label: signedIn ? email || "My account" : "Login", email } : null;
-  const apply = PORTAL_ON ? loginFor("/account/") : null;
+  const apply = PORTAL_ON ? (signedIn ? "/account/" : loginFor("/account/")) : null;
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); setSearching(true); } };
@@ -164,8 +194,8 @@ export default function Nav() {
 
           {account && (
             <div className="flex items-center gap-1.5 min-[400px]:gap-2 sm:gap-3">
-              <AccountButton {...account} />
-              {signedIn ? <LogoutButton onDone={() => setSignedIn("")} /> : apply && <ApplyButton to={apply} />}
+              <AccountButton {...account} onSignedOut={() => setSignedIn("")} />
+              {apply && <ApplyButton to={apply} />}
             </div>
           )}
 
