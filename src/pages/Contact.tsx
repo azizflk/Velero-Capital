@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { S, gap, row } from "@/components/VeleroStory";
-import { Confirmations, GoalPick, Questions, RolePick, GOALS, ROLES, about, chosen, collect, services, type Goal, type Role } from "@/components/EnquiryForm";
+import { GOALS, ROLES, services, type Goal, type Role } from "@/components/EnquiryForm";
+import ApplicationForm from "@/components/ApplicationForm";
 import { CONTACT_EMAIL, offices } from "@/data/site";
-import { submitForm } from "@/lib/forms";
 import { useTitle } from "@/lib/useTitle";
 
 const cities = [
@@ -51,24 +51,8 @@ export default function Contact() {
     return services.find((i) => i.toLowerCase() === want) ?? "";
   }, [params]);
   const r0 = params.get("role") as Role | null, g0 = params.get("goal") as Goal | null;
-  const [role, setRole] = useState<Role | null>(preset ? "founder" : r0 && ROLES.includes(r0) ? r0 : null);
-  const [goal, setGoal] = useState<Goal | null>(preset ? "services" : g0 && GOALS.includes(g0) ? g0 : null);
-  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  // Links such as /contact-us/?role=investor can arrive while the page is already open; follow them.
-  useEffect(() => {
-    if (preset) { setRole("founder"); setGoal("services"); return; }
-    if (r0 && ROLES.includes(r0)) setRole(r0);
-    if (g0 && GOALS.includes(g0)) setGoal(g0);
-  }, [preset, r0, g0]);
-
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (new FormData(e.currentTarget).get("website")) return; // filled only by bots
-    const fields = collect(e.currentTarget);
-    setState("sending");
-    const r = await submitForm(`Website enquiry: ${about(role, goal)}`, fields);
-    setState(r.ok ? "sent" : "error");
-  };
+  const role = preset ? "founder" : r0 && ROLES.includes(r0) ? r0 : null;
+  const goal = preset ? "services" : g0 && GOALS.includes(g0) ? g0 : null;
 
   return (
     <>
@@ -98,27 +82,7 @@ export default function Contact() {
           <h2 className="display mt-5 text-4xl sm:text-5xl">Tell us who you are</h2>
           <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink/80">Choose the option that describes you and we will ask only what is relevant. We review each enquiry for fit before arranging a first conversation. Please do not send confidential documents through this form.</p>
 
-          {state === "sent" ? (
-            <div className="mt-8 rounded-md border border-rule bg-white/70 p-6 text-[15px]">
-              <strong>Thank you.</strong> We have your enquiry and will come back to you once we have reviewed it.
-            </div>
-          ) : (
-            <form onSubmit={onSubmit} className="mt-8 grid gap-5 sm:grid-cols-2">
-              <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-              <RolePick value={role} onChange={setRole} />
-              {role === "founder" && <GoalPick value={goal} onChange={setGoal} />}
-              <Questions role={role} goal={goal} values={preset ? { service: preset } : undefined} />
-
-              {chosen(role, goal) && (<>
-              <Confirmations role={role} />
-
-              <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
-                <button type="submit" disabled={state === "sending"} className="pill pill-blue">{state === "sending" ? "Sending…" : "Request a conversation"}</button>
-                {state === "error" && <span className="text-[13px] text-red-700">That didn’t send. Please email {CONTACT_EMAIL}.</span>}
-              </div>
-              </>)}
-            </form>
-          )}
+          <div className="mt-8"><ApplicationForm role={role} goal={goal} service={preset} submitLabel="Request a conversation" /></div>
         </div>
 
         <aside className="lg:col-span-5">

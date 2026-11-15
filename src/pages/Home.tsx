@@ -10,6 +10,8 @@ import { investments } from "@/data/investments";
 import { menus } from "@/data/menus";
 import { Link } from "react-router-dom";
 import { useTitle } from "@/lib/useTitle";
+import ApplicationForm from "@/components/ApplicationForm";
+import { PORTAL_ON, loginFor } from "@/lib/portal";
 
 function Hero() {
   return (
@@ -155,6 +157,68 @@ function ServicesHome() {
   );
 }
 
+/** Who applies, and what happens after. Every statement here restates the Investor Access, Submit an Opportunity and Contact pages. */
+const applicants = [
+  { title: "Investors", text: "Family offices, institutions, fund managers and other professional or accredited investors who want to see opportunities that fit their mandate." },
+  { title: "Founders", text: "Companies raising a late-stage or pre-IPO round, arranging liquidity for existing holders, or looking for advice on fundraising, M&A, cap table or valuation." },
+  { title: "Sponsors and intermediaries", text: "Shareholders, real estate sponsors, fund managers and advisers introducing a company, a position or a transaction, with the authority to do so." },
+];
+const next = [
+  { title: "We review your application", text: "A senior member of the team looks at the objective, your authority, the jurisdiction, the timing, the size and how ready the information is." },
+  { title: "A first conversation", text: "If there is a fit, we arrange a call on the commercial objective, the timetable and the information needed for a proper review." },
+  { title: "Terms in writing", text: "Confidentiality is agreed before specific opportunities or documents are shared, and any engagement is set out in writing before work starts or a commitment is made." },
+];
+
+function Apply() {
+  return (
+    <section id="apply" className="scroll-mt-24 border-t border-rule py-10">
+      <div className="eyebrow mb-1">Apply</div>
+      <h2 className="display text-4xl sm:text-5xl">Apply to Velero Capital</h2>
+      <div className="mt-8 grid grid-cols-1 gap-x-12 gap-y-12 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <p className="max-w-lg text-[15px] leading-relaxed text-ink/80">Velero Capital accepts applications from investors, founders and sponsors. Applications are reviewed as they arrive, each one by a senior member of the team, and opportunities are shared only with eligible investors whose mandate they fit.</p>
+
+          <h3 className="display mt-10 text-2xl">Who should apply</h3>
+          <ul className="mt-3">
+            {applicants.map((a) => (
+              <li key={a.title} className="border-t border-rule py-3.5">
+                <div className="text-[14px] font-semibold">{a.title}</div>
+                <p className="mt-1 text-[13px] leading-relaxed text-ink/75">{a.text}</p>
+              </li>
+            ))}
+          </ul>
+
+          <h3 className="display mt-10 text-2xl">What happens after you apply</h3>
+          <ol className="mt-3">
+            {next.map((s, i) => (
+              <li key={s.title} className="flex gap-4 border-t border-rule py-3.5">
+                <span className="display w-7 shrink-0 text-xl text-blue">{String(i + 1).padStart(2, "0")}</span>
+                <span>
+                  <span className="block text-[14px] font-semibold">{s.title}</span>
+                  <span className="mt-1 block text-[13px] leading-relaxed text-ink/75">{s.text}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+
+          <p className="mt-8 text-[13px] leading-relaxed text-ink/70">We decline most of what we see, and we say so promptly. A decline is not a judgement on the business, only on fit with what we do. Nothing here is an offer, and access or an allocation is never guaranteed; see <Link to="/legal/" className="textlink">legal and disclosures</Link>.</p>
+          <p className="mt-4 text-[13px] leading-relaxed text-ink/70">
+            Not ready to apply? Read how <Link to="/investor-access/" className="textlink">investor access</Link> works, or how to <Link to="/submit-an-opportunity/" className="textlink">submit an opportunity</Link>.
+            {PORTAL_ON && <> To save a draft and follow your application’s progress, <Link to={loginFor("/account/")} className="textlink">apply with an account</Link>.</>}
+          </p>
+        </div>
+
+        <div className="lg:col-span-7">
+          <div className="rounded-lg border border-rule bg-white/60 p-5 sm:p-8">
+            <p className="mb-6 text-[13px] leading-relaxed text-ink/70">Choose the option that describes you and we will ask only what is relevant. Please do not send confidential documents through this form.</p>
+            <ApplicationForm />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function CTA() {
   return (
     <section className="rule pb-44 pt-16 text-center sm:pb-52 sm:pt-24">
@@ -177,6 +241,7 @@ export default function Home() {
         <RealEstate />
         <Portfolio />
         <ServicesHome />
+        <Apply />
         <CTA />
       </div>
       <ScrollLine />
