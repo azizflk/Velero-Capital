@@ -54,18 +54,23 @@ function MegaPanel({ menu, onPick }: { menu: Menu; onPick: () => void }) {
   );
 }
 
-/** The filled button in the header: signing in, or the account once signed in. */
+/** The filled button in the header: “Login”, or once signed in the address it was done with. */
 function AccountButton({ to, label, email }: { to: string; label: string; email?: string }) {
+  // Signed in, it only says who is signed in: a label, not a link. Apply leads into the account area.
+  if (email) {
+    return (
+      <span title={`Signed in as ${email}`} className="pill pill-blue pill-cta pill-static">
+        <span className="sr-only">Signed in as </span>
+        {/* Phones have no room for an address: a person icon there, and the address heads the menu instead. */}
+        <svg aria-hidden="true" width="15" height="20" viewBox="0 -2 16 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="sm:hidden"><circle cx="8" cy="5.5" r="3" /><path d="M2.5 14.5c.8-2.9 3-4.5 5.5-4.5s4.7 1.6 5.5 4.5" /></svg>
+        {/* A long address is cut short with an ellipsis; the full one is in the tooltip. */}
+        <span className="hidden max-w-[13rem] truncate sm:block">{email}</span>
+      </span>
+    );
+  }
   return (
-    <Link to={to} title={email ? `Signed in as ${email}` : undefined} aria-label={email ? `Your account, signed in as ${email}` : undefined} className="pill pill-blue pill-cta group/cta">
-      {email ? (
-        <>
-          {/* Phones have no room for an address: a person icon there, and the address heads the menu instead. */}
-          <svg aria-hidden="true" width="15" height="20" viewBox="0 -2 16 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="sm:hidden"><circle cx="8" cy="5.5" r="3" /><path d="M2.5 14.5c.8-2.9 3-4.5 5.5-4.5s4.7 1.6 5.5 4.5" /></svg>
-          {/* A long address is cut short with an ellipsis; the full one is in the tooltip. */}
-          <span className="hidden max-w-[13rem] truncate sm:block">{label}</span>
-        </>
-      ) : label}
+    <Link to={to} className="pill pill-blue pill-cta group/cta">
+      {label}
       <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="hidden transition-transform duration-200 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 motion-reduce:transition-none motion-reduce:transform-none min-[400px]:block">
         <path d="M1.5 8.5 8.5 1.5M3 1.5h5.5V7" />
       </svg>
@@ -159,10 +164,10 @@ export default function Nav() {
           <div className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-rule lg:hidden">
             <div className="wrap py-2">
               {email && (
-                <Link to="/account/" onClick={() => setOpen(false)} className="block border-b border-rule py-3 sm:hidden">
+                <div className="border-b border-rule py-3 sm:hidden">
                   <span className="block text-[12px] text-ink/60">Signed in as</span>
                   <span className="block truncate text-[15px] font-medium text-blue">{email}</span>
-                </Link>
+                </div>
               )}
               {/* First in the list, where it is seen at once and nothing at the foot of the screen can cover it. */}
               {nav.map((item) => (
