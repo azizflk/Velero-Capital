@@ -89,7 +89,13 @@ export default function ScrollLine() {
         start = { x: Math.round(end.x - rr.left), y: Math.round(end.y - rr.top) };
       }
 
-      const pts: Pt[] = [start, { x: start.x, y: tops[0] }, { x: leftX, y: tops[0] }];
+      // Where the firm figures sit between the drawing and the first section, the line turns before them and
+      // runs down the page edge, so it never crosses the row.
+      const figures = root.querySelector<HTMLElement>("[data-hero-stats]");
+      const figuresTop = figures ? Math.round(figures.getBoundingClientRect().top - rr.top) : 0;
+      const pts: Pt[] = figures && figuresTop > start.y - 4 && figuresTop < tops[0]
+        ? [start, { x: start.x, y: Math.max(start.y, figuresTop - 16) }, { x: leftX, y: Math.max(start.y, figuresTop - 16) }, { x: leftX, y: tops[0] }]
+        : [start, { x: start.x, y: tops[0] }, { x: leftX, y: tops[0] }];
       let x = leftX;
       for (let i = 1; i < tops.length; i++) {
         pts.push({ x, y: tops[i] }); // down this edge to the next divider

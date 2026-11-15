@@ -207,7 +207,7 @@ export default function VeleroStory({ className = "" }: { className?: string }) 
   const box = useRef<HTMLDivElement>(null);
 
   // The line continues down the page from the end of this drawing, so the drawing must be whole first.
-  // When the stats row ($350M+) comes into view, stop the loop and ink the rest of the line in quickly from
+  // When the sections below the hero come into view, stop the loop and ink the rest of the line in quickly from
   // wherever it had reached, then announce it so the scroll line can pick up from a finished picture.
   useEffect(() => {
     const el = box.current;
@@ -216,8 +216,8 @@ export default function VeleroStory({ className = "" }: { className?: string }) 
     let timer: ReturnType<typeof setTimeout> | undefined;
     const finish = () => {
       if (done) return;
-      const mark = document.querySelector("[data-scroll-sections] [data-stats]");
-      // Not yet: the stats row is still below the fold. (Without one, fall back to any real scroll.)
+      const mark = document.querySelector("[data-scroll-sections]");
+      // Not yet: the sections are still below the fold. (Without any, fall back to any real scroll.)
       if (mark ? mark.getBoundingClientRect().top > window.innerHeight * 0.85 : window.scrollY < 24) return;
       done = true;
       window.removeEventListener("scroll", finish);

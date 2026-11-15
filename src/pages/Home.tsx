@@ -14,9 +14,13 @@ import { useTitle } from "@/lib/useTitle";
 function Hero() {
   return (
     <section className="wrap">
-      <div className="grid grid-cols-1 items-end gap-10 py-10 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-12 lg:gap-8">
-        <div className="fade-in order-2 lg:col-span-7 lg:col-start-6 lg:self-center">
-          <VeleroStory className="mx-auto w-full max-w-md text-ink lg:max-w-none" />
+      {/* Two rows on wide screens: the headline beside the drawing, then the firm figures closing the first screen. */}
+      <div className="grid grid-cols-1 items-end gap-10 py-10 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-12 lg:grid-rows-[1fr_auto] lg:gap-8 lg:pb-6">
+        <div className="fade-in order-3 lg:order-2 lg:col-span-7 lg:col-start-6 lg:self-center">
+          {/* The drawing takes the height the figures leave, so they stay above the fold on short screens too. */}
+          <div className="mx-auto lg:mr-0" style={{ maxWidth: "max(22rem, calc((100vh - 23.5rem) * 1.096))" }}>
+            <VeleroStory className="mx-auto w-full max-w-md text-ink lg:max-w-none" />
+          </div>
         </div>
         <div className="fade-in order-1 lg:col-span-5 lg:col-start-1">
           <div className="eyebrow">Velero Capital</div>
@@ -25,6 +29,7 @@ function Hero() {
           <p className="mt-3 text-[13px] font-semibold">Private-market opportunities. Institutional discipline.</p>
           <div className="mt-6 flex flex-wrap gap-3"><Button to="/investor-access/" variant="blue">Investor Access</Button><Button to="/capital/">Explore Our Strategies</Button><Button to="/submit-an-opportunity/">Submit an Opportunity</Button></div>
         </div>
+        <div className="order-2 lg:order-3 lg:col-span-12" data-hero-stats><Stats hero /></div>
       </div>
     </section>
   );
@@ -47,8 +52,7 @@ function WhyUs() {
           <p className="mt-2 text-[13px] leading-relaxed text-ink/80">Family offices and institutional investors in Dubai, San Francisco and beyond, each with a defined mandate, so that what we share is relevant and handled with discretion.</p>
         </div>
       </div>
-      <div className="mt-12"><Stats /></div>
-      <div className="mt-10"><LogoWall caption="Access to Rounds Led by Leading VCs" rows={coInvestors} /></div>
+      <div className="mt-12"><LogoWall caption="Access to Rounds Led by Leading VCs" rows={coInvestors} /></div>
     </Section>
   );
 }
