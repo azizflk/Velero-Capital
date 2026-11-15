@@ -1,6 +1,7 @@
 import { investments } from "./investments";
 import { services } from "./services";
 import { sectors } from "./solutions";
+import { team } from "./site";
 
 export type SearchDoc = { title: string; text: string; to: string; section: string };
 
@@ -13,6 +14,7 @@ export const searchIndex: SearchDoc[] = [
   ...investments.map((i) => ({ section: "Capital", title: i.label, text: `${i.summary} ${i.points.map((p) => p.title).join(", ")}.`, to: i.path })),
   { section: "Capital", title: "How it works", text: "Sourcing, diligence, structuring, closing and reporting. Direct holdings and deal-by-deal vehicles.", to: "/capital/#process" },
   { section: "Company", title: "About Velero Capital", text: "Private investment firm headquartered in Dubai with an office in San Francisco. Network of investors, industry experts, dealmakers and operational leaders.", to: "/company/" },
+  { section: "Company", title: "Team", text: `The people behind every mandate. ${team.map((m) => `${m.name}, ${m.role}`).join(". ")}.`, to: "/team/" },
   { section: "Company", title: "The name", text: "Velero means sailing vessel in Spanish. The name reflects our role in navigating private markets and connecting capital with select investment opportunities.", to: "/company/#name" },
   { section: "Company", title: "Vision and mission", text: "The trusted route into private markets for family offices and institutions. Bridge the gap between bold ideas and strategic capital.", to: "/company/#vision" },
   { section: "Company", title: "Core values", text: "Innovation-first, integrity and trust, global connectivity, agility, founder-focused, excellence.", to: "/company/#values" },

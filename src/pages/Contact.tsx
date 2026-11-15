@@ -1,83 +1,10 @@
-import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { S, gap, row } from "@/components/VeleroStory";
+import { Confirmations, GoalPick, Questions, RolePick, GOALS, ROLES, about, chosen, collect, services, type Goal, type Role } from "@/components/EnquiryForm";
 import { CONTACT_EMAIL, offices } from "@/data/site";
 import { submitForm } from "@/lib/forms";
 import { useTitle } from "@/lib/useTitle";
-
-type Role = "investor" | "founder" | "sponsor";
-const ROLES: Role[] = ["investor", "founder", "sponsor"];
-type Goal = "raise" | "services";
-const GOALS: Goal[] = ["raise", "services"];
-
-const sponsorRoles = ["Company / issuer", "Existing shareholder", "Real estate sponsor, developer or owner", "Fund manager (GP)", "Adviser, placement agent or introducer", "Other"];
-const opportunityTypes = ["Primary round", "Secondary block of shares", "Real estate transaction", "Fund interest (LP stake)", "Other"];
-const authorities = ["Owner or principal", "Authorised representative of the principal", "Introducer with a written mandate", "Introducer without a mandate yet"];
-const investorTypes = ["Family office", "Institutional investor", "Fund or asset manager", "Venture or private equity firm", "Individual professional investor", "Other"];
-const strategies = ["Late-Stage & Pre-IPO", "Secondaries", "Real Estate", "Co-Investments & Syndicates"];
-const tickets = ["Under USD 1m", "USD 1m to 5m", "USD 5m to 20m", "USD 20m to 50m", "USD 50m+", "Varies by opportunity"];
-const horizons = ["Ready to allocate now", "Within 3 months", "Within 6 to 12 months", "Exploring"];
-
-const stages = ["Seed", "Series A", "Series B", "Series C or later", "Pre-IPO", "Real estate project", "Other"];
-const raises = ["Under USD 5m", "USD 5m to 20m", "USD 20m to 50m", "USD 50m to 100m", "USD 100m+", "Not yet determined"];
-const services = ["Fundraising Advisory", "Corporate Development", "M&A Advisory", "Cap Table & Equity Advisory", "Valuation & Modelling", "Joint Ventures & Partnerships", "Strategic Introductions", "Market Entry & Trade Access", "Legal & Advisory Coordination", "Cross-Border Relationship Management"];
-const timings = ["Under 30 days", "30 to 90 days", "3 to 6 months", "6 to 12 months", "Planning stage"];
-const materials = ["Financial model and data room", "Financial model and investor materials", "Historical financial statements", "Initial company or project summary", "Preparation required"];
-
-const box = "w-full rounded-md border border-ink/20 bg-white/70 px-3.5 py-2.5 text-[15px] text-ink placeholder:text-ink/40 focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue";
-
-function Field({ label, optional, hint, children, wide }: { label: string; optional?: boolean; hint?: string; children: ReactNode; wide?: boolean }) {
-  return (
-    <label className={`block ${wide ? "sm:col-span-2" : ""}`}>
-      <span className="mb-1.5 block text-[13px] font-semibold">{label}{optional && <span className="ml-1.5 font-normal text-ink/50">(optional)</span>}</span>
-      {children}
-      {hint && <span className="mt-1.5 block text-[12px] leading-snug text-ink/55">{hint}</span>}
-    </label>
-  );
-}
-
-function Choice({ name, placeholder, options, defaultValue = "" }: { name: string; placeholder: string; options: string[]; defaultValue?: string }) {
-  return (
-    <select name={name} required defaultValue={defaultValue} className={box}>
-      <option value="" disabled>{placeholder}</option>
-      {options.map((o) => <option key={o} value={o}>{o}</option>)}
-    </select>
-  );
-}
-
-/** Large either/or buttons that decide which questions follow. */
-function Pick<T extends string>({ legend, name, value, onChange, options }: { legend: string; name: string; value: T | null; onChange: (v: T) => void; options: { value: T; title: string; text: string }[] }) {
-  return (
-    <fieldset className="sm:col-span-2">
-      <legend className="mb-2 block text-[13px] font-semibold">{legend}</legend>
-      <div className={`grid gap-3 ${options.length > 2 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
-        {options.map((o) => {
-          const on = value === o.value;
-          return (
-            <label key={o.value} className={`cursor-pointer rounded-md border px-4 py-3.5 transition-colors ${on ? "border-blue bg-blue text-white" : "border-ink/20 bg-white/70 hover:border-blue"}`}>
-              <input type="radio" name={name} value={o.title} checked={on} onChange={() => onChange(o.value)} required className="sr-only" />
-              <span className="display block text-xl">{o.title}</span>
-              <span className={`mt-1 block text-[13px] leading-snug ${on ? "text-white/85" : "text-ink/65"}`}>{o.text}</span>
-            </label>
-          );
-        })}
-      </div>
-    </fieldset>
-  );
-}
-
-function Checks({ legend, name, options }: { legend: string; name: string; options: string[] }) {
-  return (
-    <fieldset className="sm:col-span-2">
-      <legend className="mb-2 block text-[13px] font-semibold">{legend}</legend>
-      <div className="grid gap-2 text-[14px] sm:grid-cols-2">
-        {options.map((o) => (
-          <label key={o} className="flex items-center gap-3 rounded-md border border-ink/20 bg-white/70 px-3.5 py-2.5"><input type="checkbox" name={name} value={o} className="h-4 w-4 accent-[#023ccf]" />{o}</label>
-        ))}
-      </div>
-    </fieldset>
-  );
-}
 
 const cities = [
   { label: "San Francisco", scenes: [S.bridge, gap(20), S.pyramid] },
@@ -136,14 +63,10 @@ export default function Contact() {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    if (data.get("website")) return; // filled only by bots
-    data.delete("website");
+    if (new FormData(e.currentTarget).get("website")) return; // filled only by bots
+    const fields = collect(e.currentTarget);
     setState("sending");
-    const fields: Record<string, string> = {};
-    for (const k of new Set(data.keys())) fields[k] = data.getAll(k).map(String).join(", ");
-    const about = role === "investor" ? "Investor" : role === "sponsor" ? "Opportunity submission" : goal === "raise" ? "Founder raising capital" : "Founder, advisory services";
-    const r = await submitForm(`Website enquiry: ${about}`, fields);
+    const r = await submitForm(`Website enquiry: ${about(role, goal)}`, fields);
     setState(r.ok ? "sent" : "error");
   };
 
@@ -159,8 +82,8 @@ export default function Contact() {
           <div className="mt-10 grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-7">
               <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">Let’s talk</div>
-              <h1 className="display mt-3 text-5xl sm:text-6xl lg:text-7xl">We’d like to hear from you</h1>
-              <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/85">Whether you are an investor looking for private-market opportunities, a founder raising capital, or a sponsor introducing a transaction, it starts with a confidential conversation with a senior member of our team.</p>
+              <h1 className="display mt-3 text-5xl sm:text-6xl lg:text-7xl">Connect With Velero</h1>
+              <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/85">Select your profile to explore investment opportunities, access advisory services, or submit a transaction for consideration.</p>
             </div>
             <div className="lg:col-span-5"><Skyline /></div>
           </div>
@@ -182,88 +105,12 @@ export default function Contact() {
           ) : (
             <form onSubmit={onSubmit} className="mt-8 grid gap-5 sm:grid-cols-2">
               <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-              <Pick legend="I am" name="i_am" value={role} onChange={setRole} options={[
-                { value: "investor", title: "An investor", text: "I want to see opportunities that fit my mandate." },
-                { value: "founder", title: "A founder", text: "I want to raise capital or use Velero’s advisory services." },
-                { value: "sponsor", title: "A sponsor or intermediary", text: "I’m introducing a company, a shareholder position or a real estate transaction." },
-              ]} />
+              <RolePick value={role} onChange={setRole} />
+              {role === "founder" && <GoalPick value={goal} onChange={setGoal} />}
+              <Questions role={role} goal={goal} values={preset ? { service: preset } : undefined} />
 
-              {role === "founder" && (
-                <Pick legend="I’m looking to" name="looking_to" value={goal} onChange={setGoal} options={[
-                  { value: "raise", title: "Raise capital", text: "A funding round, a secondary sale or project financing." },
-                  { value: "services", title: "Use our services", text: "Advisory on fundraising, M&A, cap table or valuation." },
-                ]} />
-              )}
-
-              {role === "investor" && (
-                <>
-                  <Field label="Name"><input name="name" required className={box} autoComplete="name" /></Field>
-                  <Field label="Firm / family office"><input name="organisation" required className={box} autoComplete="organization" /></Field>
-                  <Field label="Email"><input name="email" type="email" required className={box} autoComplete="email" /></Field>
-                  <Field label="Phone" optional><input name="phone" type="tel" className={box} autoComplete="tel" /></Field>
-                  <Field label="Investor type"><Choice name="investor_type" placeholder="Select a type…" options={investorTypes} /></Field>
-                  <Field label="Based in"><input name="jurisdiction" required className={box} placeholder="Country or region" /></Field>
-                  <Checks legend="Opportunities I want to see" name="strategies" options={strategies} />
-                  <Field label="Typical ticket size"><Choice name="ticket" placeholder="Select a size…" options={tickets} /></Field>
-                  <Field label="Allocation timing"><Choice name="timing" placeholder="Select timing…" options={horizons} /></Field>
-                  <Field label="Sectors, regions or companies of interest" optional wide><textarea name="interests" rows={4} className={`${box} resize-y`} placeholder="Tell us what you are looking for, and anything you already hold or want to avoid" /></Field>
-                </>
-              )}
-
-              {role === "founder" && goal && (
-                <>
-                  <Field label="Name"><input name="name" required className={box} autoComplete="name" /></Field>
-                  <Field label="Company"><input name="organisation" required className={box} autoComplete="organization" /></Field>
-                  <Field label="Email"><input name="email" type="email" required className={box} autoComplete="email" /></Field>
-                  <Field label="Phone" optional><input name="phone" type="tel" className={box} autoComplete="tel" /></Field>
-                  <Field label="Your role"><input name="role" required className={box} placeholder="Founder, CEO, CFO…" /></Field>
-                  <Field label="Company based in"><input name="jurisdiction" required className={box} placeholder="Country or region" /></Field>
-                  <Field label="Sector"><input name="sector" required className={box} placeholder="AI, fintech, real estate…" /></Field>
-                  <Field label="Website" optional><input name="company_website" className={box} placeholder="company.com" /></Field>
-                  {goal === "raise" ? (
-                    <>
-                      <Field label="Stage"><Choice name="stage" placeholder="Select a stage…" options={stages} /></Field>
-                      <Field label="Amount you are raising"><Choice name="raise" placeholder="Select an amount…" options={raises} /></Field>
-                      <Field label="Target timing"><Choice name="timing" placeholder="Select timing…" options={timings} /></Field>
-                      <Field label="Materials available"><Choice name="materials" placeholder="Select readiness…" options={materials} /></Field>
-                      <Field label="Traction and existing investors" optional wide><input name="facts" className={box} placeholder="Revenue, growth, last round, lead investors or another relevant measure" /></Field>
-                      <Field label="The raise and use of funds" wide><textarea name="objective" required rows={5} className={`${box} resize-y`} placeholder="Describe the round, what the capital is for and the kind of investor you want" /></Field>
-                    </>
-                  ) : (
-                    <>
-                      <Field label="Service"><Choice name="service" placeholder="Select a service…" options={services} defaultValue={preset} /></Field>
-                      <Field label="Target timing"><Choice name="timing" placeholder="Select timing…" options={timings} /></Field>
-                      <Field label="Relevant financial facts" optional wide><input name="facts" className={box} placeholder="Revenue, EBITDA, last valuation or another relevant measure" /></Field>
-                      <Field label="What you need help with" wide><textarea name="objective" required rows={5} className={`${box} resize-y`} placeholder="Describe the situation, the decision you face and the outcome you want" /></Field>
-                    </>
-                  )}
-                </>
-              )}
-
-              {role === "sponsor" && (
-                <>
-                  <Field label="Name"><input name="name" required className={box} autoComplete="name" /></Field>
-                  <Field label="Firm"><input name="organisation" required className={box} autoComplete="organization" /></Field>
-                  <Field label="Email"><input name="email" type="email" required className={box} autoComplete="email" /></Field>
-                  <Field label="Phone" optional><input name="phone" type="tel" className={box} autoComplete="tel" /></Field>
-                  <Field label="Your role"><Choice name="sponsor_role" placeholder="Select your role…" options={sponsorRoles} /></Field>
-                  <Field label="Your authority"><Choice name="authority" placeholder="Select…" options={authorities} /></Field>
-                  <Field label="Opportunity type"><Choice name="opportunity_type" placeholder="Select a type…" options={opportunityTypes} /></Field>
-                  <Field label="Size sought"><Choice name="raise" placeholder="Select an amount…" options={raises} /></Field>
-                  <Field label="Company or asset based in"><input name="jurisdiction" required className={box} placeholder="Country or region" /></Field>
-                  <Field label="Target timing"><Choice name="timing" placeholder="Select timing…" options={timings} /></Field>
-                  <Field label="Materials available" wide><Choice name="materials" placeholder="Select readiness…" options={materials} /></Field>
-                  <Field label="The opportunity" wide><textarea name="objective" required rows={5} className={`${box} resize-y`} placeholder="The company or asset, its stage or status, the size sought, who is involved and any transfer restrictions or consents. Please do not include confidential documents." /></Field>
-                </>
-              )}
-
-              {(role === "investor" || role === "sponsor" || (role === "founder" && goal)) && (<>
-              <div className="space-y-3 text-[13px] sm:col-span-2">
-                {role === "investor" && <label className="flex items-start gap-3"><input type="checkbox" name="confirm_professional" value="yes" required className="mt-0.5 h-4 w-4 accent-[#023ccf]" /><span>I confirm that I am, or represent, a professional or accredited investor in my jurisdiction.</span></label>}
-                <label className="flex items-start gap-3"><input type="checkbox" name="confirm_authority" value="yes" required className="mt-0.5 h-4 w-4 accent-[#023ccf]" /><span>I confirm that I have authority to make this enquiry, or am acting for an authorised decision-maker.</span></label>
-                <label className="flex items-start gap-3"><input type="checkbox" name="confirm_terms" value="yes" required className="mt-0.5 h-4 w-4 accent-[#023ccf]" /><span>I understand that any engagement is subject to due diligence and to a written scope, responsibilities and commercial terms.</span></label>
-                <label className="flex items-start gap-3"><input type="checkbox" name="confirm_privacy" value="yes" required className="mt-0.5 h-4 w-4 accent-[#023ccf]" /><span>I agree to the <Link to="/privacy/" className="textlink">privacy policy</Link> and have read the <Link to="/legal/" className="textlink">legal and disclosures</Link> page.</span></label>
-              </div>
+              {chosen(role, goal) && (<>
+              <Confirmations role={role} />
 
               <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
                 <button type="submit" disabled={state === "sending"} className="pill pill-blue">{state === "sending" ? "Sending…" : "Request a conversation"}</button>

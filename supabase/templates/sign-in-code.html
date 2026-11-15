@@ -1,0 +1,18 @@
+<!--
+  Sign-in email for velero.capital accounts.
+  Paste this into BOTH templates in Supabase → Authentication → Emails:
+    "Magic Link"      (someone who already has an account)
+    "Confirm signup"  (someone signing in for the first time)
+  Subject for both:   Your Velero Capital sign-in code: {{ .Token }}
+  The code matters: company mail filters open links before the reader does, which uses a link up.
+-->
+<div style="margin:0;padding:32px 16px;background:#f3f4ef;font-family:Arial,Helvetica,sans-serif;color:#1f1f1f;">
+  <div style="max-width:480px;margin:0 auto;background:#ffffff;border:1px solid #dcdcd6;border-radius:12px;padding:32px;">
+    <div style="font-size:13px;font-weight:bold;letter-spacing:2px;color:#023ccf;">VELERO CAPITAL</div>
+    <h1 style="margin:18px 0 8px;font-size:22px;line-height:1.25;">Your sign-in code</h1>
+    <p style="margin:0 0 20px;font-size:15px;line-height:1.55;color:#444;">Enter this code on the page where you asked to log in. It works once and expires in one hour.</p>
+    <div style="margin:0 0 20px;padding:16px;border:1px solid #dcdcd6;border-radius:8px;background:#f8f8f5;text-align:center;font-size:30px;font-weight:bold;letter-spacing:8px;">{{ .Token }}</div>
+    <p style="margin:0 0 24px;font-size:15px;line-height:1.55;color:#444;">Or continue with this link: <a href="{{ .ConfirmationURL }}" style="color:#023ccf;">log in to Velero Capital</a>.</p>
+    <p style="margin:0;font-size:12px;line-height:1.55;color:#777;">If you did not ask for this, you can ignore this email; nobody can log in without the code. Velero Capital only writes from official addresses, which you can check at https://velero.capital/verification/.</p>
+  </div>
+</div>

@@ -84,6 +84,7 @@ export const menus: Record<string, Menu> = {
     groups: [
       { title: "About", items: [
         { label: "Inside Velero Capital", to: "/company/", desc: "Who we are, and what the name means." },
+        { label: "Team", to: "/team/", desc: "The people behind every mandate." },
       ] },
       { title: "Work with us", items: [
         { label: "Investor Access", to: "/investor-access/", desc: "For family offices and institutions." },

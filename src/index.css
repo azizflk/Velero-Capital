@@ -30,6 +30,13 @@ body { @apply bg-paper text-ink font-sans antialiased text-[15px] leading-relaxe
 /* Controls */
 .pill { @apply inline-flex items-center gap-2 rounded-full border border-ink px-5 py-2 text-[13px] font-medium text-ink transition-colors hover:bg-ink hover:text-paper focus:outline-none focus-visible:ring-2 focus-visible:ring-blue disabled:opacity-50; }
 .pill-blue { @apply border-blue bg-blue text-white hover:bg-blue-dark hover:border-blue-dark; }
+/* The header's call to action: a little tighter on phones, and a focus ring that stands clear of the blue. */
+.pill-cta { @apply shrink-0 whitespace-nowrap px-3.5 py-1.5 text-[12px] font-semibold duration-200 focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:px-5 sm:py-2 sm:text-[13px]; }
+/* Account area and admin panel: sizes and a quiet outline, as variants so they win over .pill. */
+.pill-wide { @apply w-full justify-center py-3 text-[14px]; }
+.pill-small { @apply px-4 py-1.5; }
+.pill-quiet { @apply border-ink/25 bg-white hover:border-ink hover:bg-white hover:text-ink; }
+.pill-danger { @apply border-red-800/40 text-red-800 hover:border-red-800 hover:bg-red-800 hover:text-white; }
 .field { @apply w-full border-0 border-b border-ink/30 bg-transparent px-0 py-3 text-[15px] text-ink placeholder:text-ink/40 focus:border-blue focus:outline-none focus:ring-0 rounded-none; }
 .field-label { @apply mb-0 block text-[12px] text-ink/60; }
 

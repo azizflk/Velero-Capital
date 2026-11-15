@@ -14,6 +14,7 @@ import Solutions from "@/pages/Solutions";
 import SolutionDetail from "@/pages/SolutionDetail";
 import { sectors } from "@/data/solutions";
 import About from "@/pages/About";
+import Team from "@/pages/Team";
 import Contact from "@/pages/Contact";
 import Verification from "@/pages/Verification";
 import NotFound from "@/pages/NotFound";
@@ -22,9 +23,12 @@ import Legal from "@/pages/Legal";
 import InvestorAccess from "@/pages/InvestorAccess";
 import SubmitOpportunity from "@/pages/SubmitOpportunity";
 import CookieBanner from "@/components/CookieBanner";
+import { PORTAL_ON, isAdminHost, isPortalPath } from "@/lib/portal";
 
 // The walkthrough film draws real site content, so it loads in its own chunk.
 const Walkthrough = lazy(() => import("@/pages/Walkthrough"));
+// The login page, the account area and the admin panel carry the database client, so they load on their own too.
+const Portal = lazy(() => import("@/portal/Portal"));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -42,6 +46,8 @@ export default function App() {
   const { pathname } = useLocation();
   // The walkthrough film stands alone: no header, footer or cookie banner around it.
   if (pathname.replace(/\/+$/, "") === "/walkthrough") return <Suspense fallback={<div style={{ position: "fixed", inset: 0, background: "#023ccf" }} />}><Walkthrough /></Suspense>;
+  // Signed-in pages stand alone too. On the admin address every path belongs to the panel.
+  if (PORTAL_ON && (isPortalPath(pathname) || isAdminHost())) return <Suspense fallback={<div className="min-h-screen bg-paper" />}><Portal /></Suspense>;
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
@@ -71,7 +77,7 @@ export default function App() {
           <Route path="/web3-and-crypto-marketing" element={<Navigate to="/services/" replace />} />
           <Route path="/advisory" element={<Navigate to="/services/" replace />} />
           <Route path="/about-us" element={<Navigate to="/company/" replace />} />
-          <Route path="/team" element={<Navigate to="/company/" replace />} />
+          <Route path="/team" element={<Team />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/privacy" element={<Privacy />} />

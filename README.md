@@ -52,6 +52,23 @@ The build prerenders each route (`scripts/prerender.mjs`, using `src/entry-serve
 - Site-wide Organization and WebSite data is in `index.html`; keep it in step with `src/data/site.ts`.
 - `public/robots.txt` names the AI crawlers that are allowed. Details and the remaining owner-side steps: `docs/seo-geo-2026-11.md`.
 
+## Accounts and the admin panel
+
+Visitors can log in (email code or Google) at `/login/`, start an application in `/account/`, save it as a draft, submit it and follow its stage. Staff review submitted applications at `admin.velero.capital`. The public form on `/contact-us/` still works without an account.
+
+| What | Where |
+| --- | --- |
+| Tables, triggers and every access rule | `supabase/migrations/` |
+| The questions (shared with the public form) | `src/components/EnquiryForm.tsx` |
+| Login, account area, admin panel | `src/portal/` (its own bundle; public pages never load it) |
+| Sign-in email (paste into Supabase) | `supabase/templates/sign-in-code.html` |
+| Addresses served by the app shell, admin host rules | `vercel.json` |
+
+- Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_KEY` (the publishable key) in Vercel. Without them the build has no "Log in" link and the account pages do not exist.
+- Access is enforced in the database: applicants reach only their own rows, and only drafts can be edited; admins (addresses in `public.admins`) see submitted applications, never drafts. The first admin is added with SQL; after that the panel's Admins tab manages the list.
+- In Supabase → Authentication: add `https://velero.capital/account/` and `https://admin.velero.capital/admin/` to the redirect URLs, enable Google, set custom SMTP, and paste the sign-in email template.
+- The admin panel answers only on a host that starts with `admin.` — locally, `http://admin.localhost:5180/`.
+
 ## Notes
 
 - Fonts are loaded from Google Fonts: Barlow Condensed (headlines), Schibsted Grotesk (body), Newsreader (pull quotes). Swap them in `index.html` and the `@theme` block of `src/index.css`.

@@ -1,9 +1,20 @@
 import { SidebarPage } from "@/components/Layout";
 import { team } from "@/data/site";
-import { useTitle } from "@/lib/useTitle";
+import { ORG_ID, ORIGIN, useTitle } from "@/lib/useTitle";
 
 export default function Team() {
-  useTitle("Team", "The operators behind every Velero Capital mandate.");
+  useTitle("Team", "Meet the Velero Capital team: the people who source, review and structure private-market opportunities and advise companies on their transactions.", {
+    full: "Our Team | Velero Capital",
+    crumbs: [{ name: "Company", path: "/company/" }],
+    jsonLd: team.map((m) => ({
+      "@type": "Person",
+      name: m.name,
+      jobTitle: m.role,
+      worksFor: { "@id": ORG_ID },
+      ...("photo" in m && m.photo ? { image: ORIGIN + m.photo } : {}),
+      ...("linkedin" in m && m.linkedin ? { sameAs: [m.linkedin] } : {}),
+    })),
+  });
   return (
     <SidebarPage title="Team" intro="This is the team behind the curtain. The operators behind every mandate.">
       <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">

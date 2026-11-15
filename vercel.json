@@ -13,6 +13,17 @@
       "permanent": true
     },
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.velero.capital"
+        }
+      ],
+      "destination": "/admin/",
+      "permanent": false
+    },
+    {
       "source": "/otc-investment",
       "destination": "/secondaries/",
       "permanent": true
@@ -83,16 +94,6 @@
       "permanent": true
     },
     {
-      "source": "/team",
-      "destination": "/company/",
-      "permanent": true
-    },
-    {
-      "source": "/team/",
-      "destination": "/company/",
-      "permanent": true
-    },
-    {
       "source": "/transformations",
       "destination": "/services/",
       "permanent": true
@@ -151,6 +152,56 @@
     {
       "source": "/walkthrough/",
       "destination": "/app.html"
+    },
+    {
+      "source": "/login",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/login/",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/account",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/account/",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/account/(.*)",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/admin",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.velero.capital"
+        }
+      ],
+      "destination": "/app.html"
+    },
+    {
+      "source": "/admin/",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.velero.capital"
+        }
+      ],
+      "destination": "/app.html"
+    },
+    {
+      "source": "/admin/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.velero.capital"
+        }
+      ],
+      "destination": "/app.html"
     }
   ],
   "headers": [
@@ -187,6 +238,114 @@
         {
           "key": "X-Robots-Tag",
           "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/login",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "same-origin"
+        }
+      ]
+    },
+    {
+      "source": "/login/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "same-origin"
+        }
+      ]
+    },
+    {
+      "source": "/account",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "same-origin"
+        }
+      ]
+    },
+    {
+      "source": "/account/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "same-origin"
+        }
+      ]
+    },
+    {
+      "source": "/account/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "same-origin"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.velero.capital"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "same-origin"
         }
       ]
     }

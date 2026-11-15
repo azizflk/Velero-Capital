@@ -5,6 +5,9 @@ const ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
 // The key is designed to be public, so it can live in the client bundle.
 const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
+/** True when enquiries are delivered by a service, rather than by opening the visitor's own mail client. */
+export const DELIVERS = !!(WEB3FORMS_KEY || ENDPOINT);
+
 export type SubmitResult = { ok: true; via: "endpoint" | "mailto" } | { ok: false; error: string };
 
 async function post(url: string, payload: Record<string, string>): Promise<SubmitResult> {

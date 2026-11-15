@@ -4,6 +4,7 @@ import { nav } from "@/data/site";
 import { groups } from "@/data/solutions";
 import { menus, type Menu } from "@/data/menus";
 import Search from "./Search";
+import { PORTAL_ON, SIGNED_IN_KEY } from "@/lib/portal";
 
 const path = (to: string) => to.split("#")[0];
 
@@ -53,6 +54,23 @@ function MegaPanel({ menu, onPick }: { menu: Menu; onPick: () => void }) {
   );
 }
 
+/** The one filled button in the header: it opens the enquiry form on the contact page. */
+function GetStarted({ pathname }: { pathname: string }) {
+  return (
+    <Link
+      to="/contact-us/"
+      // Already on the form's page, a click brings it back to the top instead of doing nothing.
+      onClick={() => { if (pathname.replace(/\/+$/, "") === "/contact-us") window.scrollTo({ top: 0, behavior: "smooth" }); }}
+      className="pill pill-blue pill-cta group/cta"
+    >
+      Get Started
+      <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 motion-reduce:transition-none motion-reduce:transform-none">
+        <path d="M1.5 8.5 8.5 1.5M3 1.5h5.5V7" />
+      </svg>
+    </Link>
+  );
+}
+
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [searching, setSearching] = useState(false);
@@ -60,6 +78,10 @@ export default function Nav() {
   const [shut, setShut] = useState(false);
   const { pathname } = useLocation();
   const closeSearch = useCallback(() => setSearching(false), []);
+  // Someone already signed in on this browser is offered their account rather than the login page.
+  const [signedIn, setSignedIn] = useState(false);
+  useEffect(() => { try { setSignedIn(!!localStorage.getItem(SIGNED_IN_KEY)); } catch { /* storage blocked: keep “Log in” */ } }, [pathname]);
+  const account = PORTAL_ON ? { to: signedIn ? "/account/" : "/login/", label: signedIn ? "My account" : "Log in" } : null;
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); setSearching(true); } };
@@ -82,6 +104,7 @@ export default function Nav() {
             <img src="/images/logo-outline.png" alt="" aria-hidden="true" width={935} height={403} className="pointer-events-none absolute left-0 top-0 h-12 w-auto max-w-none opacity-0 transition-opacity duration-200 group-hover/logo:opacity-100 group-focus-visible/logo:opacity-100" />
           </Link>
 
+          <div className="flex items-center gap-2 sm:gap-3 lg:gap-6 xl:gap-8">
           <nav className="hidden items-center gap-6 lg:flex xl:gap-8" aria-label="Main" onMouseLeave={() => setShut(false)}>
             {nav.map((item) => {
               const menu = menus[item.label];
@@ -105,18 +128,24 @@ export default function Nav() {
               );
             })}
             <button onClick={() => setSearching(true)} className="navlink">Search</button>
+            {account && <Link to={account.to} className="navlink">{account.label}</Link>}
           </nav>
 
-          <button className="p-2 lg:hidden" onClick={() => setOpen((v) => !v)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
+          <GetStarted pathname={pathname} />
+
+          <button className="-mr-2 p-2 lg:hidden" onClick={() => setOpen((v) => !v)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
               {open ? <path d="M6 6l12 12M18 6 6 18" /> : <path d="M3 8h18M3 16h18" />}
             </svg>
           </button>
+          </div>
         </div>
 
         {open && (
           <div className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-rule lg:hidden">
             <div className="wrap py-2">
+              {/* First in the list, where it is seen at once and nothing at the foot of the screen can cover it. */}
+              {account && <Link to={account.to} onClick={() => setOpen(false)} className="flex items-center justify-between border-b border-rule py-3 text-lg font-medium text-blue">{account.label} <span aria-hidden>→</span></Link>}
               {nav.map((item) => (
                 <div key={item.label} className="border-b border-rule">
                   <NavLink to={item.to} className="block py-3 text-lg font-medium">{item.label}</NavLink>
