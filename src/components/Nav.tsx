@@ -54,16 +54,11 @@ function MegaPanel({ menu, onPick }: { menu: Menu; onPick: () => void }) {
   );
 }
 
-/** The one filled button in the header: it opens the enquiry form on the contact page. */
-function GetStarted({ pathname }: { pathname: string }) {
+/** The one filled button in the header: the way into the account area. */
+function AccountButton({ to, label }: { to: string; label: string }) {
   return (
-    <Link
-      to="/contact-us/"
-      // Already on the form's page, a click brings it back to the top instead of doing nothing.
-      onClick={() => { if (pathname.replace(/\/+$/, "") === "/contact-us") window.scrollTo({ top: 0, behavior: "smooth" }); }}
-      className="pill pill-blue pill-cta group/cta"
-    >
-      Get Started
+    <Link to={to} className="pill pill-blue pill-cta group/cta">
+      {label}
       <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-200 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 motion-reduce:transition-none motion-reduce:transform-none">
         <path d="M1.5 8.5 8.5 1.5M3 1.5h5.5V7" />
       </svg>
@@ -80,8 +75,8 @@ export default function Nav() {
   const closeSearch = useCallback(() => setSearching(false), []);
   // Someone already signed in on this browser is offered their account rather than the login page.
   const [signedIn, setSignedIn] = useState(false);
-  useEffect(() => { try { setSignedIn(!!localStorage.getItem(SIGNED_IN_KEY)); } catch { /* storage blocked: keep “Log in” */ } }, [pathname]);
-  const account = PORTAL_ON ? { to: signedIn ? "/account/" : "/login/", label: signedIn ? "My account" : "Log in" } : null;
+  useEffect(() => { try { setSignedIn(!!localStorage.getItem(SIGNED_IN_KEY)); } catch { /* storage blocked: keep “Login” */ } }, [pathname]);
+  const account = PORTAL_ON ? { to: signedIn ? "/account/" : "/login/", label: signedIn ? "My account" : "Login" } : null;
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); setSearching(true); } };
@@ -128,10 +123,9 @@ export default function Nav() {
               );
             })}
             <button onClick={() => setSearching(true)} className="navlink">Search</button>
-            {account && <Link to={account.to} className="navlink">{account.label}</Link>}
           </nav>
 
-          <GetStarted pathname={pathname} />
+          {account && <AccountButton {...account} />}
 
           <button className="-mr-2 p-2 lg:hidden" onClick={() => setOpen((v) => !v)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -145,7 +139,6 @@ export default function Nav() {
           <div className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-rule lg:hidden">
             <div className="wrap py-2">
               {/* First in the list, where it is seen at once and nothing at the foot of the screen can cover it. */}
-              {account && <Link to={account.to} onClick={() => setOpen(false)} className="flex items-center justify-between border-b border-rule py-3 text-lg font-medium text-blue">{account.label} <span aria-hidden>→</span></Link>}
               {nav.map((item) => (
                 <div key={item.label} className="border-b border-rule">
                   <NavLink to={item.to} className="block py-3 text-lg font-medium">{item.label}</NavLink>
