@@ -50,21 +50,26 @@ export const flow: Status[] = ["submitted", "in_review", "call_scheduled", "clos
 export const day = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "");
 export const dayTime = (iso: string | null) => (iso ? new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "");
 
-const remember = (on: boolean) => { try { if (on) localStorage.setItem(SIGNED_IN_KEY, "1"); else localStorage.removeItem(SIGNED_IN_KEY); } catch { /* storage may be blocked; the header then just says “Log in” */ } };
+const remember = (s: Session | null) => {
+  try {
+    if (s) localStorage.setItem(SIGNED_IN_KEY, s.user.email || "1");
+    else localStorage.removeItem(SIGNED_IN_KEY);
+  } catch { /* storage may be blocked; the header then just says “Login” */ }
+};
 
 /** The current sign-in: `undefined` while it is still being read, `null` when nobody is signed in. */
 export function useSession(): Session | null | undefined {
   const [session, setSession] = useState<Session | null | undefined>(undefined);
   useEffect(() => {
     let live = true;
-    supabase.auth.getSession().then(({ data }) => { if (live) { setSession(data.session); remember(!!data.session); } });
-    const { data } = supabase.auth.onAuthStateChange((_event, s) => { setSession(s); remember(!!s); });
+    supabase.auth.getSession().then(({ data }) => { if (live) { setSession(data.session); remember(data.session); } });
+    const { data } = supabase.auth.onAuthStateChange((_event, s) => { setSession(s); remember(s); });
     return () => { live = false; data.subscription.unsubscribe(); };
   }, []);
   return session;
 }
 
-export const signOut = async () => { await supabase.auth.signOut(); remember(false); };
+export const signOut = async () => { await supabase.auth.signOut(); remember(null); };
 
 /** Sets the tab title for a page of the account area. */
 export function usePageTitle(title: string) {

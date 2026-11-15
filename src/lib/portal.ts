@@ -6,7 +6,7 @@ export const PORTAL_ON = !!(import.meta.env.VITE_SUPABASE_URL && import.meta.env
 /** The admin panel answers only on its own address (admin.velero.capital, or admin.localhost while developing). */
 export const isAdminHost = () => typeof location !== "undefined" && /^admin\./.test(location.hostname);
 
-/** Set while someone is signed in on this browser, so the header can say “My account” instead of “Log in”. */
+/** The signed-in address, kept on this browser while someone is signed in, so the header can show it instead of “Login”. */
 export const SIGNED_IN_KEY = "velero-signed-in";
 
 /**

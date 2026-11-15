@@ -55,10 +55,17 @@ function MegaPanel({ menu, onPick }: { menu: Menu; onPick: () => void }) {
 }
 
 /** The filled button in the header: signing in, or the account once signed in. */
-function AccountButton({ to, label }: { to: string; label: string }) {
+function AccountButton({ to, label, email }: { to: string; label: string; email?: string }) {
   return (
-    <Link to={to} className="pill pill-blue pill-cta group/cta">
-      {label}
+    <Link to={to} title={email ? `Signed in as ${email}` : undefined} aria-label={email ? `Your account, signed in as ${email}` : undefined} className="pill pill-blue pill-cta group/cta">
+      {email ? (
+        <>
+          {/* Phones have no room for an address: a person icon there, and the address heads the menu instead. */}
+          <svg aria-hidden="true" width="15" height="20" viewBox="0 -2 16 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="sm:hidden"><circle cx="8" cy="5.5" r="3" /><path d="M2.5 14.5c.8-2.9 3-4.5 5.5-4.5s4.7 1.6 5.5 4.5" /></svg>
+          {/* A long address is cut short with an ellipsis; the full one is in the tooltip. */}
+          <span className="hidden max-w-[13rem] truncate sm:block">{label}</span>
+        </>
+      ) : label}
       <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="hidden transition-transform duration-200 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 motion-reduce:transition-none motion-reduce:transform-none min-[400px]:block">
         <path d="M1.5 8.5 8.5 1.5M3 1.5h5.5V7" />
       </svg>
@@ -79,10 +86,11 @@ export default function Nav() {
   const { pathname } = useLocation();
   const closeSearch = useCallback(() => setSearching(false), []);
   // Someone already signed in on this browser is offered their account rather than the login page.
-  const [signedIn, setSignedIn] = useState(false);
-  useEffect(() => { try { setSignedIn(!!localStorage.getItem(SIGNED_IN_KEY)); } catch { /* storage blocked: keep “Login” */ } }, [pathname]);
+  const [signedIn, setSignedIn] = useState("");
+  useEffect(() => { try { setSignedIn(localStorage.getItem(SIGNED_IN_KEY) ?? ""); } catch { /* storage blocked: keep “Login” */ } }, [pathname]);
+  const email = signedIn.includes("@") ? signedIn : "";
   // Login brings the visitor back to the page they were on; Apply takes them to the questions, signing in first if needed.
-  const account = PORTAL_ON ? { to: signedIn ? "/account/" : loginFor(isPortalPath(pathname) ? "/" : pathname), label: signedIn ? "My account" : "Login" } : null;
+  const account = PORTAL_ON ? { to: signedIn ? "/account/" : loginFor(isPortalPath(pathname) ? "/" : pathname), label: signedIn ? email || "My account" : "Login", email } : null;
   const apply = PORTAL_ON ? (signedIn ? "/account/" : loginFor("/account/")) : null;
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
@@ -101,7 +109,7 @@ export default function Nav() {
         <div className="wrap flex h-20 items-center justify-between">
           {/* Blue logo by default; the outlined version fades in while the pointer (or keyboard focus) is on it. */}
           {/* Already on the home page, a click reloads it fresh instead of doing nothing. */}
-          <Link to="/" className="group/logo relative flex h-12 items-center" aria-label="Velero Capital home" onClick={(e) => { if (pathname.replace(/\/+$/, "") === "") { e.preventDefault(); window.location.assign("/"); } }}>
+          <Link to="/" className="group/logo relative flex h-12 shrink-0 items-center" aria-label="Velero Capital home" onClick={(e) => { if (pathname.replace(/\/+$/, "") === "") { e.preventDefault(); window.location.assign("/"); } }}>
             <img src="/images/logo-blue.png" alt="Velero Capital" width={935} height={403} className="h-9 w-auto transition-opacity min-[360px]:h-10 min-[400px]:h-12 duration-200 group-hover/logo:opacity-0 group-focus-visible/logo:opacity-0" />
             <img src="/images/logo-outline.png" alt="" aria-hidden="true" width={935} height={403} className="pointer-events-none absolute left-0 top-0 h-9 w-auto min-[360px]:h-10 min-[400px]:h-12 max-w-none opacity-0 transition-opacity duration-200 group-hover/logo:opacity-100 group-focus-visible/logo:opacity-100" />
           </Link>
@@ -150,6 +158,12 @@ export default function Nav() {
         {open && (
           <div className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-rule lg:hidden">
             <div className="wrap py-2">
+              {email && (
+                <Link to="/account/" onClick={() => setOpen(false)} className="block border-b border-rule py-3 sm:hidden">
+                  <span className="block text-[12px] text-ink/60">Signed in as</span>
+                  <span className="block truncate text-[15px] font-medium text-blue">{email}</span>
+                </Link>
+              )}
               {/* First in the list, where it is seen at once and nothing at the foot of the screen can cover it. */}
               {nav.map((item) => (
                 <div key={item.label} className="border-b border-rule">
