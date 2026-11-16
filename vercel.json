@@ -142,6 +142,16 @@
       "source": "/stories/",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/team",
+      "destination": "/company/",
+      "permanent": true
+    },
+    {
+      "source": "/team/",
+      "destination": "/company/",
+      "permanent": true
     }
   ],
   "rewrites": [

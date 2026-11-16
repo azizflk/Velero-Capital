@@ -36,7 +36,6 @@ export const nav: NavItem[] = [
     to: "/company/",
     children: [
       { label: "Inside Velero Capital", to: "/company/" },
-      { label: "Team", to: "/team/" },
       { label: "Investor Access", to: "/investor-access/" },
       { label: "Submit an Opportunity", to: "/submit-an-opportunity/" },
       { label: "Account Verification", to: "/verification/" },

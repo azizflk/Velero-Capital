@@ -1,7 +1,7 @@
 import { investments } from "./investments";
 import { services } from "./services";
 import { sectors } from "./solutions";
-import { faqGroups, team } from "./site";
+import { faqGroups } from "./site";
 
 export type SearchDoc = { title: string; text: string; to: string; section: string };
 
@@ -14,7 +14,6 @@ export const searchIndex: SearchDoc[] = [
   ...investments.map((i) => ({ section: "Capital", title: i.label, text: `${i.summary} ${i.points.map((p) => p.title).join(", ")}.`, to: i.path })),
   { section: "Capital", title: "How it works", text: "Sourcing, diligence, structuring, closing and reporting. Direct holdings and deal-by-deal vehicles.", to: "/capital/#process" },
   { section: "Company", title: "About Velero Capital", text: "Private-markets access and advisory firm headquartered in Dubai with an office in San Francisco. Does not invest its own capital or manage a fund. Network of investors, industry experts, dealmakers and operational leaders.", to: "/company/" },
-  { section: "Company", title: "Team", text: `The people behind every mandate. ${team.map((m) => `${m.name}, ${m.role}`).join(". ")}.`, to: "/team/" },
   { section: "Company", title: "FAQ", text: "Frequently asked questions: does Velero Capital invest its own capital, who can access opportunities, how to submit an opportunity, how to apply.", to: "/faq/" },
   ...faqGroups.flatMap((g) => g.items.map((f) => ({ section: "FAQ", title: f.q, text: f.a, to: `/faq/#${g.id}` }))),
   { section: "Company", title: "The name", text: "Velero means sailing vessel in Spanish. The name reflects our role in navigating private markets and connecting capital with select investment opportunities.", to: "/company/#name" },

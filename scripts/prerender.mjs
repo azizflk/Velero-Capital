@@ -183,7 +183,6 @@ ${groups.map((g) => `\n### ${g.title}\n\n${g.sectors.map((s) => link(s.title, s.
 ## Company
 
 ${link("About Velero Capital", "/company/", "who the firm is, what the name means, its values and what sets it apart")}
-${link("Team", "/team/", "the people at the firm and their roles")}
 ${link("FAQ", "/faq/", "frequently asked questions about what the firm does and does not do, investing, submitting and applying")}
 ${link("Submit an Opportunity", "/submit-an-opportunity/", "how companies, shareholders, sponsors and intermediaries introduce a transaction")}
 ${link("Contact", "/contact-us/", "enquiry form for investors, founders and sponsors")}

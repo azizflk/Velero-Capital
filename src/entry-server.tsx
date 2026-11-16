@@ -21,7 +21,6 @@ export const routes: string[] = [
   ...sectors.map((s) => s.path),
   "/portfolio/",
   "/company/",
-  "/team/",
   "/faq/",
   "/contact-us/",
   "/verification/",
