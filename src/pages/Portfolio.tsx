@@ -23,7 +23,7 @@ export default function Portfolio() {
     >
       <Section><Stats compact /></Section>
 
-      <Section title="Where we invest">
+      <Section title="Where we source opportunities">
         <Cols cols={4} items={investments.map((i) => ({ title: i.label, text: i.intro, to: i.path }))} />
       </Section>
 

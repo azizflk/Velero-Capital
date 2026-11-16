@@ -151,11 +151,11 @@ export const differentiators = [
 
 export const faqs = [
   {
-    q: "What does Velero Capital invest in?",
-    a: "Velero Capital does not invest its own capital. It connects eligible investors with select private-market opportunities in three strategies — late-stage and pre-IPO companies, secondary transactions and institutional real estate — through direct holdings, co-investments alongside a lead sponsor, or dedicated deal-by-deal vehicles.",
+    q: "Does Velero Capital invest its own capital?",
+    a: "No. Velero Capital does not invest its own capital or manage a fund; it helps investment happen. It connects eligible investors with select private-market opportunities in three strategies — late-stage and pre-IPO companies, secondary transactions and institutional real estate — through direct holdings, co-investments alongside a lead sponsor, or dedicated deal-by-deal vehicles.",
   },
   {
-    q: "Who can invest with Velero Capital?",
+    q: "Who can access opportunities through Velero Capital?",
     a: "Family offices, institutional investors and other professional or accredited investors who meet the eligibility rules of their jurisdiction. Opportunities are shared only with eligible investors whose mandate they fit, on a deal-by-deal basis.",
   },
   {

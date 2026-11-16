@@ -24,8 +24,8 @@ export default function Solutions() {
     <SidebarPage title="Solutions: the sectors we serve" intro={`Capital and advice shaped to each industry. We cover ${sectors.length} sectors in seven groups, and bring to each an understanding of its capital, its cycle and its counterparties.`} anchors={anchors}>
       <Section title="Who we serve">
         <Prose>
-          <p>Our Capital and Services pages describe what we do: equity, debt, M&A, secondaries and execution. These pages describe who we do it for. We bring an understanding of each sector’s capital, its cycle and its counterparties to every mandate.</p>
-          <p>Most mandates combine both: a view of the sector, and the right form of capital for it. Explore each industry to see how we fund, transact and advise.</p>
+          <p>Our Capital and Services pages describe what we do: arranging equity and debt, advising on M&A and secondaries, and execution. These pages describe who we do it for. We bring an understanding of each sector’s capital, its cycle and its counterparties to every mandate.</p>
+          <p>Most mandates combine both: a view of the sector, and the right form of capital for it. Explore each industry to see how we arrange capital, transact and advise.</p>
         </Prose>
       </Section>
 

@@ -32,8 +32,8 @@ export default function About() {
 
       <Section id="expertise">
         <Cols cols={3} items={[
-          { title: "Private Companies", text: "Primary allocations in late-stage and pre-IPO rounds, and secondary purchases of existing stakes from founders, employees, early investors and fund limited partners.", to: "/late-stage/" },
-          { title: "Real Estate", text: "Direct deals, joint ventures and fund positions in institutional-quality real estate, alongside established operators and sponsors.", to: "/real-estate/" },
+          { title: "Private Companies", text: "Opportunities for investors in late-stage and pre-IPO rounds, and in existing stakes sold by founders, employees, early investors and fund limited partners.", to: "/late-stage/" },
+          { title: "Real Estate", text: "Direct deals, joint ventures and fund positions in institutional-quality real estate for investors, alongside established operators and sponsors.", to: "/real-estate/" },
           { title: "Advisory", text: "A focused corporate finance practice covering fundraising, corporate development, M&A, cap table and equity advisory, and valuation.", to: "/services/" },
         ]} />
       </Section>

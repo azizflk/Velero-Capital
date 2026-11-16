@@ -26,7 +26,7 @@ export const menus: Record<string, Menu> = {
     eyebrow: "Capital",
     headline: "Access is the edge.",
     text: "Select private-market opportunities for family offices and institutional investors, sourced through relationships.",
-    cta: { label: "Explore how we invest", to: "/capital/" },
+    cta: { label: "Explore the opportunities we source", to: "/capital/" },
     groups: [
       { title: "Private companies", items: [
         { label: "Late-Stage & Pre-IPO", to: "/late-stage/", desc: "Primary allocations in growth rounds, Series C onward." },
@@ -79,7 +79,7 @@ export const menus: Record<string, Menu> = {
   Company: {
     eyebrow: "Company",
     headline: "Velero means sailing vessel.",
-    text: "A private investment firm headquartered in Dubai, with an office in San Francisco.",
+    text: "A private-markets access and advisory firm, headquartered in Dubai with an office in San Francisco. We do not invest our own capital.",
     cta: { label: "Inside Velero Capital", to: "/company/" },
     groups: [
       { title: "About", items: [
