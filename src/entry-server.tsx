@@ -6,7 +6,7 @@ import { collected, type Head } from "./lib/useTitle";
 import { investments, process } from "./data/investments";
 import { services } from "./data/services";
 import { groups, sectors, commonFaqs } from "./data/solutions";
-import { CONTACT_EMAIL, STATS_ASOF, faqs, offices, social, stats } from "./data/site";
+import { CONTACT_EMAIL, STATS_ASOF, faqGroups, faqs, offices, social, stats } from "./data/site";
 
 /** Every address that is prerendered and listed in the sitemap. */
 export const routes: string[] = [
@@ -22,6 +22,7 @@ export const routes: string[] = [
   "/portfolio/",
   "/company/",
   "/team/",
+  "/faq/",
   "/contact-us/",
   "/verification/",
   "/privacy/",
@@ -41,4 +42,4 @@ export function render(url: string): { html: string; head: Head | null } {
 }
 
 /** Site data, for the files written for language models (llms.txt). */
-export const data = { investments, process, services, groups, sectors, commonFaqs, faqs, offices, social, stats, STATS_ASOF, CONTACT_EMAIL };
+export const data = { investments, process, services, groups, sectors, commonFaqs, faqGroups, faqs, offices, social, stats, STATS_ASOF, CONTACT_EMAIL };

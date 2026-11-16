@@ -99,6 +99,7 @@ export default function Footer() {
               <Row><Link to="/submit-an-opportunity/" className={linkCls}>Submit an Opportunity</Link></Row>
               <Row><Link to="/verification/" className={linkCls}>Account Verification</Link></Row>
               <Row><Link to="/contact-us/" className={linkCls}>Inquiries</Link></Row>
+              <Row><Link to="/faq/" className={linkCls}>FAQ</Link></Row>
               <Row><Link to="/privacy/" className={linkCls}>Privacy Policy</Link></Row>
               <Row><Link to="/legal/" className={linkCls}>Legal &amp; Disclosures</Link></Row>
               <Row><button onClick={openCookieSettings} className={`${linkCls} text-left`}>Cookie Settings</button></Row>

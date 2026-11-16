@@ -97,7 +97,7 @@ export default function AuthCard({ heading, lead, next }: { heading: string; lea
           <form onSubmit={onCode} className="mt-7">
             <label className="block">
               <span className="mb-1.5 block text-[13px] font-semibold">Sign-in code</span>
-              <input ref={code} name="code" required inputMode="numeric" autoComplete="one-time-code" pattern="[0-9 ]{6,12}" maxLength={12} className={`${box} text-center text-[20px] tracking-[0.3em]`} placeholder="••••••" />
+              <input ref={code} name="code" required inputMode="numeric" autoComplete="one-time-code" pattern="[0-9 ]{6,12}" maxLength={12} className={`${box} text-center text-[20px] tracking-[0.3em]`} placeholder="••••••••" />
             </label>
             <button type="submit" disabled={!!busy} className={`${wide} pill-blue mt-4`}>{busy === "code" ? "Checking…" : "Log in"}</button>
           </form>

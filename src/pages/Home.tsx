@@ -28,7 +28,6 @@ function Hero() {
           <div className="eyebrow">Velero Capital</div>
           <h1 className="display mt-1 text-5xl sm:text-6xl lg:text-[72px]">Access is the edge.</h1>
           <p className="mt-4 max-w-lg text-[13px] leading-relaxed text-ink/80">We connect family offices and institutional investors with select private-market opportunities across late-stage companies, secondary transactions, and real estate — and advise founders and companies on fundraising, M&amp;A and corporate finance.</p>
-          <p className="mt-3 text-[13px] font-semibold">We do not invest our own capital. We help investment happen.</p>
           <div className="mt-6 flex flex-wrap gap-3"><Button to="/investor-access/" variant="blue">Investor Access</Button><Button to="/capital/">Explore Our Strategies</Button><Button to="/submit-an-opportunity/">Submit an Opportunity</Button></div>
         </div>
         <div className="order-2 lg:order-3 lg:col-span-12" data-hero-stats><Stats hero /></div>

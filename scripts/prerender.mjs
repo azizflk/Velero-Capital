@@ -141,7 +141,7 @@ ${routes.map((u) => `  <url><loc>${ORIGIN}${u}</loc><lastmod>${today}</lastmod><
 `);
 
 // --- llms.txt ----------------------------------------------------------------------------------------------
-const { investments, services, groups, faqs, offices, social, stats, STATS_ASOF, CONTACT_EMAIL } = data;
+const { investments, services, groups, faqGroups, offices, social, stats, STATS_ASOF, CONTACT_EMAIL } = data;
 const link = (title, p, note) => `- [${title}](${ORIGIN}${p})${note ? `: ${note}` : ""}`;
 const firstSentence = (s) => (s.match(/^.*?[.!?](?=\s|$)/) || [s])[0];
 const figure = (s) => `${s.prefix}${s.value.toLocaleString("en-US")}${s.suffix}`;
@@ -184,6 +184,7 @@ ${groups.map((g) => `\n### ${g.title}\n\n${g.sectors.map((s) => link(s.title, s.
 
 ${link("About Velero Capital", "/company/", "who the firm is, what the name means, its values and what sets it apart")}
 ${link("Team", "/team/", "the people at the firm and their roles")}
+${link("FAQ", "/faq/", "frequently asked questions about what the firm does and does not do, investing, submitting and applying")}
 ${link("Submit an Opportunity", "/submit-an-opportunity/", "how companies, shareholders, sponsors and intermediaries introduce a transaction")}
 ${link("Contact", "/contact-us/", "enquiry form for investors, founders and sponsors")}
 ${link("Account Verification", "/verification/", "check whether an email address is officially Velero Capital's")}
@@ -192,7 +193,9 @@ ${link("Privacy Policy", "/privacy/", "personal data and cookies")}
 
 ## Frequently asked questions
 
-${faqs.map((f) => `### ${f.q}\n\n${f.a}`).join("\n\n")}
+${link("All questions", "/faq/", "the full FAQ, grouped by audience")}
+
+${faqGroups.map((g) => `### ${g.title}\n\n${g.items.map((f) => `**${f.q}**\n${f.a}`).join("\n\n")}`).join("\n\n")}
 
 ## Optional
 

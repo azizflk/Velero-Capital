@@ -41,6 +41,7 @@ export const nav: NavItem[] = [
       { label: "Submit an Opportunity", to: "/submit-an-opportunity/" },
       { label: "Account Verification", to: "/verification/" },
       { label: "Contact", to: "/contact-us/" },
+      { label: "FAQ", to: "/faq/" },
       { label: "Legal & Disclosures", to: "/legal/" },
     ],
   },
@@ -149,24 +150,203 @@ export const differentiators = [
   },
 ];
 
-export const faqs = [
+/** Official email domains used by the Account Verification page. Keep this list current. */
+export const officialAccounts = {
+  emailDomains: ["velero.capital"],
+};
+function officialAccountsDomains() { return officialAccounts.emailDomains.join(" and "); }
+
+/**
+ * Frequently asked questions, grouped. Every answer restates something the site already says elsewhere
+ * (About, Investor Access, Submit an Opportunity, Legal, Verification, the firm figures); add nothing new here
+ * without the firm confirming it. Shown in full on /faq/, a selection on the Company page.
+ */
+export type Faq = { q: string; a: string };
+export type FaqGroup = { id: string; title: string; items: Faq[] };
+
+const fmt = (s: (typeof stats)[number]) => `${s.prefix}${s.value.toLocaleString("en-US")}${s.suffix}`;
+
+export const faqGroups: FaqGroup[] = [
   {
-    q: "Does Velero Capital invest its own capital?",
-    a: "No. Velero Capital does not invest its own capital or manage a fund; it helps investment happen. It connects eligible investors with select private-market opportunities in three strategies — late-stage and pre-IPO companies, secondary transactions and institutional real estate — through direct holdings, co-investments alongside a lead sponsor, or dedicated deal-by-deal vehicles.",
+    id: "how-it-works",
+    title: "How Velero works",
+    items: [
+      {
+        q: "So what does Velero Capital actually do?",
+        a: "For investors, it sources and reviews private-market opportunities through founder, sponsor and shareholder relationships, and introduces them to family offices and institutions whose mandate they fit. For founders, companies and sponsors, it advises on their own transactions and introduces suitable opportunities to the investors they fit.",
+      },
+      {
+        q: "Where does Velero Capital work? Do I need to be in Dubai or San Francisco?",
+        a: `No. Velero Capital is headquartered in Dubai, at ${offices[0].address.replace(/, Dubai, UAE$/, "")}, with an office in San Francisco. It works with investors in Dubai, San Francisco and beyond, and on cross-border mandates between the Gulf, the United States and wider international markets.`,
+      },
+      {
+        q: "How do investors take part in a transaction?",
+        a: "Participation is structured to suit the transaction: a direct holding, a co-investment alongside a lead sponsor, or a dedicated deal-by-deal vehicle. The structure, costs and reporting are set out in writing before any commitment.",
+      },
+      {
+        q: "Is there a platform or a public list of opportunities?",
+        a: "No. Velero Capital does not operate a platform or a public listing. Each opportunity is shared individually, after review and under confidentiality terms, with the investors whose mandate it fits.",
+      },
+      {
+        q: "How do secondary transactions work?",
+        a: "Rather than buying new shares in a funding round, investors acquire existing stakes — from founders, employees and early investors, or fund interests from limited partners seeking liquidity. We source the position, run diligence, and manage transfer approvals through closing.",
+      },
+      {
+        q: "What does it cost?",
+        a: "There is no charge for applying. For companies, the scope, responsibilities, deliverables and commercial terms of any engagement are agreed in writing before work starts. For investors, the costs of each transaction are set out in writing before any commitment.",
+      },
+      {
+        q: "What has Velero Capital done so far?",
+        a: `${fmt(stats[0])} raised, placed and advised since 2023, in aggregate transaction value across all mandates; ${fmt(stats[1])} of capital raised for companies and funds as fundraising adviser; ${fmt(stats[2])} of M&A advised on buy-side and sell-side mandates; and an investor network of ${fmt(stats[3])} family offices, institutions and LPs met on mandates. Figures as at ${STATS_ASOF}.`,
+      },
+    ],
   },
   {
-    q: "Who can access opportunities through Velero Capital?",
-    a: "Family offices, institutional investors and other professional or accredited investors who meet the eligibility rules of their jurisdiction. Opportunities are shared only with eligible investors whose mandate they fit, on a deal-by-deal basis.",
+    id: "should-i-apply",
+    title: "Should I apply?",
+    items: [
+      {
+        q: "Who can access opportunities through Velero Capital?",
+        a: "Family offices, institutional investors, fund managers and other professional or accredited investors who meet the eligibility rules of their jurisdiction. Opportunities are shared only with eligible investors whose mandate they fit, on a deal-by-deal basis.",
+      },
+      {
+        q: "Can an individual investor apply?",
+        a: "Yes, if you are an individual professional or accredited investor under the rules of your jurisdiction. Private-market investments are only suitable for professional, qualified or accredited investors.",
+      },
+      {
+        q: "Is my company too early?",
+        a: "Not necessarily. Velero Capital works with earlier-stage companies as well as late-stage and pre-IPO ones, both on raising capital and on advisory. Tell us your stage in the application and we will tell you whether there is a fit.",
+      },
+      {
+        q: "Can companies that have already raised money apply?",
+        a: "Yes. The application asks for your traction and existing investors, and the late-stage and pre-IPO rounds we work on are raised by companies that already have investors.",
+      },
+      {
+        q: "Does it make sense to apply if we are not raising money?",
+        a: "Yes. Alongside capital raising, Velero Capital advises on M&A, corporate development, cap table and equity, valuation and modelling, joint ventures and partnerships, market entry and other cross-border work.",
+      },
+      {
+        q: "Do you only work with certain sectors?",
+        a: "No single sector. The industries we follow most closely are artificial intelligence, robotics, financial technology, healthcare and biotech, space technology and real estate, and our Solutions pages cover seven groups of sectors, from real estate and infrastructure to the public sector.",
+      },
+      {
+        q: "Can an adviser or introducer apply on someone else’s behalf?",
+        a: "Yes. Advisers, placement agents and introducers can submit an opportunity; the application asks for your role and your authority. We work with introducers acting with the written authority of a principal.",
+      },
+      {
+        q: "Will I hear back, even if it is a no?",
+        a: "Yes. We reply to every submission, whatever the outcome. Many opportunities are not the right fit for us, and when that is the case we will let you know promptly. It is never a judgement on your business, only on how closely it matches what we do.",
+      },
+    ],
   },
   {
-    q: "How do secondary transactions work?",
-    a: "Rather than buying new shares in a funding round, investors acquire existing stakes — from founders, employees and early investors, or fund interests from limited partners seeking liquidity. We source the position, run diligence, and manage transfer approvals through closing.",
+    id: "applying",
+    title: "Applying",
+    items: [
+      {
+        q: "How do I apply?",
+        a: "Use the application form on the home page or the contact page and choose whether you are an investor, a founder, or a sponsor or intermediary; you are asked only the questions that apply. You do not need an account.",
+      },
+      {
+        q: "What should a submission include?",
+        a: "A short summary is enough to start: what the opportunity is, the company or asset and where it is based, the size sought and the timing, the information available now, your role and authority, and any transfer restrictions, consents or confidentiality already in place.",
+      },
+      {
+        q: "What do I need to provide as an investor?",
+        a: "A short form is enough: who you are, the kind of investor you represent and what you are looking for. We do not ask for financial or identity documents at this stage; the verification that a transaction and the law require comes later, before specific opportunities are discussed.",
+      },
+      {
+        q: "Can I send confidential documents?",
+        a: "Please do not send confidential documents through the website. Once confidentiality terms are agreed, we tell you how to share them.",
+      },
+      {
+        q: "What happens after I apply?",
+        a: "A senior member of the team reviews the objective, your authority, the jurisdiction, the timing, the size and how ready the information is. If there is a fit, we arrange a first conversation, usually followed by a non-disclosure agreement; where work goes ahead, its scope and terms are agreed in writing.",
+      },
+      {
+        q: "Is anything guaranteed once I apply?",
+        a: "No. Not every mandate will have a matching opportunity at any given time, access to an opportunity or an allocation is never guaranteed, and Velero Capital does not promise a return, a price, a timing or a liquidity event. Nothing on the website, and no application through it, creates an engagement or an obligation on either side.",
+      },
+    ],
   },
   {
-    q: "What advisory services does Velero Capital offer?",
-    a: "A focused corporate finance and cross-border practice: fundraising advisory, corporate development, M&A advisory, cap table and equity advisory, valuation and modelling, joint ventures and partnerships, strategic introductions, market entry and trade access, legal and advisory coordination, and cross-border relationship management.",
+    id: "accounts",
+    title: "Accounts and sign-in",
+    items: [
+      {
+        q: "Do I need an account to apply?",
+        a: "No. The form on the home page and the contact page works without one. With an account you can save a draft, come back to it, and follow your application’s progress.",
+      },
+      {
+        q: "How do I sign in?",
+        a: "With your email address and a one-time code sent to it, or with Google. There is no password; the same steps create an account the first time.",
+      },
+      {
+        q: "I did not receive my sign-in code. What should I do?",
+        a: "Check your spam folder, and make sure the address is typed correctly. The code works once and expires after an hour; you can ask for a new one from the same screen after a minute.",
+      },
+      {
+        q: "Is my draft saved?",
+        a: "Yes. In your account, answers are saved as you type, and nothing is sent to us until you submit.",
+      },
+      {
+        q: "Can I edit an application after submitting it?",
+        a: "No, a submitted application is fixed. To add or correct something, email us; the address is on the contact page.",
+      },
+      {
+        q: "How do I follow my application?",
+        a: "In your account, each application shows its stage: received, under review, call arranged or closed.",
+      },
+    ],
+  },
+  {
+    id: "trust",
+    title: "Trust and safety",
+    items: [
+      {
+        q: "How can I check that an email really comes from Velero Capital?",
+        a: `Use the Account Verification page before acting on any message. Official email comes only from the ${officialAccountsDomains()} domain, and Velero Capital never asks for bank, card or identity-document details through its website.`,
+      },
+      {
+        q: "Does the website give investment, legal or tax advice?",
+        a: "No. Nothing on the website is a recommendation, an offer or a solicitation, and you should take your own professional advice before making any investment decision. Private-market investments carry significant risk, including the loss of capital.",
+      },
+      {
+        q: "How is my personal data handled?",
+        a: "The privacy policy explains what personal data and cookies the website uses, how they are used and your rights. Analytics and embedded media stay off until you accept them.",
+      },
+    ],
+  },
+  {
+    id: "other",
+    title: "Other",
+    items: [
+      {
+        q: "Why the name Velero?",
+        a: "Velero means sailing vessel in Spanish. The name reflects the firm’s role in navigating private markets and connecting capital with select investment opportunities.",
+      },
+      {
+        q: "What principles guide Velero Capital?",
+        a: "Selectivity, integrity, discretion, discipline, alignment and global reach: we share only what has been reviewed and fits a mandate, disclose terms, costs and conflicts in writing, hold mandates and information in confidence, review every opportunity the same way, bring investors in on terms no worse than the lead sponsor’s, and work across the Gulf and the United States.",
+      },
+    ],
   },
 ];
+
+/** Every question in one list, in page order (used for the AI text files). */
+export const faqs: Faq[] = faqGroups.flatMap((g) => g.items);
+
+/** The selection shown on the Company page, which links to the full list. */
+export const faqHighlights: Faq[] = [
+  "So what does Velero Capital actually do?",
+  "Where does Velero Capital work? Do I need to be in Dubai or San Francisco?",
+  "Who can access opportunities through Velero Capital?",
+  "How do investors take part in a transaction?",
+  "Is my company too early?",
+  "Does it make sense to apply if we are not raising money?",
+  "How do I apply?",
+  "Is anything guaranteed once I apply?",
+].map((q) => faqs.find((f) => f.q === q)!);
 
 export const team = [
   { name: "Aziz Falak", role: "Founder", photo: "/team/aziz-falak.jpg", telegram: "https://t.me/AJF_VC", linkedin: "https://www.linkedin.com/in/aziz-f-4a9a6b179/" },
@@ -179,7 +359,3 @@ export const team = [
   { name: "Elvin Mammadli", role: "Head of Partnerships", telegram: "https://t.me/elvin_vc" },
 ];
 
-/** Official email domains used by the Account Verification page. Keep this list current. */
-export const officialAccounts = {
-  emailDomains: ["velero.capital"],
-};

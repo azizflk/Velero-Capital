@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { SidebarPage, Section, Cols, Prose } from "@/components/Layout";
 import Stats from "@/components/Stats";
 import FAQ from "@/components/FAQ";
-import { differentiators, faqs } from "@/data/site";
-import { faqPage, useTitle } from "@/lib/useTitle";
+import { differentiators, faqHighlights } from "@/data/site";
+import { useTitle } from "@/lib/useTitle";
 
 const anchors = [
   { id: "name", label: "The name" },
@@ -18,7 +19,6 @@ export default function About() {
   useTitle("Company", "Velero Capital is an independent private-markets investment-access and advisory firm headquartered in Dubai, with an office in San Francisco.", {
     full: "About Velero Capital | Independent Private-Markets Firm in Dubai",
     pageType: "AboutPage",
-    jsonLd: [faqPage("/company/", faqs)],
   });
   return (
     <SidebarPage title="Company: an independent private-markets firm" intro="Velero Capital is an independent private-markets investment-access and advisory firm headquartered in Dubai, with an office in San Francisco." anchors={anchors}>
@@ -63,7 +63,8 @@ export default function About() {
       </Section>
 
       <Section id="questions" title="Questions, answered">
-        <FAQ items={faqs} />
+        <FAQ items={faqHighlights} />
+        <div className="mt-6"><Link to="/faq/" className="textlink text-[14px]">All frequently asked questions</Link></div>
       </Section>
 
       <Section id="connect" title="Connect with us">

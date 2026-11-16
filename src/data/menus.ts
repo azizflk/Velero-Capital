@@ -97,6 +97,7 @@ export const menus: Record<string, Menu> = {
       ] },
       { title: "Contact", items: [
         { label: "Contact", to: "/contact-us/", desc: "Tell us about your mandate." },
+        { label: "FAQ", to: "/faq/", desc: "Common questions, answered." },
       ] },
     ],
   },
