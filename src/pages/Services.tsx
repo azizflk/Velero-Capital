@@ -4,16 +4,31 @@ import Button from "@/components/Button";
 import { services } from "@/data/services";
 import { ORIGIN, useTitle } from "@/lib/useTitle";
 
-const anchors = services.map((s) => ({ id: s.id, label: s.title }));
+const anchors = [{ id: "advisers", label: "Our advisers" }, ...services.map((s) => ({ id: s.id, label: s.title }))];
+
+/** Where the advisers worked before (owner, 18 Nov 2026). Names only, as plain text: no logos, no implied affiliation. */
+const formerFirms = ["J.P. Morgan", "Morgan Stanley", "Goldman Sachs", "Blackstone", "Lazard", "Evercore"];
 
 export default function Services() {
-  useTitle("Services", "Corporate finance and cross-border advisory: fundraising, M&A, corporate development, cap table, valuation, joint ventures, market entry and strategic introductions.", {
+  useTitle("Services", "Corporate finance and cross-border advisory: fundraising, M&A, corporate development, cap table, valuation, joint ventures and strategic introductions.", {
     full: "Corporate Finance & Cross-Border Advisory Services | Velero Capital",
     pageType: "CollectionPage",
     jsonLd: [{ "@type": "ItemList", name: "Velero Capital advisory services", itemListElement: services.map((s, i) => ({ "@type": "ListItem", position: i + 1, name: s.title, url: ORIGIN + s.path })) }],
   });
   return (
     <SidebarPage title="Services: corporate finance and cross-border advisory" intro="We advise across the financing and transaction lifecycle. Every engagement is senior-led, tightly scoped and run with the discipline of an institutional process, informed by investor-side judgment and operating experience." anchors={anchors}>
+      <Section id="advisers" eyebrow="Our advisers" title="Experience from leading banks and investment firms">
+        <p className="max-w-2xl text-[14px] leading-relaxed text-ink/80">Our services are delivered by advisers who previously worked at:</p>
+        <ul className="mt-6 grid grid-cols-2 gap-px border border-rule bg-rule sm:grid-cols-3 lg:grid-cols-6">
+          {formerFirms.map((f) => (
+            <li key={f} className="flex min-h-20 items-center justify-center bg-paper px-3 py-5 text-center">
+              <span className="display text-xl text-ink/80">{f}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-4 text-[12px] leading-relaxed text-ink/55">Velero Capital is independent and is not affiliated with, or endorsed by, any of these firms.</p>
+      </Section>
+
       <Section>
         <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (

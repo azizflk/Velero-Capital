@@ -34,7 +34,7 @@ export type Service = {
 
 const make = (s: Omit<Service, "path">): Service => ({ ...s, path: `/services/${s.slug}/` });
 
-export const services: Service[] = [
+export const allServices: Service[] = [
   make({
     id: "fundraising",
     slug: "fundraising-advisory",
@@ -843,3 +843,13 @@ export const services: Service[] = [
 ];
 
 export const serviceBySlug = (slug: string) => services.find((s) => s.slug === slug);
+
+/**
+ * Services taken off the site for now (owner, 18 Nov 2026). Their content is kept above; remove a slug here to
+ * publish the page again, and restore its links in src/data/menus.ts, src/data/site.ts (nav), the enquiry form's
+ * service list and the redirects in vercel.json.
+ */
+export const PAUSED_SERVICES = ["market-entry-trade-access", "legal-advisory-coordination", "cross-border-relationship-management"];
+
+/** The services shown on the site. */
+export const services: Service[] = allServices.filter((s) => !PAUSED_SERVICES.includes(s.slug));

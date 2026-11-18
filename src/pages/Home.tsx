@@ -125,7 +125,7 @@ function ServicesHome() {
   const pick = (titles: string[]) => groups.filter((g) => titles.includes(g.title)).flatMap((g) => g.items);
   const columns = [
     { title: "Corporate finance", intro: "For companies and shareholders preparing a raise, a transaction or a decision that depends on the numbers.", items: pick(["Capital raising", "Transactions", "Equity", "Analysis"]) },
-    { title: "Cross-border", intro: "For businesses and investors working between the Gulf, the United States and wider international markets.", items: pick(["Partnerships", "Cross-border"]) },
+    { title: "Partnerships", intro: "For businesses and investors working between the Gulf, the United States and wider international markets.", items: pick(["Partnerships"]) },
   ];
   return (
     <Section eyebrow="Advisory Services" title="Corporate Finance And Cross-Border Advisory">

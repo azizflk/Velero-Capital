@@ -152,6 +152,36 @@
       "source": "/team/",
       "destination": "/company/",
       "permanent": true
+    },
+    {
+      "source": "/services/market-entry-trade-access",
+      "destination": "/services/",
+      "permanent": false
+    },
+    {
+      "source": "/services/market-entry-trade-access/",
+      "destination": "/services/",
+      "permanent": false
+    },
+    {
+      "source": "/services/legal-advisory-coordination",
+      "destination": "/services/",
+      "permanent": false
+    },
+    {
+      "source": "/services/legal-advisory-coordination/",
+      "destination": "/services/",
+      "permanent": false
+    },
+    {
+      "source": "/services/cross-border-relationship-management",
+      "destination": "/services/",
+      "permanent": false
+    },
+    {
+      "source": "/services/cross-border-relationship-management/",
+      "destination": "/services/",
+      "permanent": false
     }
   ],
   "rewrites": [

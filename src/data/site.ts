@@ -26,9 +26,6 @@ export const nav: NavItem[] = [
       { label: "Valuation & Modelling", to: "/services/valuation-modelling/" },
       { label: "Joint Ventures & Partnerships", to: "/services/joint-ventures-partnerships/" },
       { label: "Strategic Introductions", to: "/services/strategic-introductions/" },
-      { label: "Market Entry & Trade Access", to: "/services/market-entry-trade-access/" },
-      { label: "Legal & Advisory Coordination", to: "/services/legal-advisory-coordination/" },
-      { label: "Cross-Border Relationship Management", to: "/services/cross-border-relationship-management/" },
     ],
   },
   {
@@ -222,7 +219,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Does it make sense to apply if we are not raising money?",
-        a: "Yes. Alongside capital raising, Velero Capital advises on M&A, corporate development, cap table and equity, valuation and modelling, joint ventures and partnerships, market entry and other cross-border work.",
+        a: "Yes. Alongside capital raising, Velero Capital advises on M&A, corporate development, cap table and equity, valuation and modelling, joint ventures and partnerships, and strategic introductions.",
       },
       {
         q: "Do you only work with certain sectors?",

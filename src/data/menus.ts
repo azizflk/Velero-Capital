@@ -48,7 +48,7 @@ export const menus: Record<string, Menu> = {
   Services: {
     eyebrow: "Advisory services",
     headline: "Corporate finance and cross-border advisory.",
-    text: "Senior-led, tightly scoped engagements across the financing, transaction and market-entry lifecycle.",
+    text: "Senior-led, tightly scoped engagements across the financing and transaction lifecycle.",
     cta: { label: "Explore all services", to: "/services/" },
     action: { label: "Discuss an engagement", to: "/contact-us/?role=founder&goal=services" },
     groups: [
@@ -68,11 +68,6 @@ export const menus: Record<string, Menu> = {
       { title: "Partnerships", items: [
         { label: "Joint Ventures & Partnerships", to: "/services/joint-ventures-partnerships/", desc: "Alliances structured to survive year two." },
         { label: "Strategic Introductions", to: "/services/strategic-introductions/", desc: "The people who can move a decision." },
-      ] },
-      { title: "Cross-border", items: [
-        { label: "Market Entry & Trade Access", to: "/services/market-entry-trade-access/", desc: "Between the Gulf, the US and beyond." },
-        { label: "Legal & Advisory Coordination", to: "/services/legal-advisory-coordination/", desc: "One coordinated adviser team." },
-        { label: "Cross-Border Relationship Management", to: "/services/cross-border-relationship-management/", desc: "A single point of contact across markets." },
       ] },
     ],
   },
