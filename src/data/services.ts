@@ -929,7 +929,8 @@ export const serviceBySlug = (slug: string) => services.find((s) => s.slug === s
 /**
  * Services taken off the site for now (owner, 18 Nov 2026). Their content is kept above; remove a slug here to
  * publish the page again, and restore its links in src/data/menus.ts, src/data/site.ts (nav), the enquiry form's
- * service list and the redirects in vercel.json.
+ * service list and the redirects in vercel.json. The redirects are permanent (308, owner, 18 Nov 2026), so browsers
+ * that followed one may keep sending visitors to /services/ for a while after a page is restored.
  */
 export const PAUSED_SERVICES = ["market-entry-trade-access", "legal-advisory-coordination", "cross-border-relationship-management"];
 
