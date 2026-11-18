@@ -21,10 +21,10 @@ export default function Solutions() {
     jsonLd: [faqPage("/solutions/", questions)],
   });
   return (
-    <SidebarPage title="Solutions: the sectors we serve" intro={`Capital and advice shaped to each industry. We cover ${sectors.length} sectors in seven groups, and bring to each an understanding of its capital, its cycle and its counterparties.`} anchors={anchors}>
+    <SidebarPage title="Solutions: the sectors we serve" intro={`Capital raising, M&A and advisory across ${sectors.length} sectors in seven groups.`} anchors={anchors}>
       <Section title="Who we serve">
         <Prose>
-          <p>Our Capital and Services pages describe what we do: arranging equity and debt, advising on M&A and secondaries, and execution. These pages describe who we do it for. We bring an understanding of each sector’s capital, its cycle and its counterparties to every mandate.</p>
+          <p>Our Capital and Services pages describe what we do: arranging equity and debt, advising on M&A and secondaries, and execution. These pages describe who we do it for.</p>
           <p>Most mandates combine both: a view of the sector, and the right form of capital for it. Explore each industry to see how we arrange capital, transact and advise.</p>
         </Prose>
       </Section>
@@ -46,14 +46,14 @@ export default function Solutions() {
       ))}
 
       <Section id="across" title="Across every sector">
-        <Prose className="mb-8"><p>Every sector draws on the same set of capabilities, matched to that industry’s capital and cycle.</p></Prose>
+        <Prose className="mb-8"><p>We offer the same capabilities in every sector.</p></Prose>
         <Cols cols={3} items={[
           { title: "Equity & growth capital", text: "Venture, growth and structured equity, and joint-venture capital, sized to each sector." },
           { title: "Debt & private credit", text: "Advice on senior, mezzanine, project and venture debt, across real assets and operating businesses." },
           { title: "M&A & transactions", text: "Buy-side, sell-side and cross-border M&A, and joint ventures." },
           { title: "Alternatives & secondaries", text: "Co-investment and pre-IPO secondary access across private companies and real estate." },
           { title: "Strategy & execution", text: "Modelling, investor documentation and fundraising support behind every raise." },
-          { title: "Senior-led, everywhere", text: "Led from Dubai with an office in San Francisco, and a senior team member on every mandate." },
+          { title: "Senior-led", text: "Led from Dubai with an office in San Francisco, and a senior team member on every mandate." },
         ]} />
       </Section>
 

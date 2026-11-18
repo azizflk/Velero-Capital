@@ -24,6 +24,7 @@ export const nav: NavItem[] = [
       { label: "M&A Advisory", to: "/services/m-and-a-advisory/" },
       { label: "Cap Table & Equity Advisory", to: "/services/cap-table-equity-advisory/" },
       { label: "Valuation & Modelling", to: "/services/valuation-modelling/" },
+      { label: "Fractional CFO", to: "/services/fractional-cfo/" },
       { label: "Joint Ventures & Partnerships", to: "/services/joint-ventures-partnerships/" },
       { label: "Strategic Introductions", to: "/services/strategic-introductions/" },
     ],
@@ -137,8 +138,8 @@ export const differentiators = [
     text: "Structure, costs and reporting are set out in writing before any commitment, and investors see the same information we have reviewed.",
   },
   {
-    title: "Relationships, Not Platforms",
-    text: "Opportunities come through the founders, sponsors and shareholders who lead and own them, and investors are known to us by mandate, not by sign-up.",
+    title: "Relationship Sourcing",
+    text: "Opportunities come through the founders, sponsors and shareholders who lead and own them, and we work with investors whose mandates we know.",
   },
   {
     title: "Selectivity",
@@ -219,7 +220,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Does it make sense to apply if we are not raising money?",
-        a: "Yes. Alongside capital raising, Velero Capital advises on M&A, corporate development, cap table and equity, valuation and modelling, joint ventures and partnerships, and strategic introductions.",
+        a: "Yes. Alongside capital raising, Velero Capital advises on M&A, corporate development, cap table and equity, valuation and modelling, joint ventures and partnerships, and strategic introductions. It can also act as a fractional or interim CFO.",
       },
       {
         q: "Do you only work with certain sectors?",
@@ -241,7 +242,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "How do I apply?",
-        a: "Use the application form on the home page or the contact page and choose whether you are an investor, a founder, or a sponsor or intermediary; you are asked only the questions that apply. You do not need an account.",
+        a: "Click Apply at the top of any page and log in with your email or Google. Then choose whether you are an investor, a founder, or a sponsor or intermediary; you are asked only the questions that apply.",
       },
       {
         q: "What should a submission include?",
@@ -271,7 +272,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "Do I need an account to apply?",
-        a: "No. The form on the home page and the contact page works without one. With an account you can save a draft, come back to it, and follow your application’s progress.",
+        a: "Yes. Applications are made through a Velero Capital account, which lets you save a draft, come back to it and follow your application’s progress. For a general enquiry, you can use the contact page.",
       },
       {
         q: "How do I sign in?",

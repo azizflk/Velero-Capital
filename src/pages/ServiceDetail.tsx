@@ -13,7 +13,6 @@ const anchorsFor = (s: Service) => [
   ...(s.more?.process ? [{ id: "process", label: "How the work runs" }] : []),
   { id: "deliverables", label: "What you receive" },
   ...(s.more?.needs ? [{ id: "needs", label: "What we need from you" }] : []),
-  { id: "insights", label: "Insights" },
   ...(s.more?.faqs ? [{ id: "questions", label: "Questions" }] : []),
   { id: "engage", label: "How we engage" },
 ];
@@ -89,15 +88,12 @@ export default function ServiceDetail({ service }: { service: Service }) {
 
       {more.needs && (
         <Section id="needs" title="What we need from you">
-          <Prose className="mb-5"><p>A first view needs less than you might think. As the work goes on, we usually ask for:</p></Prose>
+          <Prose className="mb-5"><p>As the work goes on, we usually ask for:</p></Prose>
           <List items={more.needs} />
           <Prose className="mt-5 text-[13px]"><p>Please do not send confidential documents through the website; once confidentiality terms are agreed, we will tell you how to share them.</p></Prose>
         </Section>
       )}
 
-      <Section id="insights" title="Insights">
-        <Cols cols={3} items={service.insights} />
-      </Section>
 
       {more.faqs && (
         <Section id="questions" title="Questions">

@@ -16,8 +16,8 @@ export type Menu = {
 export const menus: Record<string, Menu> = {
   Solutions: {
     eyebrow: "Industry coverage",
-    headline: "Sector knowledge. Disciplined execution.",
-    text: "An understanding of each industry’s capital, cycle and counterparties, applied to every mandate.",
+    headline: "The sectors we serve.",
+    text: "Capital raising, M&A and advisory, organised by industry.",
     cta: { label: "Explore the sectors we serve", to: "/solutions/" },
     action: { label: "Discuss a mandate", to: "/contact-us/" },
     groups: groups.map((g) => ({ title: g.title, to: `/solutions/#${g.id}`, items: g.sectors.map((s) => ({ label: s.title, to: s.path })) })),
@@ -62,12 +62,13 @@ export const menus: Record<string, Menu> = {
       { title: "Equity", items: [
         { label: "Cap Table & Equity Advisory", to: "/services/cap-table-equity-advisory/", desc: "Cap tables, secondaries and incentive design." },
       ] },
-      { title: "Analysis", items: [
-        { label: "Valuation & Modelling", to: "/services/valuation-modelling/", desc: "Models built to stand up to scrutiny." },
+      { title: "Finance & Analysis", items: [
+        { label: "Valuation & Modelling", to: "/services/valuation-modelling/", desc: "Operating models and valuation analysis." },
+        { label: "Fractional CFO", to: "/services/fractional-cfo/", desc: "Senior finance leadership, part-time or interim." },
       ] },
       { title: "Partnerships", items: [
-        { label: "Joint Ventures & Partnerships", to: "/services/joint-ventures-partnerships/", desc: "Alliances structured to survive year two." },
-        { label: "Strategic Introductions", to: "/services/strategic-introductions/", desc: "The people who can move a decision." },
+        { label: "Joint Ventures & Partnerships", to: "/services/joint-ventures-partnerships/", desc: "Joint ventures and strategic alliances." },
+        { label: "Strategic Introductions", to: "/services/strategic-introductions/", desc: "Introductions to investors, acquirers and institutions." },
       ] },
     ],
   },

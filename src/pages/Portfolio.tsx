@@ -28,7 +28,7 @@ export default function Portfolio() {
       </Section>
 
       <Section id="network" title="The investor landscape">
-        <Prose className="mb-8"><p>The lead investors whose rounds and assets define the markets we work in. Our investors look for transactions sponsored at this standard.</p></Prose>
+        <Prose className="mb-8"><p>Leading venture and real estate investors in the markets we work in. Our investors look for transactions sponsored at this standard.</p></Prose>
         <div className="space-y-10">
           {show("Venture firms") && <LogoRow title="Venture firms" logos={[...coInvestors[0], ...coInvestors[1]]} />}
           {show("Real estate investors") && <LogoRow title="Real estate investors" logos={[...realEstateInvestors[0], ...realEstateInvestors[1]]} />}

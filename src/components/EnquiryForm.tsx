@@ -17,22 +17,49 @@ const opportunityTypes = ["Primary round", "Secondary block of shares", "Real es
 const authorities = ["Owner or principal", "Authorised representative of the principal", "Introducer with a written mandate", "Introducer without a mandate yet"];
 const investorTypes = ["Family office", "Institutional investor", "Fund or asset manager", "Venture or private equity firm", "Individual professional investor", "Other"];
 const strategies = ["Late-Stage & Pre-IPO", "Secondaries", "Real Estate", "Co-Investments & Syndicates"];
-const tickets = ["Under USD 1m", "USD 1m to 5m", "USD 5m to 20m", "USD 20m to 50m", "USD 50m+", "Varies by opportunity"];
+const tickets = ["$25,000 – $100,000", "$100,000 – $250,000", "$250,000 – $500,000", "$500,000 – $1,000,000", "$1,000,000 – $5,000,000", "$5,000,000+", "Flexible / Depends on opportunity"];
 const horizons = ["Ready to allocate now", "Within 3 months", "Within 6 to 12 months", "Exploring"];
 const stages = ["Seed", "Series A", "Series B", "Series C or later", "Pre-IPO", "Real estate project", "Other"];
 const raises = ["Under USD 5m", "USD 5m to 20m", "USD 20m to 50m", "USD 50m to 100m", "USD 100m+", "Not yet determined"];
-export const services = ["Fundraising Advisory", "Corporate Development", "M&A Advisory", "Cap Table & Equity Advisory", "Valuation & Modelling", "Joint Ventures & Partnerships", "Strategic Introductions"];
+export const services = ["Fundraising Advisory", "Corporate Development", "M&A Advisory", "Cap Table & Equity Advisory", "Valuation & Modelling", "Fractional CFO", "Joint Ventures & Partnerships", "Strategic Introductions"];
 const timings = ["Under 30 days", "30 to 90 days", "3 to 6 months", "6 to 12 months", "Planning stage"];
 const materials = ["Financial model and data room", "Financial model and investor materials", "Historical financial statements", "Initial company or project summary", "Preparation required"];
 
-export const roleOptions: { value: Role; title: string; text: string }[] = [
-  { value: "investor", title: "An investor", text: "I want to see opportunities that fit my mandate." },
-  { value: "founder", title: "A founder", text: "I want to raise capital or use Velero’s advisory services." },
-  { value: "sponsor", title: "A sponsor or intermediary", text: "I’m introducing a company, a shareholder position or a real estate transaction." },
+/**
+ * Line drawings for the profile cards, in the site's one-line style (48 × 48, stroke only). Each is drawn as a single
+ * path so it can trace itself in when the card is hovered or chosen.
+ */
+export type IconName = "investor" | "founder" | "sponsor" | "raise" | "services";
+const ICONS: Record<IconName, string> = {
+  // A skyline of rising bars: opportunities that grow.
+  investor: "M4 40 H9 V33 H13 V40 H18 V26 H22 V40 H27 V18 H31 V40 H36 V10 H40 V40 H44 M33 6 L38 3 L43 6",
+  // A seedling breaking ground: a company in growth.
+  founder: "M4 42 H44 M24 42 V24 C24 15 30 9 39 9 C39 18 33 24 24 24 M24 31 C17 31 11 26 11 18 C18 18 24 23 24 31",
+  // A bridge between two banks: bringing two sides together.
+  sponsor: "M3 33 H10 V43 M10 33 C15 13 33 13 38 33 V43 M38 33 H45 M10 33 H38 M16 33 V22 M24 33 V18 M32 33 V22",
+  // Bars climbing to an arrow: capital raised.
+  raise: "M5 43 H43 M11 43 V33 H17 V43 M21 43 V27 H27 V43 M31 43 V20 H37 V43 M8 24 L19 15 L25 20 L39 7 M32 7 H39 V14",
+  // A compass: direction on a decision.
+  services: "M24 4 A20 20 0 1 1 23.9 4 M24 11 L29 24 L24 37 L19 24 Z M24 24 H24.1",
+};
+export function Icon({ name, className = "" }: { name: IconName; className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={`pick-ico ${className}`}>
+      <path d={ICONS[name]} pathLength={1} />
+    </svg>
+  );
+}
+
+type Option<T> = { value: T; title: string; text: string; icon: IconName };
+
+export const roleOptions: Option<Role>[] = [
+  { value: "investor", title: "An investor", text: "I want to see opportunities that fit my mandate.", icon: "investor" },
+  { value: "founder", title: "A founder", text: "I want to raise capital or use Velero’s advisory services.", icon: "founder" },
+  { value: "sponsor", title: "A sponsor or intermediary", text: "I’m introducing a company, a shareholder position or a real estate transaction.", icon: "sponsor" },
 ];
-export const goalOptions: { value: Goal; title: string; text: string }[] = [
-  { value: "raise", title: "Raise capital", text: "A funding round, a secondary sale or project financing." },
-  { value: "services", title: "Use our services", text: "Advisory on fundraising, M&A, cap table or valuation." },
+export const goalOptions: Option<Goal>[] = [
+  { value: "raise", title: "Raise capital", text: "A funding round, a secondary sale or project financing.", icon: "raise" },
+  { value: "services", title: "Use our services", text: "Advisory on fundraising, M&A, cap table or valuation.", icon: "services" },
 ];
 
 type Def = {
@@ -59,7 +86,7 @@ const investor: Def[] = [
   { name: "investor_type", label: "Investor type", kind: "select", placeholder: "Select a type…", options: investorTypes },
   { name: "jurisdiction", label: "Based in", placeholder: "Country or region" },
   { name: "strategies", label: "Opportunities I want to see", kind: "checks", options: strategies },
-  { name: "ticket", label: "Typical ticket size", kind: "select", placeholder: "Select a size…", options: tickets },
+  { name: "ticket", label: "Investment size (USD)", kind: "select", placeholder: "Select a size…", options: tickets },
   { name: "timing", label: "Allocation timing", kind: "select", placeholder: "Select timing…", options: horizons },
   { name: "interests", label: "Sectors, regions or companies of interest", kind: "textarea", optional: true, wide: true, rows: 4, placeholder: "Tell us what you are looking for, and anything you already hold or want to avoid" },
 ];
@@ -151,19 +178,39 @@ function Choice({ name, placeholder, options, defaultValue = "" }: { name: strin
   );
 }
 
-/** Large either/or buttons that decide which questions follow. */
-export function Pick<T extends string>({ legend, name, value, onChange, options }: { legend: string; name: string; value: T | null; onChange: (v: T) => void; options: { value: T; title: string; text: string }[] }) {
+/** Large either/or cards that decide which questions follow: icon, title, a line of text and a clear chosen state. */
+export function Pick<T extends string>({ legend, name, value, onChange, options }: { legend: string; name: string; value: T | null; onChange: (v: T) => void; options: Option<T>[] }) {
   return (
     <fieldset className="sm:col-span-2">
-      <legend className="mb-2 block text-[13px] font-semibold">{legend}</legend>
-      <div className={`grid gap-3 ${options.length > 2 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
+      <legend className="mb-3 block text-[13px] font-semibold">{legend}</legend>
+      <div className={`grid gap-3 sm:gap-4 ${options.length > 2 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
         {options.map((o) => {
           const on = value === o.value;
           return (
-            <label key={o.value} className={`cursor-pointer rounded-md border px-4 py-3.5 transition-colors ${on ? "border-blue bg-blue text-white" : "border-ink/20 bg-white/70 hover:border-blue"}`}>
+            <label
+              key={o.value}
+              className={`group/pick relative flex cursor-pointer flex-col rounded-lg border p-5 transition duration-200 ease-out has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-paper motion-reduce:transition-none ${
+                on
+                  ? "border-blue bg-blue text-white shadow-[0_18px_40px_-22px_rgba(2,60,207,.75)]"
+                  : "border-ink/15 bg-white hover:-translate-y-0.5 hover:border-blue hover:shadow-[0_16px_34px_-24px_rgba(0,0,0,.45)] motion-reduce:hover:translate-y-0"
+              }`}
+            >
               <input type="radio" name={name} value={o.title} checked={on} onChange={() => onChange(o.value)} required className="sr-only" />
-              <span className="display block text-xl">{o.title}</span>
-              <span className={`mt-1 block text-[13px] leading-snug ${on ? "text-white/85" : "text-ink/65"}`}>{o.text}</span>
+              <span className="flex items-start justify-between">
+                <span className={`flex h-14 w-14 items-center justify-center rounded-xl ring-1 transition-colors ${on ? "bg-white/10 text-white ring-white/30" : "bg-blue/[0.05] text-blue ring-blue/15 group-hover/pick:bg-blue/[0.09]"}`}>
+                  <Icon name={o.icon} className={on ? "is-on" : ""} />
+                </span>
+                {/* The chosen state is shown by more than colour: a filled ring with a tick. */}
+                <span aria-hidden="true" className={`flex h-6 w-6 items-center justify-center rounded-full border transition-colors ${on ? "border-white bg-white text-blue" : "border-ink/25 text-transparent group-hover/pick:border-blue"}`}>
+                  <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 6.2 5 8.5l4.5-5" /></svg>
+                </span>
+              </span>
+              <span className="display mt-5 block text-[22px] leading-[1.05]">{o.title}</span>
+              <span className={`mt-2 block text-[13px] leading-snug ${on ? "text-white/85" : "text-ink/65"}`}>{o.text}</span>
+              <span className={`mt-auto flex items-center gap-1.5 pt-5 text-[12px] font-semibold ${on ? "text-white" : "text-blue"}`}>
+                {on ? "Selected" : "Select"}
+                {!on && <span aria-hidden="true" className="transition-transform duration-200 group-hover/pick:translate-x-0.5 motion-reduce:transition-none">→</span>}
+              </span>
             </label>
           );
         })}

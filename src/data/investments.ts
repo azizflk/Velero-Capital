@@ -16,7 +16,7 @@ export type Investment = {
 };
 
 export const process = [
-  { title: "Sourcing", text: "Opportunities come through founder, sponsor, shareholder and operator relationships — not listing platforms." },
+  { title: "Sourcing", text: "Opportunities come through founder, sponsor, shareholder and operator relationships." },
   { title: "Diligence", text: "We review the company or asset, the terms and the counterparties before anything is shared with investors." },
   { title: "Structuring", text: "Each transaction is structured as a direct holding or a dedicated vehicle, with terms and fees set out up front." },
   { title: "Closing & Reporting", text: "We manage closing and transfer approvals, then report to investors through to exit." },
@@ -37,7 +37,7 @@ export const investments: Investment[] = [
       { title: "Stage", text: "Series C through pre-IPO, where the business model is proven and the route to liquidity is visible." },
       { title: "Sectors", text: "Artificial intelligence, robotics, fintech, healthcare and biotechnology, and space technology." },
     ],
-    lookFor: ["Category leaders with durable revenue growth", "Experienced management and institutional investors in the round", "A credible path to IPO or strategic exit", "Valuation supported by fundamentals, not momentum"],
+    lookFor: ["Category leaders with durable revenue growth", "Experienced management and institutional investors in the round", "A credible path to IPO or strategic exit", "Valuation supported by fundamentals"],
     belt: "venture",
     beltLabel: "Access to Rounds Led by Leading VCs",
   },
@@ -48,7 +48,7 @@ export const investments: Investment[] = [
     path: "/secondaries/",
     label: "Secondaries",
     title: "Secondaries: existing stakes in leading private companies and funds",
-    intro: "Access to existing stakes rather than new shares — from founders, employees and early investors, and fund interests from limited partners seeking liquidity.",
+    intro: "Existing shares bought from founders, employees and early investors, and fund interests bought from limited partners seeking liquidity.",
     summary: "Existing stakes rather than new shares: direct secondaries from founders, employees and early investors, and fund interests from limited partners seeking liquidity.",
     points: [
       { title: "Direct Secondaries", text: "Shares purchased by eligible investors from founders, employees and early investors in established private companies." },
@@ -83,7 +83,7 @@ export const investments: Investment[] = [
     path: "/co-investments/",
     label: "Co-Investments & Syndicates",
     title: "Co-Investments & Syndicates: how investors participate",
-    intro: "Not a separate asset class but the structures through which investors take part in the three strategies we cover: a co-investment alongside a lead sponsor, or a dedicated vehicle formed for one transaction.",
+    intro: "The structures through which investors take part in the three strategies we cover: a co-investment alongside a lead sponsor, or a dedicated vehicle formed for one transaction.",
     summary: "The structures through which investors participate across the three strategies: deal by deal, alongside a lead sponsor, through a direct holding or a dedicated vehicle.",
     points: [
       { title: "Syndicates", text: "A dedicated vehicle is formed for each transaction, aggregating capital from approved investors into a single line on the cap table." },
