@@ -124,18 +124,9 @@ function AccountButton({ to, label, email, onSignedOut }: { to: string; label: s
   );
 }
 
-/** “Apply”, drawn like the outlined logo: a plain ink frame that fills on hover. It goes to the Apply section on the home page. */
-function ApplyButton({ pathname }: { pathname: string }) {
-  // Already on the home page, glide to the section; a repeat click works too, though the address does not change.
-  const onClick = (e: React.MouseEvent) => {
-    const target = document.getElementById("apply");
-    if (pathname === "/" && target) {
-      e.preventDefault();
-      history.replaceState(history.state, "", "/#apply");
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-  return <Link to="/#apply" onClick={onClick} className="frame-cta">Apply</Link>;
+/** “Apply”, drawn like the outlined logo: a plain ink frame that fills on hover. Applying needs an account: it signs the visitor in first, then opens the questions. */
+function ApplyButton({ signedIn }: { signedIn: boolean }) {
+  return <Link to={signedIn ? "/account/" : loginFor("/account/")} className="frame-cta">Apply</Link>;
 }
 
 export default function Nav() {
@@ -149,7 +140,7 @@ export default function Nav() {
   const [signedIn, setSignedIn] = useState("");
   useEffect(() => { try { setSignedIn(localStorage.getItem(SIGNED_IN_KEY) ?? ""); } catch { /* storage blocked: keep “Login” */ } }, [pathname]);
   const email = signedIn.includes("@") ? signedIn : "";
-  // Login brings the visitor back to the page they were on. Apply goes to the application form on the home page.
+  // Login brings the visitor back to the page they were on. Apply signs the visitor in, then opens the application.
   // Signed in, the address replaces Login and opens a menu with Log out.
   const account = PORTAL_ON ? { to: signedIn ? "/account/" : loginFor(isPortalPath(pathname) ? "/" : pathname), label: signedIn ? email || "My account" : "Login", email } : null;
   const apply = PORTAL_ON;
@@ -204,7 +195,7 @@ export default function Nav() {
           {account && (
             <div className="flex items-center gap-1.5 min-[400px]:gap-2 sm:gap-3">
               <AccountButton {...account} onSignedOut={() => setSignedIn("")} />
-              {apply && <ApplyButton pathname={pathname} />}
+              {apply && <ApplyButton signedIn={!!signedIn} />}
             </div>
           )}
 
