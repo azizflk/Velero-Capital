@@ -3,7 +3,7 @@ import { SidebarPage, Section, Prose, List } from "@/components/Layout";
 import Button from "@/components/Button";
 import { services } from "@/data/services";
 import { ORIGIN, useTitle } from "@/lib/useTitle";
-import { APPLY_HREF } from "@/lib/portal";
+import { applyForService } from "@/lib/portal";
 
 const anchors = [{ id: "advisers", label: "Our advisers" }, ...services.map((s) => ({ id: s.id, label: s.title }))];
 
@@ -51,7 +51,7 @@ export default function Services() {
         <Prose>
           <p>Engagements are scoped up front and typically run on a retainer, so our advice stays independent of any single outcome. Tell us where you are in the financing or transaction lifecycle and we’ll propose a scope.</p>
         </Prose>
-        <div className="mt-6"><Button to={APPLY_HREF} variant="blue">Apply to discuss an engagement</Button></div>
+        <div className="mt-6"><Button to={applyForService()} variant="blue">Apply to discuss an engagement</Button></div>
       </Section>
     </SidebarPage>
   );

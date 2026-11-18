@@ -5,6 +5,7 @@ import { usePageTitle, useSession } from "./client";
 import Account from "./Account";
 import Admin from "./Admin";
 import ApplicationPage from "./ApplicationPage";
+import StartApplication from "./StartApplication";
 import AuthCard, { AuthPage } from "./AuthCard";
 import Shell from "./Shell";
 
@@ -43,13 +44,14 @@ export default function Portal() {
   }
   const email = session?.user.email ?? "";
   // Someone who opens an account page signed out comes back to that page after signing in.
-  const inside = (page: React.ReactNode) => (session ? <Shell email={email} home="/">{page}</Shell> : <Navigate to={loginFor(pathname)} replace />);
+  const inside = (page: React.ReactNode) => (session ? <Shell email={email} home="/">{page}</Shell> : <Navigate to={loginFor(pathname + search)} replace />);
   const next = nextPath(search);
   return (
     <Routes>
       {/* After signing in, back to the page they came from (the site itself by default), not into the account area. */}
       <Route path="/login" element={session ? <Navigate to={next} replace /> : <Login next={next} />} />
       <Route path="/account" element={inside(session && <Account session={session} />)} />
+      <Route path="/account/apply" element={inside(session && <StartApplication />)} />
       <Route path="/account/application/:id" element={inside(session && <ApplicationPage session={session} />)} />
       <Route path="/account/*" element={<Navigate to="/account/" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />

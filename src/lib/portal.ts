@@ -26,3 +26,11 @@ export const isPortalPath = (pathname: string) => /^\/(login|account|admin)(\/|$
 
 /** Where every “apply” link goes: the login page, then the application. Without accounts, the contact page. */
 export const APPLY_HREF = PORTAL_ON ? loginFor("/account/") : "/contact-us/";
+
+/**
+ * A link straight into a new application from a service page: a founder who wants advisory services,
+ * with the service already chosen when there is one. Signed out, it goes through the login page first.
+ * Without accounts, the contact page.
+ */
+export const applyForService = (service?: string) =>
+  PORTAL_ON ? `/account/apply/?for=services${service ? `&service=${encodeURIComponent(service)}` : ""}` : "/contact-us/";

@@ -3,7 +3,7 @@ import Button from "@/components/Button";
 import { services, type Service } from "@/data/services";
 import { faqPage, serviceNode, useTitle } from "@/lib/useTitle";
 import FAQ from "@/components/FAQ";
-import { APPLY_HREF } from "@/lib/portal";
+import { applyForService } from "@/lib/portal";
 
 /** The sections in page order; the optional ones appear only when the service has them. */
 const anchorsFor = (s: Service) => [
@@ -31,10 +31,15 @@ export default function ServiceDetail({ service }: { service: Service }) {
   // The services most often combined with this one, or else all the others.
   const others = related.length ? related : services.filter((s) => s.slug !== service.slug);
   const anchors = anchorsFor(service);
+  // Opens the application with this service already chosen.
+  const apply = applyForService(service.title);
   return (
     <SidebarPage title={service.title} intro={service.intro} anchors={anchors}>
       <Section id="overview">
-        <Prose><p>{service.text}</p></Prose>
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          <Prose><p>{service.text}</p></Prose>
+          <Button to={apply} variant="blue" className="shrink-0 self-start lg:self-center">Apply <span aria-hidden>→</span></Button>
+        </div>
       </Section>
 
       <Section id="when" title="When to engage us">
@@ -106,7 +111,7 @@ export default function ServiceDetail({ service }: { service: Service }) {
         <Prose>
           <p>Each engagement is led by a senior member of the team, scoped up front and typically run on a retainer, so our advice stays independent of any single outcome. Tell us where you are and we’ll propose a scope.</p>
         </Prose>
-        <div className="mt-6 flex flex-wrap gap-3"><Button to={APPLY_HREF} variant="blue">Apply to discuss an engagement</Button><Button to="/services/">All services</Button></div>
+        <div className="mt-6 flex flex-wrap gap-3"><Button to={apply} variant="blue">Apply to discuss an engagement</Button><Button to="/services/">All services</Button></div>
       </Section>
 
       <Section title={related.length ? "Often combined with" : "Other services"}>
