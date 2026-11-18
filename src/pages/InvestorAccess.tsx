@@ -3,6 +3,7 @@ import { SidebarPage, Section, Cols, Prose, List } from "@/components/Layout";
 import Button from "@/components/Button";
 import { investments } from "@/data/investments";
 import { useTitle } from "@/lib/useTitle";
+import { APPLY_HREF } from "@/lib/portal";
 
 const anchors = [
   { id: "who", label: "Who we work with" },
@@ -83,7 +84,7 @@ export default function InvestorAccess() {
 
       <Section id="start" title="Start">
         <Prose><p>Tell us about yourself and your mandate. A senior member of the team reviews every investor enquiry and comes back to you to arrange a first conversation.</p></Prose>
-        <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/?role=investor" variant="blue">Investor enquiry</Button><Button to="/capital/">Explore our strategies</Button></div>
+        <div className="mt-6 flex flex-wrap gap-3"><Button to={APPLY_HREF} variant="blue">Apply as an investor</Button><Button to="/capital/">Explore our strategies</Button></div>
       </Section>
     </SidebarPage>
   );

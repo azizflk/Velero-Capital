@@ -48,9 +48,10 @@ export const social = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/107078065/" },
 ];
 
+/** Office cities only (owner, 18 Nov 2026: no street addresses on the site). */
 export const offices = [
-  { region: "United Arab Emirates", address: "Meydan Grandstand, Meydan Road, Nad Al Sheba, Dubai, UAE" },
-  { region: "San Francisco", address: "San Francisco, CA, USA" },
+  { region: "United Arab Emirates", city: "Dubai", address: "Dubai, UAE" },
+  { region: "San Francisco", city: "San Francisco", address: "San Francisco, CA, USA" },
 ];
 
 /**
@@ -147,11 +148,14 @@ export const differentiators = [
   },
 ];
 
-/** Official email domains used by the Account Verification page. Keep this list current. */
+/**
+ * The official email addresses the Account Verification page confirms (owner, 18 Nov 2026). Only these exact
+ * addresses verify; any other address, even on velero.capital, does not. Keep this list current.
+ */
 export const officialAccounts = {
-  emailDomains: ["velero.capital"],
+  emailAddresses: ["contact@velero.capital"],
 };
-function officialAccountsDomains() { return officialAccounts.emailDomains.join(" and "); }
+const officialAddressList = () => officialAccounts.emailAddresses.join(" and ");
 
 /**
  * Frequently asked questions, grouped. Every answer restates something the site already says elsewhere
@@ -174,7 +178,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Where does Velero Capital work? Do I need to be in Dubai or San Francisco?",
-        a: `No. Velero Capital is headquartered in Dubai, at ${offices[0].address.replace(/, Dubai, UAE$/, "")}, with an office in San Francisco. It works with investors in Dubai, San Francisco and beyond, and on cross-border mandates between the Gulf, the United States and wider international markets.`,
+        a: `No. Velero Capital is headquartered in Dubai, with an office in San Francisco. It works with investors in Dubai, San Francisco and beyond, and on cross-border mandates between the Gulf, the United States and wider international markets.`,
       },
       {
         q: "How do investors take part in a transaction?",
@@ -232,7 +236,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Will I hear back, even if it is a no?",
-        a: "Yes. We reply to every submission, whatever the outcome. Many opportunities are not the right fit for us, and when that is the case we will let you know promptly. It is never a judgement on your business, only on how closely it matches what we do.",
+        a: "Yes. We reply to every application. If it is a fit, we invite you to a first conversation; if we decide not to proceed, we will explain why. It is never a judgement on your business, only on how closely it matches what we do.",
       },
     ],
   },
@@ -243,6 +247,10 @@ export const faqGroups: FaqGroup[] = [
       {
         q: "How do I apply?",
         a: "Click Apply at the top of any page and log in with your email or Google. Then choose whether you are an investor, a founder, or a sponsor or intermediary; you are asked only the questions that apply.",
+      },
+      {
+        q: "Is there a deadline or a batch?",
+        a: "No. There are no batches or deadlines. Whether you are an investor looking for opportunities, a founder raising capital or seeking advice, or a sponsor introducing a transaction, we review your application as soon as it arrives.",
       },
       {
         q: "What should a submission include?",
@@ -258,7 +266,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "What happens after I apply?",
-        a: "A senior member of the team reviews the objective, your authority, the jurisdiction, the timing, the size and how ready the information is. If there is a fit, we arrange a first conversation, usually followed by a non-disclosure agreement; where work goes ahead, its scope and terms are agreed in writing.",
+        a: "A senior member of the team reviews your application as soon as it arrives: the objective, your authority, the jurisdiction, the timing, the size and how ready the information is. If it is a fit, we invite you to a first conversation, most often by video call, and you hear back from us by email after it, typically within 24 hours. Where work goes ahead, a non-disclosure agreement usually follows and the scope and terms are agreed in writing.",
       },
       {
         q: "Is anything guaranteed once I apply?",
@@ -302,7 +310,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "How can I check that an email really comes from Velero Capital?",
-        a: `Use the Account Verification page before acting on any message. Official email comes only from the ${officialAccountsDomains()} domain, and Velero Capital never asks for bank, card or identity-document details through its website.`,
+        a: `Use the Account Verification page before acting on any message. Official email comes only from ${officialAddressList()}, and Velero Capital never asks for bank, card or identity-document details through its website.`,
       },
       {
         q: "Does the website give investment, legal or tax advice?",

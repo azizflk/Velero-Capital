@@ -11,8 +11,8 @@ function check(raw: string): Result {
   const v = raw.trim().toLowerCase();
   if (!v) return null;
   const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  const domain = v.split("@").pop() ?? "";
-  return { ok: valid && officialAccounts.emailDomains.includes(domain), valid, value: v };
+  // Only the exact official addresses verify; a lookalike on the same domain does not.
+  return { ok: valid && officialAccounts.emailAddresses.includes(v), valid, value: v };
 }
 
 export default function Verification() {
@@ -27,7 +27,7 @@ export default function Verification() {
             <form onSubmit={onSubmit} className="max-w-md space-y-6">
               <div>
                 <Label htmlFor="account">Email address</Label>
-                <Input id="account" name="account" type="email" required placeholder="name@velero.capital" autoComplete="off" />
+                <Input id="account" name="account" type="email" required placeholder="Paste the sender’s email address" autoComplete="off" />
               </div>
               <Button type="submit" variant="blue">Verify</Button>
             </form>
@@ -36,7 +36,7 @@ export default function Verification() {
                 {result.ok ? (
                   <><strong>Verified.</strong> <span className="font-mono">{result.value}</span> is an official Velero Capital email address.</>
                 ) : !result.valid ? (
-                  <><strong>That doesn’t look like an email address.</strong> Please enter the full address, for example name@velero.capital.</>
+                  <><strong>That doesn’t look like an email address.</strong> Please enter the full address, for example contact@velero.capital.</>
                 ) : (
                   <><strong>Not recognised.</strong> <span className="font-mono">{result.value}</span> is <u>not</u> an official Velero Capital email address. Do not share funds or personal data with this sender.</>
                 )}
@@ -46,7 +46,8 @@ export default function Verification() {
           <div className="lg:col-span-5">
             <Prose className="text-[13px]">
               <p>Enter the full email address exactly as it appears in the message you received. Make sure there are no extra spaces before or after it — even a small typo can cause errors.</p>
-              <p className="border-t border-rule pt-4 font-medium text-ink">We do not reach out through unofficial channels.</p>
+              <p className="border-t border-rule pt-4 font-medium text-ink">Our official email address: {officialAccounts.emailAddresses.map((a, i) => <span key={a}>{i ? ", " : ""}<a href={`mailto:${a}`} className="textlink">{a}</a></span>)}</p>
+              <p className="font-medium text-ink">We do not reach out through unofficial channels.</p>
               <p>If someone contacts you claiming to represent Velero Capital, always verify their identity here first. We are not responsible for any communication or offers made outside of our verified accounts.</p>
             </Prose>
           </div>

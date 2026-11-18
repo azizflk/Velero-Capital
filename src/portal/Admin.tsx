@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { box, questions, summary, type Role } from "@/components/EnquiryForm";
-import { day, dayTime, flow, signOut, supabase, usePageTitle, type Admin as AdminRow, type Application, type Note, type Profile, type Status } from "./client";
+import { day, dayTime, flow, signOut, supabase, usePageTitle, type Admin as AdminRow, type Application, type Enquiry, type EnquiryStatus, type Note, type Profile, type Status } from "./client";
 import { nameOf } from "./Account";
 import AuthCard, { AuthPage } from "./AuthCard";
 import Shell, { Chip, Loading, toneOf } from "./Shell";
@@ -47,7 +47,8 @@ export default function Admin({ session }: { session: Session | null }) {
 }
 
 function Panel({ me }: { me: string }) {
-  const [tab, setTab] = useState<"applications" | "accounts" | "admins">("applications");
+  const [tab, setTab] = useState<"applications" | "enquiries" | "accounts" | "admins">("applications");
+  const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [apps, setApps] = useState<Application[] | null>(null);
   const [people, setPeople] = useState<Profile[]>([]);
   const [admins, setAdmins] = useState<AdminRow[]>([]);
@@ -56,14 +57,17 @@ function Panel({ me }: { me: string }) {
 
   const load = useCallback(async () => {
     setError("");
-    const [a, p, ad] = await Promise.all([
+    const [a, p, ad, en] = await Promise.all([
       // Drafts are never returned to an admin; the filter only keeps an admin's own drafts out of this list.
       supabase.from("applications").select("*").neq("status", "draft").order("submitted_at", { ascending: false }),
       supabase.from("profiles").select("*").order("created_at", { ascending: false }),
       supabase.from("admins").select("*").order("added_at", { ascending: true }),
+      supabase.from("enquiries").select("*").order("created_at", { ascending: false }),
     ]);
     if (a.error || p.error || ad.error) { setError("The data could not be loaded. Please refresh the page."); return; }
     setApps(a.data as Application[]); setPeople(p.data as Profile[]); setAdmins(ad.data as AdminRow[]);
+    // Enquiries arrive on their own table; if it is not there yet, the rest of the panel still works.
+    setEnquiries(en.error ? [] : (en.data as Enquiry[]));
   }, []);
   useEffect(() => { void load(); }, [load]);
 
@@ -73,7 +77,8 @@ function Panel({ me }: { me: string }) {
     return <Detail app={current} onBack={() => setOpen("")} onChange={(next) => setApps((list) => (list ?? []).map((a) => (a.id === next.id ? next : a)))} />;
   }
 
-  const tabs = [["applications", `Applications (${apps.length})`], ["accounts", `Accounts (${people.length})`], ["admins", `Admins (${admins.length})`]] as const;
+  const fresh = enquiries.filter((e) => e.status === "new").length;
+  const tabs = [["applications", `Applications (${apps.length})`], ["enquiries", `Enquiries (${fresh ? `${fresh} new` : enquiries.length})`], ["accounts", `Accounts (${people.length})`], ["admins", `Admins (${admins.length})`]] as const;
   return (
     <>
       <div className="flex flex-wrap items-end justify-between gap-4">
@@ -88,6 +93,7 @@ function Panel({ me }: { me: string }) {
       {error && <p className={`${warn} mt-5`} role="alert">{error}</p>}
       <div className="mt-7">
         {tab === "applications" && <Applications apps={apps} onOpen={setOpen} />}
+        {tab === "enquiries" && <Enquiries items={enquiries} onChange={setEnquiries} />}
         {tab === "accounts" && <Accounts people={people} apps={apps} />}
         {tab === "admins" && <Admins me={me} admins={admins} onChange={setAdmins} />}
       </div>
@@ -258,6 +264,81 @@ function Detail({ app, onBack, onChange }: { app: Application; onBack: () => voi
         </aside>
       </div>
     </div>
+  );
+}
+
+const enquiryLabels: Record<EnquiryStatus, string> = { new: "New", answered: "Answered", closed: "Closed" };
+
+/** General messages from the contact page: read, reply by email, mark answered or closed, delete. */
+function Enquiries({ items, onChange }: { items: Enquiry[]; onChange: (list: Enquiry[]) => void }) {
+  const [filter, setFilter] = useState<EnquiryStatus | "">("");
+  const [open, setOpen] = useState("");
+  const [removing, setRemoving] = useState("");
+  const [error, setError] = useState("");
+  const shown = items.filter((e) => !filter || e.status === filter);
+  const move = async (e: Enquiry, status: EnquiryStatus) => {
+    setError("");
+    const { data, error } = await supabase.from("enquiries").update({ status }).eq("id", e.id).select().single();
+    if (error || !data) { setError("The status was not changed. Please try again."); return; }
+    onChange(items.map((x) => (x.id === e.id ? (data as Enquiry) : x)));
+  };
+  const remove = async (id: string) => {
+    setError("");
+    const { error } = await supabase.from("enquiries").delete().eq("id", id);
+    setRemoving("");
+    if (error) { setError("That message was not deleted. Please try again."); return; }
+    onChange(items.filter((x) => x.id !== id));
+  };
+  return (
+    <>
+      <div className="flex flex-wrap items-center gap-2">
+        {(["", "new", "answered", "closed"] as const).map((s) => (
+          <button key={s || "all"} type="button" aria-pressed={filter === s} onClick={() => setFilter(s)} className={`pill pill-small ${filter === s ? "pill-blue" : ""}`}>
+            {s ? enquiryLabels[s] : "All"} ({s ? items.filter((e) => e.status === s).length : items.length})
+          </button>
+        ))}
+      </div>
+      {error && <p className={`${warn} mt-4`} role="alert">{error}</p>}
+      {shown.length === 0 ? (
+        <p className="mt-6 rounded-lg border border-rule bg-white p-8 text-center text-[14px] text-ink/65">{items.length ? "Nothing matches this filter." : "No messages yet. They arrive here from the contact page."}</p>
+      ) : (
+        <ul className="mt-5 space-y-3">
+          {shown.map((e) => {
+            const expanded = open === e.id;
+            return (
+              <li key={e.id} className="rounded-lg border border-rule bg-white">
+                <button type="button" onClick={() => setOpen(expanded ? "" : e.id)} aria-expanded={expanded} className="flex w-full flex-wrap items-center justify-between gap-3 p-4 text-left">
+                  <span className="min-w-0">
+                    <span className="block font-medium">{e.name}{e.organisation ? <span className="font-normal text-ink/60"> · {e.organisation}</span> : null}</span>
+                    <span className="block text-[12px] text-ink/60">{e.topic} · {dayTime(e.created_at)} · {e.email}</span>
+                  </span>
+                  <Chip tone={e.status === "new" ? "new" : e.status === "closed" ? "done" : "active"}>{enquiryLabels[e.status]}</Chip>
+                </button>
+                {expanded && (
+                  <div className="border-t border-rule p-4">
+                    <p className="whitespace-pre-wrap break-words text-[14px] leading-relaxed">{e.message}</p>
+                    <div className="mt-4 flex flex-wrap items-center gap-2">
+                      <a href={`mailto:${e.email}?subject=${encodeURIComponent(`Re: ${e.topic}`)}`} className="pill pill-small pill-blue">Reply by email</a>
+                      {e.status !== "answered" && <button type="button" onClick={() => void move(e, "answered")} className="pill pill-small">Mark answered</button>}
+                      {e.status !== "closed" && <button type="button" onClick={() => void move(e, "closed")} className="pill pill-small">Close</button>}
+                      {e.status !== "new" && <button type="button" onClick={() => void move(e, "new")} className="pill pill-small">Mark new</button>}
+                      {removing === e.id ? (
+                        <span className="ml-auto flex gap-2">
+                          <button type="button" onClick={() => void remove(e.id)} className="pill pill-small pill-danger">Delete</button>
+                          <button type="button" onClick={() => setRemoving("")} className="pill pill-small">Keep</button>
+                        </span>
+                      ) : (
+                        <button type="button" onClick={() => setRemoving(e.id)} className="ml-auto text-[13px] text-ink/60 underline-offset-4 hover:text-ink hover:underline">Delete</button>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </>
   );
 }
 

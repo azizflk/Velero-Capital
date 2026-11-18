@@ -50,7 +50,7 @@ export const menus: Record<string, Menu> = {
     headline: "Corporate finance and cross-border advisory.",
     text: "Senior-led, tightly scoped engagements across the financing and transaction lifecycle.",
     cta: { label: "Explore all services", to: "/services/" },
-    action: { label: "Discuss an engagement", to: "/contact-us/?role=founder&goal=services" },
+    action: { label: "Discuss an engagement", to: "/login/?next=%2Faccount%2F" },
     groups: [
       { title: "Capital raising", items: [
         { label: "Fundraising Advisory", to: "/services/fundraising-advisory/", desc: "Equity and structured raises, end to end." },

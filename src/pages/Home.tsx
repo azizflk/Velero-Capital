@@ -10,7 +10,7 @@ import { investments } from "@/data/investments";
 import { menus } from "@/data/menus";
 import { Link } from "react-router-dom";
 import { useTitle } from "@/lib/useTitle";
-import { PORTAL_ON, loginFor } from "@/lib/portal";
+import { PORTAL_ON, loginFor, APPLY_HREF } from "@/lib/portal";
 
 function Hero() {
   return (
@@ -150,7 +150,7 @@ function ServicesHome() {
           </div>
         ))}
       </div>
-      <div className="mt-10 flex flex-wrap gap-3"><Button to="/services/">Explore our services</Button><Button to="/contact-us/?role=founder&goal=services">Discuss an engagement</Button></div>
+      <div className="mt-10 flex flex-wrap gap-3"><Button to="/services/">Explore our services</Button><Button to={APPLY_HREF}>Discuss an engagement</Button></div>
     </Section>
   );
 }

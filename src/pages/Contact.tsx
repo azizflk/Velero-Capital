@@ -1,8 +1,8 @@
-import { useMemo } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { S, gap, row } from "@/components/VeleroStory";
-import { GOALS, ROLES, services, type Goal, type Role } from "@/components/EnquiryForm";
-import ApplicationForm from "@/components/ApplicationForm";
+import Button from "@/components/Button";
+import MessageForm from "@/components/MessageForm";
+import { APPLY_HREF } from "@/lib/portal";
 import { CONTACT_EMAIL, offices } from "@/data/site";
 import { useTitle } from "@/lib/useTitle";
 
@@ -45,14 +45,6 @@ const steps = [
 
 export default function Contact() {
   useTitle("Contact", "Start a confidential conversation with Velero Capital about raising capital, a transaction, liquidity, or access to private markets.", { full: "Contact Velero Capital | Dubai & San Francisco", pageType: "ContactPage" });
-  const [params] = useSearchParams();
-  const preset = useMemo(() => {
-    const want = (params.get("service") || "").toLowerCase();
-    return services.find((i) => i.toLowerCase() === want) ?? "";
-  }, [params]);
-  const r0 = params.get("role") as Role | null, g0 = params.get("goal") as Goal | null;
-  const role = preset ? "founder" : r0 && ROLES.includes(r0) ? r0 : null;
-  const goal = preset ? "services" : g0 && GOALS.includes(g0) ? g0 : null;
 
   return (
     <>
@@ -67,7 +59,7 @@ export default function Contact() {
             <div className="lg:col-span-7">
               <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">Let’s talk</div>
               <h1 className="display mt-3 text-5xl sm:text-6xl lg:text-7xl">Connect With Velero</h1>
-              <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/85">Select your profile to explore investment opportunities, access advisory services, or submit a transaction for consideration.</p>
+              <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/85">To apply as an investor, a founder or a sponsor, use Apply. For anything else, send us a short message.</p>
             </div>
             <div className="lg:col-span-5"><Skyline /></div>
           </div>
@@ -77,12 +69,21 @@ export default function Contact() {
       {/* Form and contact card */}
       <section className="wrap grid grid-cols-1 gap-12 py-16 sm:py-20 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-7">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-blue">Start a conversation</div>
-          <div className="mt-3 h-px w-10 bg-blue" />
-          <h2 className="display mt-5 text-4xl sm:text-5xl">Tell us who you are</h2>
-          <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink/80">Choose the option that describes you and we will ask only what is relevant. We review each enquiry for fit before arranging a first conversation. Please do not send confidential documents through this form.</p>
+          {/* Applications go through Apply; this page takes general messages only. */}
+          <div className="flex flex-col gap-4 rounded-lg border border-blue/30 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <div className="text-[14px] font-semibold">Applying to Velero Capital?</div>
+              <p className="mt-1 text-[13px] leading-relaxed text-ink/70">Investors, founders and sponsors apply through Apply. Log in with your email or Google; you can save a draft and follow your application.</p>
+            </div>
+            <Button to={APPLY_HREF} variant="blue" className="shrink-0">Apply <span aria-hidden>→</span></Button>
+          </div>
 
-          <div className="mt-8"><ApplicationForm role={role} goal={goal} service={preset} submitLabel="Request a conversation" /></div>
+          <div className="mt-12 text-[11px] font-semibold uppercase tracking-[0.22em] text-blue">General enquiries</div>
+          <div className="mt-3 h-px w-10 bg-blue" />
+          <h2 className="display mt-5 text-4xl sm:text-5xl">Send us a message</h2>
+          <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink/80">For questions that are not an application. Please do not send confidential documents through this form.</p>
+
+          <div className="mt-8"><MessageForm /></div>
         </div>
 
         <aside className="lg:col-span-5">
@@ -97,7 +98,7 @@ export default function Contact() {
                 <dt className="text-[14px] font-semibold">Offices</dt>
                 <dd className="mt-2 space-y-3 text-[14px] leading-relaxed text-white/85">
                   {offices.map((o) => (
-                    <div key={o.region}><span className="block font-medium text-white">{o.region === "United Arab Emirates" ? "Dubai" : o.region}</span>{o.address}</div>
+                    <div key={o.region} className="font-medium text-white">{o.city}</div>
                   ))}
                 </dd>
               </div>

@@ -25,41 +25,17 @@ export const services = ["Fundraising Advisory", "Corporate Development", "M&A A
 const timings = ["Under 30 days", "30 to 90 days", "3 to 6 months", "6 to 12 months", "Planning stage"];
 const materials = ["Financial model and data room", "Financial model and investor materials", "Historical financial statements", "Initial company or project summary", "Preparation required"];
 
-/**
- * Line drawings for the profile cards, in the site's one-line style (48 × 48, stroke only). Each is drawn as a single
- * path so it can trace itself in when the card is hovered or chosen.
- */
-export type IconName = "investor" | "founder" | "sponsor" | "raise" | "services";
-const ICONS: Record<IconName, string> = {
-  // A skyline of rising bars: opportunities that grow.
-  investor: "M4 40 H9 V33 H13 V40 H18 V26 H22 V40 H27 V18 H31 V40 H36 V10 H40 V40 H44 M33 6 L38 3 L43 6",
-  // A seedling breaking ground: a company in growth.
-  founder: "M4 42 H44 M24 42 V24 C24 15 30 9 39 9 C39 18 33 24 24 24 M24 31 C17 31 11 26 11 18 C18 18 24 23 24 31",
-  // A bridge between two banks: bringing two sides together.
-  sponsor: "M3 33 H10 V43 M10 33 C15 13 33 13 38 33 V43 M38 33 H45 M10 33 H38 M16 33 V22 M24 33 V18 M32 33 V22",
-  // Bars climbing to an arrow: capital raised.
-  raise: "M5 43 H43 M11 43 V33 H17 V43 M21 43 V27 H27 V43 M31 43 V20 H37 V43 M8 24 L19 15 L25 20 L39 7 M32 7 H39 V14",
-  // A compass: direction on a decision.
-  services: "M24 4 A20 20 0 1 1 23.9 4 M24 11 L29 24 L24 37 L19 24 Z M24 24 H24.1",
-};
-export function Icon({ name, className = "" }: { name: IconName; className?: string }) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={`pick-ico ${className}`}>
-      <path d={ICONS[name]} pathLength={1} />
-    </svg>
-  );
-}
-
-type Option<T> = { value: T; title: string; text: string; icon: IconName };
+/** A profile card: its value, title, line of text and the large initial set in its corner. */
+type Option<T> = { value: T; title: string; text: string; mark: string };
 
 export const roleOptions: Option<Role>[] = [
-  { value: "investor", title: "An investor", text: "I want to see opportunities that fit my mandate.", icon: "investor" },
-  { value: "founder", title: "A founder", text: "I want to raise capital or use Velero’s advisory services.", icon: "founder" },
-  { value: "sponsor", title: "A sponsor or intermediary", text: "I’m introducing a company, a shareholder position or a real estate transaction.", icon: "sponsor" },
+  { value: "investor", title: "An investor", text: "I want to see opportunities that fit my mandate.", mark: "I" },
+  { value: "founder", title: "A founder", text: "I want to raise capital or use Velero’s advisory services.", mark: "A" },
+  { value: "sponsor", title: "A sponsor or intermediary", text: "I’m introducing a company, a shareholder position or a real estate transaction.", mark: "M" },
 ];
 export const goalOptions: Option<Goal>[] = [
-  { value: "raise", title: "Raise capital", text: "A funding round, a secondary sale or project financing.", icon: "raise" },
-  { value: "services", title: "Use our services", text: "Advisory on fundraising, M&A, cap table or valuation.", icon: "services" },
+  { value: "raise", title: "Raise capital", text: "A funding round, a secondary sale or project financing.", mark: "R" },
+  { value: "services", title: "Use our services", text: "Advisory on fundraising, M&A, cap table or valuation.", mark: "S" },
 ];
 
 type Def = {
@@ -178,36 +154,46 @@ function Choice({ name, placeholder, options, defaultValue = "" }: { name: strin
   );
 }
 
-/** Large either/or cards that decide which questions follow: icon, title, a line of text and a clear chosen state. */
-export function Pick<T extends string>({ legend, name, value, onChange, options }: { legend: string; name: string; value: T | null; onChange: (v: T) => void; options: Option<T>[] }) {
+/**
+ * The large faint letter in a profile card’s corner, in the display face. On the three profile cards the letters are
+ * I, A and M, so the row reads “I AM” across the cards.
+ */
+export function Mark({ letter, on = false }: { letter: string; on?: boolean }) {
+  return (
+    <span aria-hidden="true" className={`pointer-events-none absolute -right-1 select-none whitespace-nowrap font-display font-semibold uppercase leading-none transition-colors duration-200 ${letter.length > 1 ? "-bottom-6 text-[130px]" : "-bottom-4 text-[170px]"} ${on ? "text-white/[0.18]" : "text-blue/[0.10] group-hover/pick:text-blue/[0.16]"}`}>
+      {letter}
+    </span>
+  );
+}
+
+/** Large either/or cards that decide which questions follow: title, a line of text, a large initial and a clear chosen state. */
+export function Pick<T extends string>({ legend, name, value, onChange, options, eyebrow = true }: { legend: string; name: string; value: T | null; onChange: (v: T) => void; options: Option<T>[]; eyebrow?: boolean }) {
   return (
     <fieldset className="sm:col-span-2">
-      <legend className="mb-3 block text-[13px] font-semibold">{legend}</legend>
+      {/* The question is read inside each card (“I am / An investor”); the legend stays for screen readers. */}
+      <legend className="sr-only">{legend}</legend>
       <div className={`grid gap-3 sm:gap-4 ${options.length > 2 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
         {options.map((o) => {
           const on = value === o.value;
           return (
             <label
               key={o.value}
-              className={`group/pick relative flex cursor-pointer flex-col rounded-lg border p-5 transition duration-200 ease-out has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-paper motion-reduce:transition-none ${
+              className={`group/pick relative flex min-h-[15rem] cursor-pointer flex-col overflow-hidden rounded-lg border p-5 transition duration-200 ease-out has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-blue has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-paper motion-reduce:transition-none ${
                 on
                   ? "border-blue bg-blue text-white shadow-[0_18px_40px_-22px_rgba(2,60,207,.75)]"
                   : "border-ink/15 bg-white hover:-translate-y-0.5 hover:border-blue hover:shadow-[0_16px_34px_-24px_rgba(0,0,0,.45)] motion-reduce:hover:translate-y-0"
               }`}
             >
               <input type="radio" name={name} value={o.title} checked={on} onChange={() => onChange(o.value)} required className="sr-only" />
-              <span className="flex items-start justify-between">
-                <span className={`flex h-14 w-14 items-center justify-center rounded-xl ring-1 transition-colors ${on ? "bg-white/10 text-white ring-white/30" : "bg-blue/[0.05] text-blue ring-blue/15 group-hover/pick:bg-blue/[0.09]"}`}>
-                  <Icon name={o.icon} className={on ? "is-on" : ""} />
-                </span>
-                {/* The chosen state is shown by more than colour: a filled ring with a tick. */}
-                <span aria-hidden="true" className={`flex h-6 w-6 items-center justify-center rounded-full border transition-colors ${on ? "border-white bg-white text-blue" : "border-ink/25 text-transparent group-hover/pick:border-blue"}`}>
-                  <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 6.2 5 8.5l4.5-5" /></svg>
-                </span>
+              <Mark letter={o.mark} on={on} />
+              {/* The chosen state is shown by more than colour: a filled ring with a tick. */}
+              <span aria-hidden="true" className={`relative ml-auto flex h-6 w-6 items-center justify-center rounded-full border transition-colors ${on ? "border-white bg-white text-blue" : "border-ink/25 text-transparent group-hover/pick:border-blue"}`}>
+                <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 6.2 5 8.5l4.5-5" /></svg>
               </span>
-              <span className="display mt-5 block text-[22px] leading-[1.05]">{o.title}</span>
-              <span className={`mt-2 block text-[13px] leading-snug ${on ? "text-white/85" : "text-ink/65"}`}>{o.text}</span>
-              <span className={`mt-auto flex items-center gap-1.5 pt-5 text-[12px] font-semibold ${on ? "text-white" : "text-blue"}`}>
+              {eyebrow && <span aria-hidden="true" className={`relative mt-6 block text-[12px] font-semibold uppercase tracking-[0.16em] ${on ? "text-white/70" : "text-blue"}`}>{legend}</span>}
+              <span className={`display relative block text-[28px] leading-[1.02] ${eyebrow ? "mt-1.5" : "mt-8"}`}>{o.title}</span>
+              <span className={`relative mt-2 block max-w-[30ch] text-[13px] leading-snug ${on ? "text-white/85" : "text-ink/65"}`}>{o.text}</span>
+              <span className={`relative mt-auto flex items-center gap-1.5 pt-5 text-[12px] font-semibold ${on ? "text-white" : "text-blue"}`}>
                 {on ? "Selected" : "Select"}
                 {!on && <span aria-hidden="true" className="transition-transform duration-200 group-hover/pick:translate-x-0.5 motion-reduce:transition-none">→</span>}
               </span>
@@ -234,7 +220,7 @@ function Checks({ legend, name, options, ticked }: { legend: string; name: strin
 
 /** “I am”: the first choice. */
 export function RolePick({ value, onChange }: { value: Role | null; onChange: (v: Role) => void }) {
-  return <Pick legend="I am" name="i_am" value={value} onChange={onChange} options={roleOptions} />;
+  return <Pick legend="I am" name="i_am" value={value} onChange={onChange} options={roleOptions} eyebrow={false} />;
 }
 
 /** “I’m looking to”: asked of founders only. */

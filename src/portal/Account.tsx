@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import type { Session } from "@supabase/supabase-js";
-import { Icon, about, roleOptions, type Role } from "@/components/EnquiryForm";
+import { Mark, about, roleOptions, type Role } from "@/components/EnquiryForm";
 import { day, stages, supabase, usePageTitle, type Application } from "./client";
 import { Chip, Loading, toneOf } from "./Shell";
 
@@ -89,14 +89,14 @@ export default function Account({ session }: { session: Session }) {
 
       {none || picking ? (
         <section className="mt-9" aria-labelledby="start">
-          <h2 id="start" className="text-[13px] font-semibold">I am</h2>
-          <div className="mt-2 grid gap-3 sm:grid-cols-3">
+          <h2 id="start" className="sr-only">Start an application</h2>
+          <div className="grid gap-3 sm:grid-cols-3">
             {roleOptions.map((o) => (
-              <button key={o.value} type="button" disabled={!!starting} onClick={() => void start(o.value)} className="group/pick flex flex-col rounded-lg border border-ink/15 bg-white p-5 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-blue hover:shadow-[0_16px_34px_-24px_rgba(0,0,0,.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 disabled:opacity-60 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-                <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-blue/[0.05] text-blue ring-1 ring-blue/15 group-hover/pick:bg-blue/[0.09]"><Icon name={o.icon} /></span>
-                <span className="display mt-5 block text-[22px] leading-[1.05]">{starting === o.value ? "Starting…" : o.title}</span>
-                <span className="mt-2 block text-[13px] leading-snug text-ink/65">{o.text}</span>
-                <span className="mt-auto flex items-center gap-1.5 pt-5 text-[12px] font-semibold text-blue">Start <span aria-hidden="true" className="transition-transform duration-200 group-hover/pick:translate-x-0.5">→</span></span>
+              <button key={o.value} type="button" disabled={!!starting} onClick={() => void start(o.value)} className="group/pick relative flex min-h-[15rem] flex-col overflow-hidden rounded-lg border border-ink/15 bg-white p-5 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-blue hover:shadow-[0_16px_34px_-24px_rgba(0,0,0,.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 disabled:opacity-60 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+                <Mark letter={o.mark} />
+                <span className="display relative mt-14 block text-[28px] leading-[1.02]">{starting === o.value ? "Starting…" : o.title}</span>
+                <span className="relative mt-2 block max-w-[30ch] text-[13px] leading-snug text-ink/65">{o.text}</span>
+                <span className="relative mt-auto flex items-center gap-1.5 pt-5 text-[12px] font-semibold text-blue">Start <span aria-hidden="true" className="transition-transform duration-200 group-hover/pick:translate-x-0.5">→</span></span>
               </button>
             ))}
           </div>

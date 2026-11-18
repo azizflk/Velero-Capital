@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import { services, type Service } from "@/data/services";
 import { faqPage, serviceNode, useTitle } from "@/lib/useTitle";
 import FAQ from "@/components/FAQ";
+import { APPLY_HREF } from "@/lib/portal";
 
 /** The sections in page order; the optional ones appear only when the service has them. */
 const anchorsFor = (s: Service) => [
@@ -105,7 +106,7 @@ export default function ServiceDetail({ service }: { service: Service }) {
         <Prose>
           <p>Each engagement is led by a senior member of the team, scoped up front and typically run on a retainer, so our advice stays independent of any single outcome. Tell us where you are and we’ll propose a scope.</p>
         </Prose>
-        <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/?role=founder&goal=services" variant="blue">Discuss an engagement</Button><Button to="/services/">All services</Button></div>
+        <div className="mt-6 flex flex-wrap gap-3"><Button to={APPLY_HREF} variant="blue">Apply to discuss an engagement</Button><Button to="/services/">All services</Button></div>
       </Section>
 
       <Section title={related.length ? "Often combined with" : "Other services"}>

@@ -106,7 +106,7 @@ export default function Footer() {
 
             <div className="space-y-12">
               <Module title="Offices">
-                {offices.map((o) => <Row key={o.region}>{o.region === "United Arab Emirates" ? "Dubai" : o.region}</Row>)}
+                {offices.map((o) => <Row key={o.region}>{o.city}</Row>)}
               </Module>
               <Module title="Socials">
                 {social.map((s) => (

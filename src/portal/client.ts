@@ -35,6 +35,8 @@ export type Application = {
 export type Note = { id: number; application_id: string; author: string; body: string; created_at: string };
 export type Profile = { id: string; email: string; full_name: string | null; created_at: string };
 export type Admin = { email: string; added_by: string | null; added_at: string };
+export type EnquiryStatus = "new" | "answered" | "closed";
+export type Enquiry = { id: string; name: string; email: string; organisation: string | null; topic: string; message: string; status: EnquiryStatus; created_at: string; updated_at: string };
 
 /** What an applicant is told about each stage. */
 export const stages: Record<Status, { label: string; text: string }> = {

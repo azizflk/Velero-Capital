@@ -23,3 +23,6 @@ export const loginFor = (to: string) => (to === "/" ? "/login/" : `/login/?next=
 
 /** Addresses that belong to the account area and the admin panel rather than to the public pages. */
 export const isPortalPath = (pathname: string) => /^\/(login|account|admin)(\/|$)/.test(pathname);
+
+/** Where every “apply” link goes: the login page, then the application. Without accounts, the contact page. */
+export const APPLY_HREF = PORTAL_ON ? loginFor("/account/") : "/contact-us/";

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { SidebarPage, Section, Cols, Prose, List } from "@/components/Layout";
 import Button from "@/components/Button";
 import { useTitle } from "@/lib/useTitle";
+import { APPLY_HREF } from "@/lib/portal";
 
 const anchors = [
   { id: "who", label: "Who this is for" },
@@ -57,7 +58,7 @@ export default function SubmitOpportunity() {
 
       <Section id="start" title="Start">
         <Prose><p>Introduce the opportunity in a few lines. We come back to every submission.</p></Prose>
-        <div className="mt-6 flex flex-wrap gap-3"><Button to="/contact-us/?role=sponsor" variant="blue">Submit an opportunity</Button><Button to="/contact-us/?role=founder&goal=raise">I’m a founder raising capital</Button></div>
+        <div className="mt-6 flex flex-wrap gap-3"><Button to={APPLY_HREF} variant="blue">Apply to submit an opportunity</Button></div>
       </Section>
     </SidebarPage>
   );
